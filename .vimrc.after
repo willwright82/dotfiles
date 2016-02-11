@@ -1,0 +1,225 @@
+set t_Co=256   " This is may or may not needed.
+
+set background=dark
+"colorscheme PaperColor
+"let g:PaperColor_Dark_Override = { 'background' : '#3a3a3a' }
+"colorscheme hybrid_material
+set wrap linebreak nolist
+set splitright
+" enable syntax processing
+syntax enable
+" use Airline Theme
+"let g:airline_theme='luna'
+let g:airline_theme='hybridline'
+" load Airline on Startup
+set laststatus=2
+
+" screw those standards, i like my tabs being just that. tabs.
+set tabstop=4 " number of visual spaces per TAB
+set shiftwidth=4
+set softtabstop=4 " number of spaces in tab when editing
+set expandtab " tabs are spaces
+
+" Relative Line Numbers
+set relativenumber
+
+" list and invisible characters
+" set list
+" set listchars=tab:▸\ ,eol:¬
+
+" setup the leader key
+let mapleader = ","
+
+" makes ,w split windows vertically
+nnoremap <leader>w <C-w>v<C-w>l
+
+" split window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" mouse settings
+:set mouse=a
+":map <xCSI>[62~ <MouseDown>
+
+" OSX Clipboard
+" set clipboard=unnamedplus
+vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+" nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
+" groovyness in Insert mode (lets you paste and keep on typing)
+imap <C-v> <Esc><C-v>a
+
+" Enclose in Brackets
+" vnoremap _( <Esc>`>a)<Esc>`<i(<Esc>
+" vnoremap _[ <Esc>`>a]<Esc>`<i[<Esc>
+" vnoremap _{ <Esc>`>a}<Esc>`<i{<Esc>
+
+" Auto close Brackets
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap { {}<Esc>i
+inoremap < <><ESC>i
+
+" Fast Scrolling
+set ttyfast
+
+" show command in bottom bar
+set showcmd
+
+" Highlight current line
+set cursorline
+hi CursorLine cterm=NONE ctermbg=235
+
+" Hide Non text Characters
+"hi NonText guifg=bg
+hi NonText ctermfg=236 guifg=236 cterm=NONE gui=NONE
+
+" Disable EXEC file highlight in NERDtree
+highlight link NERDTreeExecFile ModeMsg
+
+" Change Vertical Split Bar colour
+highlight VertSplit ctermfg=236 ctermbg=236
+highlight StatusLineNC ctermfg=236 ctermbg=245
+
+" Remove pipes in window split bar
+set fillchars+=vert:\ 
+" Change Line Number Colour
+highlight LineNr ctermfg=237 ctermbg=NONE
+
+" load filetype-specific indent files
+filetype indent on
+
+" IndentLine plugin Character
+"let g:indentLine_char = '⦙'
+let g:indentLine_char = '·'
+let g:indentLine_color_term = 237
+let g:indentLine_concealcursor=0
+
+" visual autocomplete for command menu
+set wildmenu
+
+set showmode
+
+" Tame searching
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set smartcase
+set gdefault
+" search as characters are entered
+set incsearch
+" highlight matching [{()}]
+set showmatch
+" highlight matches
+set hlsearch
+" get the word under the cursor, and searches for it in the current directory and all subdirectories, opening the quickfix window when done
+map <F3> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+" The Silver Searcher
+ if executable('ag')
+    " Use ag over grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+endif
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
+
+" fold based on indent level
+set foldmethod=indent
+" disable folding
+set nofoldenable
+" space open/closes folds
+nnoremap <space> za
+
+" Remove Concealing
+set conceallevel=0
+
+" clear search
+nnoremap <leader><space> :noh<cr>
+
+" Match bracket pairs with TAB
+nnoremap <tab> %
+vnoremap <tab> %
+
+" Easier to save files
+nnoremap ; :
+
+" move lines up and down with ALT+J/K
+execute "set <M-j>=\ej"
+execute "set <M-k>=\ek"
+nnoremap <M-j> :m .+1<CR>==
+nnoremap <M-k> :m .-2<CR>==
+inoremap <M-j> <Esc>:m .+1<CR>==gi
+inoremap <M-k> <Esc>:m .-2<CR>==gi
+vnoremap <M-j> :m '>+1<CR>gv=gv
+vnoremap <M-k> :m '<-2<CR>gv=gv
+
+noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 30, 2)<CR>
+noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 30, 2)<CR>
+noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 30, 4)<CR>
+noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
+
+" Line number then ENTER goto line
+nnoremap <CR> G
+
+" Remove all trailing whitespace by pressing F5
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" Switch buffers by number
+nnoremap <F6> :buffers<CR>:b<Space>
+
+" toggle gundo
+nnoremap <leader>u :GundoToggle<CR>
+
+" delete deletes in Normal mode
+nnoremap <backspace> dh
+
+" save session
+nnoremap <leader>s :mksession<CR>
+
+" allows cursor change in tmux mode
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" don't blink the cursor
+"set guicursor+=i:blinkwait0
+
+" let g:tmuxline_preset = 'nightly_fox'
+" or
+" let g:tmuxline_preset = 'full'
+" or
+"let g:tmuxline_preset = 'tmux'
+" other presets available in autoload/tmuxline/presets/*
+"
+" #H    Hostname of local host
+" #h    Hostname of local host without the domain name
+" #F    Current window flag
+" #I    Current window index
+" #S    Session name
+" #W    Current window name
+" #(shell-command)  First line of the command's output)
+" \'x'    : '#(~/bin/tmux-charge) [✉ #(~/bin/imap_check.py)]',
+
+let g:tmuxline_preset = {
+      \'a'    : '#H',
+      \'b'    : '#S',
+      \'c'    : '#W #(branch)',
+      \'win'  : '#I #W',
+      \'cwin' : '#I #W',
+      \'x'    : '#(~/bin/tmux-charge)',
+      \'y'    : '%a %d/%h %H:%M',
+      \'z'    : '#(ipconfig getifaddr en1) #h'}
