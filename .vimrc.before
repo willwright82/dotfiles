@@ -1,0 +1,20 @@
+" setup the leader key
+let mapleader = ","
+
+" clear search
+nnoremap <leader><space> :noh<cr>
+
+" move lines up and down with ALT+J/K
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+set clipboard=unnamed
+
+" Disable plugins because I don't need them, but keep the bindings to remind me
+call janus#disable_plugin('vroom', "I don't need vroom")
+call janus#disable_plugin('papercolor', "I don't need papercolor")
+call janus#disable_plugin('YouCompleteMe', "I don't need YouCompleteMe")
