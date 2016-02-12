@@ -1,18 +1,41 @@
 set t_Co=256   " This is may or may not needed.
 
-set background=dark
-"colorscheme PaperColor
-"let g:PaperColor_Dark_Override = { 'background' : '#3a3a3a' }
-"colorscheme hybrid_material
 set wrap linebreak nolist
 set splitright
+
 " enable syntax processing
 syntax enable
-" use Airline Theme
-"let g:airline_theme='luna'
-let g:airline_theme='hybridline'
+
 " load Airline on Startup
 set laststatus=2
+
+"Dark Theme
+set background=dark
+let g:PaperColor_Dark_Override = { 'background' : '#3a3a3a' }
+"colorscheme hybrid_material
+"let g:airline_theme='luna'
+let g:airline_theme='hybridline'
+hi CursorLine cterm=NONE ctermbg=235
+" Hide Non text Characters
+"hi NonText guifg=bg
+hi NonText ctermfg=236 guifg=236 cterm=NONE gui=NONE
+" Change Vertical Split Bar colour
+highlight VertSplit ctermfg=236 ctermbg=236
+highlight StatusLineNC ctermfg=236 ctermbg=245
+" Change Line Number Colour
+highlight LineNr ctermfg=237 ctermbg=NONE
+let g:indentLine_color_term = 237
+
+""Light Theme
+"colorscheme PaperColor
+"set background=light
+""let g:airline_theme='papercolor'
+"" Hide Non text Characters
+""hi NonText guifg=bg
+"hi NonText ctermfg=254 guifg=254 cterm=NONE gui=NONE
+"" Change Line Number Colour
+"highlight LineNr ctermfg=251 ctermbg=NONE
+"let g:indentLine_color_term = 251
 
 " screw those standards, i like my tabs being just that. tabs.
 set tabstop=4 " number of visual spaces per TAB
@@ -69,23 +92,12 @@ set showcmd
 
 " Highlight current line
 set cursorline
-hi CursorLine cterm=NONE ctermbg=235
-
-" Hide Non text Characters
-"hi NonText guifg=bg
-hi NonText ctermfg=236 guifg=236 cterm=NONE gui=NONE
 
 " Disable EXEC file highlight in NERDtree
 highlight link NERDTreeExecFile ModeMsg
 
-" Change Vertical Split Bar colour
-highlight VertSplit ctermfg=236 ctermbg=236
-highlight StatusLineNC ctermfg=236 ctermbg=245
-
 " Remove pipes in window split bar
 set fillchars+=vert:\ 
-" Change Line Number Colour
-highlight LineNr ctermfg=237 ctermbg=NONE
 
 " load filetype-specific indent files
 filetype indent on
@@ -93,7 +105,6 @@ filetype indent on
 " IndentLine plugin Character
 "let g:indentLine_char = '⦙'
 let g:indentLine_char = '·'
-let g:indentLine_color_term = 237
 let g:indentLine_concealcursor=0
 
 " visual autocomplete for command menu
