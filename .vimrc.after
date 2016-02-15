@@ -9,34 +9,34 @@ syntax enable
 " load Airline on Startup
 set laststatus=2
 
-""Dark Theme
-"set background=dark
-"let g:PaperColor_Dark_Override = { 'background' : '#3a3a3a' }
-""colorscheme hybrid_material
-""let g:airline_theme='luna'
-"let g:airline_theme='hybridline'
-"hi CursorLine cterm=NONE ctermbg=235
-"" Hide Non text Characters
-""hi NonText guifg=bg
-"hi NonText ctermfg=236 guifg=236 cterm=NONE gui=NONE
-"" Change Vertical Split Bar colour
-"highlight VertSplit ctermfg=236 ctermbg=236
-"highlight StatusLineNC ctermfg=236 ctermbg=245
-"" Change Line Number Colour
-"highlight LineNr ctermfg=237 ctermbg=NONE
-"let g:indentLine_color_term = 237
-
-"Light Theme
-colorscheme PaperColor
-set background=light
-let g:airline_theme='PaperColor'
-autocmd VimEnter * AirlineTheme PaperColor
+"Dark Theme
+set background=dark
+let g:PaperColor_Dark_Override = { 'background' : '#3a3a3a' }
+"colorscheme hybrid_material
+"let g:airline_theme='luna'
+let g:airline_theme='hybridline'
+hi CursorLine cterm=NONE ctermbg=235
 " Hide Non text Characters
 "hi NonText guifg=bg
-hi NonText ctermfg=254 guifg=254 cterm=NONE gui=NONE
+hi NonText ctermfg=236 guifg=236 cterm=NONE gui=NONE
+" Change Vertical Split Bar colour
+highlight VertSplit ctermfg=236 ctermbg=236
+highlight StatusLineNC ctermfg=236 ctermbg=245
 " Change Line Number Colour
-highlight LineNr ctermfg=251 ctermbg=NONE
-let g:indentLine_color_term = 251
+highlight LineNr ctermfg=237 ctermbg=NONE
+let g:indentLine_color_term = 237
+
+""Light Theme
+"colorscheme PaperColor
+"set background=light
+"let g:airline_theme='PaperColor'
+"autocmd VimEnter * AirlineTheme PaperColor
+"" Hide Non text Characters
+""hi NonText guifg=bg
+"hi NonText ctermfg=254 guifg=254 cterm=NONE gui=NONE
+"" Change Line Number Colour
+"highlight LineNr ctermfg=251 ctermbg=NONE
+"let g:indentLine_color_term = 251
 
 " screw those standards, i like my tabs being just that. tabs.
 set tabstop=4 " number of visual spaces per TAB
