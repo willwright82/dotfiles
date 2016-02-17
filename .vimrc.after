@@ -193,7 +193,12 @@ nnoremap <F6> :buffers<CR>:b<Space>
 nnoremap <leader>u :GundoToggle<CR>
 
 " delete deletes in Normal mode
-nnoremap <backspace> dh
+nnoremap <backspace> dhi
+
+" Run  Code
+autocmd FileType ruby nmap <leader>r :!ruby %<cr>
+autocmd FileType eruby nmap <leader>r :!ruby %<cr>
+autocmd FileType javascript nmap <leader>r :!node %<cr>
 
 " save session
 nnoremap <leader>s :mksession<CR>
