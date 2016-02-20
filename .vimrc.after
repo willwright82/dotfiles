@@ -1,13 +1,10 @@
 set t_Co=256   " This is may or may not needed.
-
 set wrap linebreak nolist
 set splitright
 
 " enable syntax processing
 syntax enable
 
-" load Airline on Startup
-set laststatus=2
 
 colorscheme PaperColor
 
@@ -15,7 +12,7 @@ colorscheme PaperColor
 set background=dark
 let g:airline_theme='hybridline'
 autocmd VimEnter * AirlineTheme hybridline
-let g:PaperColor_Dark_Override = { 'background' : '#3a3a3a' }
+"let g:PaperColor_Dark_Override = { 'background' : '#3a3a3a' }
 "hi CursorLine cterm=NONE ctermbg=235
 " Hide Non text Characters
 "hi NonText guifg=bg
@@ -40,6 +37,10 @@ hi Normal ctermbg=NONE
 "highlight LineNr ctermfg=251 ctermbg=NONE
 "let g:indentLine_color_term = 251
 
+" load Airline on Startup
+set laststatus=2
+let g:airline_powerline_fonts = 1
+autocmd VimEnter * AirlineToggleWhitespace
 
 " screw those standards, i like my tabs being just that. tabs.
 set tabstop=4 " number of visual spaces per TAB
@@ -65,6 +66,9 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" Show hidden files
+let g:NERDTreeShowHidden=1
 
 " mouse settings
 :set mouse=a
