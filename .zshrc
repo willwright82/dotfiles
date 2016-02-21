@@ -106,6 +106,8 @@ alias zip="zip -x *.DS_Store -x *__MACOSX* -x *.AppleDouble*"
 alias rainbowstream="source venv/bin/activate && rainbowstream"
 alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app"
 alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app"
+alias watch:c='coffee -o javascripts -cw javascripts/coffee'
+alias watch:s="sass --watch sass/style.scss:style.css --style compressed"
 
 # Avoid overwriting files - `set +o noclobber` to override
 set -o noclobber
