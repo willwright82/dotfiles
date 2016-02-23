@@ -244,6 +244,7 @@ endif
 " #W    Current window name
 " #(shell-command)  First line of the command's output)
 " \'x'    : '#(~/bin/tmux-charge) [✉ #(~/bin/imap_check.py)]',
+" \'x'    : '#(/usr/bin/battery -t)',
 
 let g:tmuxline_preset = {
       \'a'    : '#H',

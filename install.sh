@@ -13,12 +13,14 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$DOTFILES_DIR/install/brew.sh"
 . "$DOTFILES_DIR/install/npm.sh"
-. "$DOTFILES_DIR/install/pip.sh"
+. "$DOTFILES_DIR/install/gem.sh"
 . "$DOTFILES_DIR/install/brew-cask.sh"
 
 # Install extra stuff
 
+# Oh My ZSH
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# Janus Vim
 curl -L https://bit.ly/janus-bootstrap | bash
 
 # Bunch of symlinks
