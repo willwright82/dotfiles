@@ -5,8 +5,6 @@ set splitright
 " enable syntax processing
 syntax enable
 
-
-
 "Dark Theme
 set background=dark
 let g:airline_theme='hybridline'
@@ -211,8 +209,11 @@ autocmd FileType markdown imap --- —
 
 " Run Code
 autocmd FileType ruby nmap <leader>r :!ruby %<cr>
+autocmd FileType ruby nmap <leader>rb :call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
 autocmd FileType eruby nmap <leader>r :!ruby %<cr>
+autocmd FileType eruby nmap <leader>rb :call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
 autocmd FileType javascript nmap <leader>r :!node %<cr>
+autocmd FileType javascript nmap <leader>rb :call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<cr>
 
 " save session
 nnoremap <leader>s :mksession<CR>
