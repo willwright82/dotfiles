@@ -186,6 +186,20 @@ noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 30, 2)<CR>
 noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 30, 4)<CR>
 noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 
+" Learning Mode
+"nnoremap <up> <nop>
+"nnoremap <down> <nop>
+"nnoremap <left> <nop>
+"nnoremap <right> <nop>
+"inoremap <up> <nop>
+"inoremap <down> <nop>
+"inoremap <left> <nop>
+"inoremap <right> <nop>
+
+" Proper J & K
+nnoremap j gj
+nnoremap k gk
+
 " Line number then ENTER goto line
 nnoremap <CR> G
 
@@ -201,6 +215,12 @@ nnoremap <leader>u :GundoToggle<CR>
 " delete deletes in Normal mode
 nnoremap <backspace> dhi
 
+" Fold Tag
+nnoremap <leader>ft Vatzf
+
+" Quick vimrc edit in vertical split
+nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.files/.vimrc.after<cr>
+
 " For en/em dashes, respectively:
 " inoremap <buffer> --<space> –<space>
 " inoremap <buffer> -- —
@@ -215,8 +235,20 @@ autocmd FileType eruby nmap <leader>rb :call VimuxRunCommandInDir("clear; ruby "
 autocmd FileType javascript nmap <leader>r :!node %<cr>
 autocmd FileType javascript nmap <leader>rb :call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<cr>
 
+" Save on losing focus
+"au FocusLost * :wa
+"au FocusLost * silent! wa
+autocmd BufLeave,FocusLost * silent! wall
+
 " save session
 nnoremap <leader>s :mksession<CR>
+
+" buffergator tweaks
+" split below VIM window
+let g:buffergator_viewport_split_policy = "b"
+" 15 lines height for window
+let g:buffergator_split_size = 15
+let g:buffergator_sort_regime = "mru"
 
 " allows cursor change in tmux mode
 if exists('$TMUX')

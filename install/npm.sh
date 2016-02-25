@@ -13,6 +13,7 @@ packages=(
     nodemon
     spot
     vtop
+    ntl
 )
 
 npm install -g "${packages[@]}"
