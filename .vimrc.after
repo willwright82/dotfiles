@@ -42,9 +42,9 @@ let g:airline_powerline_fonts = 1
 autocmd VimEnter * AirlineToggleWhitespace
 
 " screw those standards, i like my tabs being just that. tabs.
-set tabstop=4 " number of visual spaces per TAB
-set shiftwidth=4
-set softtabstop=4 " number of spaces in tab when editing
+set tabstop=2 " number of visual spaces per TAB
+set shiftwidth=2
+set softtabstop=2 " number of spaces in tab when editing
 set expandtab " tabs are spaces
 
 " Relative Line Numbers
