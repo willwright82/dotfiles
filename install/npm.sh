@@ -10,10 +10,11 @@ packages=(
     grunt
     gulp
     http-server
+    how2
     nodemon
+    ntl
     spot
     vtop
-    ntl
 )
 
 npm install -g "${packages[@]}"
