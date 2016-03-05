@@ -197,8 +197,8 @@ noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 "inoremap <right> <nop>
 
 " Proper J & K
-nnoremap j gj
-nnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
 
 " Line number then ENTER goto line
 nnoremap <CR> G
