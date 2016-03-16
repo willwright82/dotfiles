@@ -201,7 +201,7 @@ noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 "nnoremap k gk
 
 " Line number then ENTER goto line
-nnoremap <CR> G
+"nnoremap <CR> G
 
 " Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
