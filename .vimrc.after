@@ -153,6 +153,7 @@ nnoremap \ :Ag<SPACE>
 
 " fold based on indent level
 set foldmethod=indent
+set foldlevelstart=20
 " disable folding
 set nofoldenable
 " space open/closes folds
@@ -201,7 +202,7 @@ noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 "nnoremap k gk
 
 " Line number then ENTER goto line
-nnoremap <CR> G
+"nnoremap <CR> G
 
 " Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
@@ -241,7 +242,8 @@ autocmd FileType javascript nmap <leader>rb :call VimuxRunCommandInDir("clear; n
 autocmd BufLeave,FocusLost * silent! wall
 
 " save session
-nnoremap <leader>s :mksession<CR>
+"nnoremap <leader>s :mksession<CR>
+nnoremap <leader>s :w<CR>:ChromeReload<CR>
 
 " buffergator tweaks
 " split below VIM window
