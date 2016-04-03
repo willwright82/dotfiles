@@ -165,10 +165,6 @@ nnoremap <space> za
 " Remove Concealing
 set conceallevel=0
 
-
-" Set F2 to Beautify
-noremap <F2> :Autoformat<CR>
-
 " clear search
 nnoremap <leader><space> :noh<cr>
 
@@ -251,6 +247,9 @@ autocmd BufLeave,FocusLost * silent! wall
 " save session
 "nnoremap <leader>s :mksession<CR>
 nnoremap <leader>s :w<CR>:ChromeReload<CR>
+
+" Autoformat code
+noremap <F2> :Autoformat<CR>
 
 " buffergator tweaks
 " split below VIM window

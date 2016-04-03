@@ -15,6 +15,7 @@ packages=(
     ntl
     spot
     vtop
+    node-tweet-cli
 )
 
 npm install -g "${packages[@]}"
