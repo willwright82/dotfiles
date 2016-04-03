@@ -76,7 +76,7 @@ let g:NERDTreeShowHidden=1
 " OSX Clipboard
 " set clipboard=unnamedplus
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-" nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
+nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
 " groovyness in Insert mode (lets you paste and keep on typing)
 imap <C-v> <Esc><C-v>a
 
