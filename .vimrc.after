@@ -241,7 +241,11 @@ autocmd FileType javascript nmap <leader>rb :call VimuxRunCommandInDir("clear; n
 autocmd BufLeave,FocusLost * silent! wall
 
 " save session
-nnoremap <leader>s :mksession<CR>
+"nnoremap <leader>s :mksession<CR>
+nnoremap <leader>s :w<CR>:ChromeReload<CR>
+
+" Autoformat code
+noremap <F2> :Autoformat<CR>
 
 " buffergator tweaks
 " split below VIM window

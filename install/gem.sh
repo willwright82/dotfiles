@@ -4,3 +4,4 @@ rvm use ruby --install --default
 
 gem install rails --no-ri --no-rdoc
 gem install pygmentize
+gem install trello_cli
