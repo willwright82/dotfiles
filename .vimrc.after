@@ -86,10 +86,13 @@ imap <C-v> <Esc><C-v>a
 " vnoremap _{ <Esc>`>a}<Esc>`<i{<Esc>
 
 " Auto close Brackets
-inoremap ( ()<Esc>i
-inoremap [ []<Esc>i
-inoremap { {}<Esc>i
-inoremap < <><ESC>i
+"inoremap ( ()<Esc>i
+"inoremap [ []<Esc>i
+"inoremap { {}<Esc>i
+"inoremap < <><ESC>i
+
+" add <angular brackets> and |pipes| to autoclose
+let g:AutoClosePairs_add = '<> |'
 
 " Fast Scrolling
 set ttyfast
@@ -161,6 +164,10 @@ nnoremap <space> za
 
 " Remove Concealing
 set conceallevel=0
+
+
+" Set F2 to Beautify
+noremap <F2> :Autoformat<CR>
 
 " clear search
 nnoremap <leader><space> :noh<cr>
