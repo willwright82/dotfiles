@@ -112,8 +112,9 @@ alias watch:s="sass --watch sass/style.scss:style.css --style compressed"
 alias pgGo='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias solrGo='bundle exec rake sunspot:solr:start'
 alias railsGo='rails s -b 0.0.0.0'
-alias bug='trello card create -b 56ffa69d50b0d684366dadaf -l 56ffbbaa800d725013a9f8e0 -o json -n'
-alias bugs='trello card list -b 56ffa69d50b0d684366dadaf -l 56ffbbaa800d725013a9f8e0'
+alias bug='trello card create -b 56ffa69d50b0d684366dadaf -l 56ffbbaa800d725013a9f8e0 -o tsv -n'
+alias bugs='trello card list -b 56ffa69d50b0d684366dadaf -l 56ffbbaa800d725013a9f8e0 -o tsv'
+alias bugsquash='trello card move -b 56ffa69d50b0d684366dadaf -l 56ffff32cd7ff586e27bc66d -o tsv -c'
 
 # Avoid overwriting files - `set +o noclobber` to override
 set -o noclobber

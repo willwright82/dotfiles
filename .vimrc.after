@@ -242,11 +242,12 @@ autocmd FileType javascript nmap <leader>rb :call VimuxRunCommandInDir("clear; n
 " Save on losing focus
 "au FocusLost * :wa
 "au FocusLost * silent! wa
-autocmd BufLeave,FocusLost * silent! wall
+autocmd BufLeave,FocusLost * stopinsert | silent! wall
 
 " save session
 "nnoremap <leader>s :mksession<CR>
 nnoremap <leader>s :w<CR>:ChromeReload<CR>
+inoremap <leader>s <ESC>:w<CR>:ChromeReload<CR>
 
 " Autoformat code
 noremap <F2> :Autoformat<CR>
