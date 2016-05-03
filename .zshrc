@@ -98,6 +98,7 @@ alias notes="vi ~/Dropbox/Quick\ Notes.md"
 alias swift="xcrun swift"
 alias ggprp="ggpur && ggpush"
 alias gn="ggpur && gco -b"
+alias gsup="git standup"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
 alias afk="/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"
@@ -105,6 +106,7 @@ alias ssdesk="/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenS
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
 alias zip="zip -x *.DS_Store -x *__MACOSX* -x *.AppleDouble*"
 alias rainbowstream="source venv/bin/activate && rainbowstream"
+alias chrome='open -a "Google Chrome"'
 alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app"
 alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app"
 alias watch:c='coffee -o javascripts -cw javascripts/coffee'
@@ -114,7 +116,7 @@ alias solrGo='bundle exec rake sunspot:solr:start'
 alias railsGo='rails s -b 0.0.0.0'
 alias bug='trello card create -b 56ffa69d50b0d684366dadaf -l 56ffbbaa800d725013a9f8e0 -o tsv -n'
 alias bugs='trello card list -b 56ffa69d50b0d684366dadaf -l 56ffbbaa800d725013a9f8e0 -o tsv'
-alias bugsquash='trello card move -b 56ffa69d50b0d684366dadaf -l 56ffff32cd7ff586e27bc66d -o tsv -c'
+alias bugsquash='trello card move -l 56ffff32cd7ff586e27bc66d -o tsv -c'
 
 # Avoid overwriting files - `set +o noclobber` to override
 set -o noclobber
