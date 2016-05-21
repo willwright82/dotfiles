@@ -117,6 +117,7 @@ alias railsGo='rails s -b 0.0.0.0'
 alias bug='trello card create -b 56ffa69d50b0d684366dadaf -l 56ffbbaa800d725013a9f8e0 -o tsv -n'
 alias bugs='trello card list -b 56ffa69d50b0d684366dadaf -l 56ffbbaa800d725013a9f8e0 -o tsv'
 alias bugsquash='trello card move -l 56ffff32cd7ff586e27bc66d -o tsv -c'
+alias starwars="telnet towel.blinkenlights.nl"
 
 # Avoid overwriting files - `set +o noclobber` to override
 set -o noclobber
