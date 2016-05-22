@@ -16,6 +16,7 @@ packages=(
     spot
     vtop
     node-tweet-cli
+    fast-cli
 )
 
 npm install -g "${packages[@]}"

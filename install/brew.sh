@@ -17,6 +17,7 @@ apps=(
     git
     git-extras
     gnupg
+    gtypist
     htop-osx
     irssi
     libidn

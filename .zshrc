@@ -119,6 +119,8 @@ alias bugs='trello card list -b 56ffa69d50b0d684366dadaf -l 56ffbbaa800d725013a9
 alias bugsquash='trello card move -l 56ffff32cd7ff586e27bc66d -o tsv -c'
 alias starwars="telnet towel.blinkenlights.nl"
 
+function on() { noglob curl -X POST --data-urlencode "task=$*" https://api.workingon.co/hooks/incoming?token=fd536f24201290ed5eb055d9beaf104e7d4b34f224bf3e2003474449911cd653 >/dev/null 2>&1 echo "Task sent." }
+
 # Avoid overwriting files - `set +o noclobber` to override
 set -o noclobber
 
