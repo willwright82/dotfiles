@@ -49,7 +49,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras osx meteor sublime sudo tmux common-aliases web-search brew npm nyan encode64 python url-tools)
+plugins=(git git-extras osx meteor sublime sudo tmux tmuxinator common-aliases web-search brew npm nyan encode64 python url-tools)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -67,11 +67,12 @@ export PATH="/usr/local/sbin:$PATH"
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   #export EDITOR='mvim'
+   export EDITOR='vim'
+ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -114,9 +115,11 @@ alias watch:s="sass --watch sass/style.scss:style.css --style compressed"
 alias pgGo='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias solrGo='bundle exec rake sunspot:solr:start'
 alias railsGo='rails s -b 0.0.0.0'
-alias starwars="telnet towel.blinkenlights.nl"
 alias tests="rspec spec"
+alias starwars="telnet towel.blinkenlights.nl"
 alias moon="curl wttr\.in/Moon"
+
+function matrix() {echo -e "\e[1;40m" ; clear ; characters=$( jot -c 94 33 | tr -d '\n' ) ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) $characters ;sleep 0.05; done|gawk '{ letters=$5; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'}
 
 function on() { noglob curl -X POST --data-urlencode "task=$*" https://api.workingon.co/hooks/incoming?token=fd536f24201290ed5eb055d9beaf104e7d4b34f224bf3e2003474449911cd653 >/dev/null 2>&1 echo "Task sent." }
 
