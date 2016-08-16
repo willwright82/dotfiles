@@ -99,6 +99,8 @@ alias notes="vi ~/Dropbox/Quick\ Notes.md"
 alias swift="xcrun swift"
 alias ggprp="ggpur && ggpush"
 alias gn="ggpur && gco -b"
+alias gac="gaa && gcam"
+alias gcd="gco develop"
 alias gsup="git standup"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
@@ -120,6 +122,7 @@ alias clazzoo="clear && tmuxinator start clazzoo"
 alias tests="rspec spec"
 alias starwars="telnet towel.blinkenlights.nl"
 alias moon="curl wttr\.in/Moon"
+alias weather="finger edinburgh@graph.no"
 
 function matrix() {echo -e "\e[1;40m" ; clear ; characters=$( jot -c 94 33 | tr -d '\n' ) ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) $characters ;sleep 0.05; done|gawk '{ letters=$5; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'}
 
@@ -133,3 +136,5 @@ promptinit
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+export GOPATH=$HOME/Labs/go
