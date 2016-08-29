@@ -54,6 +54,7 @@ values."
      yaml
      ruby-on-rails
      rcirc
+     chrome
      ;; emoji
      )
    ;; List of additional packages that will be installed without being
@@ -133,7 +134,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Fira Code Light"
+   dotspacemacs-default-font '("Fira Code Retina"
                                :size 14
                                :weight normal
                                :width normal
@@ -274,6 +275,26 @@ before packages are loaded. If you are unsure, you should try in setting them in
    web-mode-markup-indent-offset 2
    web-mode-css-indent-offset 2
    )
+  (defmacro define-and-bind-text-object (key start-regex end-regex)
+    (let ((inner-name (make-symbol "inner-name"))
+          (outer-name (make-symbol "outer-name")))
+      `(progn
+         (evil-define-text-object ,inner-name (count &optional beg end type)
+           (evil-regexp-range count beg end type ,start-regex ,end-regex t))
+         (evil-define-text-object ,outer-name (count &optional beg end type)
+           (evil-regexp-range count beg end type ,start-regex ,end-regex nil))
+         (define-key evil-inner-text-objects-map ,key (quote ,inner-name))
+         (define-key evil-outer-text-objects-map ,key (quote ,outer-name)))))
+  (defun chrome-reload (&optional focus)
+    "Use osascript to tell Google Chrome to reload.
+If optional argument FOCUS is non-nil, give Chrome the focus as well."
+    (interactive "P")
+    (let ((cmd (concat "osascript -e 'tell application \"Google Chrome\" "
+                       "to (reload (active tab of (window 1)))"
+                       (if focus " & activate" "")
+                       "'")))
+      (save-buffer)
+      (shell-command cmd "*Reload Chrome")))
   )
 
 (defun dotspacemacs/user-config ()
@@ -284,6 +305,10 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (add-to-list 'exec-path "~/.local/bin/")
+  ;; create "il"/"al" (inside/around) line text objects:
+  (define-and-bind-text-object "l" "^\\s-*" "\\s-*$")
+  ;; create "ie"/"ae" (inside/around) entire buffer text objects:
+  (define-and-bind-text-object "e" "\\`\\s-*" "\\s-*\\'")
   (with-eval-after-load 'evil-maps
 
   ;; move lines up and down with ALT+J/K
@@ -297,8 +322,9 @@ you should place your code here."
   (define-key evil-insert-state-map (kbd "M-o") 'evil-open-below)
   (define-key evil-insert-state-map (kbd "M-O") 'evil-open-above)
 
-
   (define-key evil-normal-state-map (kbd "<backspace>") "dhi")
+
+  (evil-leader/set-key "br" 'chrome-reload)
   )
 
   ;; Display battery on mode-line
@@ -336,6 +362,9 @@ you should place your code here."
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.js.erb\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.html.erb\\'" . web-mode))
+
+  ;; FiraCode and other glyphy fonts
+  ;; (mac-auto-operator-composition-mode)
 
   ;; use ligatures (this is reaaaaal hacky)
   ;; (when (window-system)

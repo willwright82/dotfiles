@@ -279,6 +279,10 @@ let g:buffergator_viewport_split_policy = "b"
 let g:buffergator_split_size = 15
 let g:buffergator_sort_regime = "mru"
 
+" Exit mode in Multiple-cursors
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
+
 " allows cursor change in tmux mode
 if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
