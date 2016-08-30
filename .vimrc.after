@@ -7,8 +7,10 @@ syntax enable
 
 "Dark Theme
 set background=dark
-let g:airline_theme='hybridline'
-autocmd VimEnter * AirlineTheme hybridline
+"let g:airline_theme='hybridline'
+"autocmd VimEnter * AirlineTheme hybridline
+let g:airline_theme='PaperColor'
+autocmd VimEnter * AirlineTheme PaperColor
 colorscheme PaperColor
 "let g:PaperColor_Dark_Override = { 'background' : '#3a3a3a' }
 "hi CursorLine cterm=NONE ctermbg=235
