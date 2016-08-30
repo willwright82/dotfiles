@@ -134,7 +134,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Fira Code Retina"
+   dotspacemacs-default-font '("Fira Code Light"
                                :size 14
                                :weight normal
                                :width normal
@@ -305,6 +305,12 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (add-to-list 'exec-path "~/.local/bin/")
+
+  (set-face-attribute 'default nil :font "Fira Code Retina-14")
+  ;; (set-face-attribute 'default nil :height 154)
+  ;; (set-face-attribute 'default nil :weight 'light)
+  (setq-default line-spacing 0.15)
+
   ;; create "il"/"al" (inside/around) line text objects:
   (define-and-bind-text-object "l" "^\\s-*" "\\s-*$")
   ;; create "ie"/"ae" (inside/around) entire buffer text objects:
@@ -359,6 +365,10 @@ you should place your code here."
   (add-hook 'prog-mode-hook #'spacemacs/toggle-indent-guide-on)
 
   ;; Modes by File types
+  (autoload 'markdown-mode "markdown-mode"
+    "Major mode for editing Markdown files" t)
+  (add-to-list 'auto-mode-alist '("\\.post\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.js.erb\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.html.erb\\'" . web-mode))
@@ -368,7 +378,7 @@ you should place your code here."
 
   ;; use ligatures (this is reaaaaal hacky)
   ;; (when (window-system)
-  ;;   (set-default-font "Fira Code"))
+  ;;   (set-default-font "Fira Code Light"))
   ;; (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
   ;;                (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
   ;;                (36 . ".\\(?:>\\)")
