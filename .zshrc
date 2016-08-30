@@ -49,7 +49,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras osx meteor sublime sudo tmux tmuxinator common-aliases web-search brew npm nyan encode64 python url-tools)
+plugins=(git git-extras osx meteor sublime sudo tmux tmuxinator common-aliases web-search brew npm nyan encode64 python rails url-tools)
 
 source $ZSH/oh-my-zsh.sh
 
