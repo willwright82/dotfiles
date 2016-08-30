@@ -264,6 +264,7 @@ autocmd BufLeave,FocusLost * stopinsert | silent! wall
 
 " save session and reload
 "nnoremap <leader>s :mksession<CR>
+let g:returnApp = "iTerm"
 nnoremap <leader>s :w<CR>:ChromeReload<CR>
 inoremap <leader>s <ESC>:w<CR>:ChromeReload<CR>
 
