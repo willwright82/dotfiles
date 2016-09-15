@@ -275,6 +275,9 @@ inoremap <leader>p <ESC>:w<CR>:exe '!open -a "Google Chrome" %'<CR><CR>
 " Autoformat code
 noremap <F2> :Autoformat<CR>
 
+" Use Eslint for React
+let g:syntastic_javascript_checkers = ['eslint']
+
 " buffergator tweaks
 " split below VIM window
 let g:buffergator_viewport_split_policy = "b"
