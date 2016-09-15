@@ -17,6 +17,9 @@ packages=(
     vtop
     node-tweet-cli
     fast-cli
+    eslint
+    babel-eslint
+    eslint-plugin-react
 )
 
 npm install -g "${packages[@]}"
