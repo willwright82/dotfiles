@@ -199,18 +199,18 @@ noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 imap <M-o> <Esc>o
 
 " Learning Mode
-"nnoremap <up> <nop>
-"nnoremap <down> <nop>
-"nnoremap <left> <nop>
-"nnoremap <right> <nop>
-"inoremap <up> <nop>
-"inoremap <down> <nop>
-"inoremap <left> <nop>
-"inoremap <right> <nop>
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
 
 " Proper J & K
-"nnoremap j gj
-"nnoremap k gk
+nnoremap j gj
+nnoremap k gk
 
 " Line number then ENTER goto line
 "nnoremap <CR> G
@@ -244,14 +244,16 @@ autocmd FileType ruby nmap <leader>r :w<CR>:!ruby %<cr>
 autocmd FileType ruby imap <leader>r <ESC>:w<CR>:!ruby %<cr>
 autocmd FileType ruby nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
 autocmd FileType ruby imap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
-autocmd FileType ruby nmap <leader>rs :w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
-autocmd FileType ruby imap <leader>rs <ESC>:w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
+autocmd FileType ruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
+autocmd FileType ruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
+autocmd FileType ruby nmap <leader>rs :w<CR>:call VimuxRunCommand("clear; rspec spec")<cr>
+autocmd FileType ruby imap <leader>rs <ESC>:w<CR>:call VimuxRunCommand("clear; rspec spec")<cr>
 autocmd FileType eruby nmap <leader>r :w<CR>:!ruby %<cr>
 autocmd FileType eruby imap <leader>r <ESC>:w<CR>:!ruby %<cr>
 autocmd FileType eruby nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
 autocmd FileType eruby imap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
-autocmd FileType eruby nmap <leader>rs :w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
-autocmd FileType eruby imap <leader>rs <ESC>:w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
+autocmd FileType eruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
+autocmd FileType eruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
 autocmd FileType javascript nmap <leader>r :w<CR>:!node %<cr>
 autocmd FileType javascript imap <leader>r <ESC>:w<CR>:!node %<cr>
 autocmd FileType javascript nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<cr>
