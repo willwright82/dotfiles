@@ -101,7 +101,7 @@ alias ggprp="ggpur && ggpush"
 alias gn="ggpur && gco -b"
 alias gac="gaa && gcam"
 alias gcd="gco develop"
-alias gsup="git standup"
+alias gsup="git standup -D \"format:%Y-%m-%d %H:%M\""
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
 alias afk="/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"
@@ -128,6 +128,15 @@ function matrix() {echo -e "\e[1;40m" ; clear ; characters=$( jot -c 94 33 | tr 
 
 function on() { noglob curl -X POST --data-urlencode "task=$*" https://api.workingon.co/hooks/incoming?token=fd536f24201290ed5eb055d9beaf104e7d4b34f224bf3e2003474449911cd653 >/dev/null 2>&1 echo "Task sent." }
 
+
+function gitvanity() {
+    local code="$1" url="$2";
+    echo 'creating vanity GitHub URL... ';
+    ghurl=$(curl -s -i http://git.io -F "url=$url" -F "code=$code"           | grep Location           | awk '{print $2}');
+    echo $ghurl | pbcopy;
+    echo "copied to clipboard: ${ghurl}"
+}
+
 # Avoid overwriting files - `set +o noclobber` to override
 set -o noclobber
 
@@ -138,5 +147,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export GOPATH=$HOME/Labs/go
+
+export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/Dropbox/.logs/zsh-history-$(date "+%Y-%m-%d").log; fi'
 
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

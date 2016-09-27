@@ -55,6 +55,7 @@ values."
      ruby-on-rails
      rcirc
      chrome
+     react
      ;; emoji
      )
    ;; List of additional packages that will be installed without being
@@ -122,14 +123,16 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(material
+   dotspacemacs-themes '(
+                         material
                          spacemacs-dark
                          spacemacs-light
                          solarized-light
                          solarized-dark
                          leuven
                          monokai
-                         zenburn)
+                         zenburn
+                         )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -275,6 +278,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
    web-mode-markup-indent-offset 2
    web-mode-css-indent-offset 2
    )
+  (setq flycheck-checker-error-threshold 800)
   (defmacro define-and-bind-text-object (key start-regex end-regex)
     (let ((inner-name (make-symbol "inner-name"))
           (outer-name (make-symbol "outer-name")))
