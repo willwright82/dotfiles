@@ -16,6 +16,7 @@ apps=(
     firefox
     google-chrome
     iconjar
+    imageoptim
     licecap
     mou
     postgres
@@ -27,6 +28,8 @@ apps=(
     spotify
     sublime-text3
     transmit
+    vagrant
+    vagrant-manager
     virtualbox
     vlc
     whatsmac
