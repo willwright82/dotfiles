@@ -146,7 +146,10 @@ highlight link NERDTreeExecFile ModeMsg
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeWinSize = 31
-map <leader>n :NERDTreeToggle %<CR>
+let g:nerdtree_tabs_open_on_console_startup = 2
+let g:nerdtree_tabs_open_on_gui_startup = 2
+let g:nerdtree_tabs_autofind = 1
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 " Remove pipes in window split bar
 set fillchars+=vert:\ 
@@ -243,6 +246,9 @@ noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 " Insert new line in insert mode
 imap <M-o> <Esc>o
 
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
 " Learning Mode
 "nnoremap <up> <nop>
 "nnoremap <down> <nop>
@@ -308,6 +314,9 @@ autocmd FileType javascript nmap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDi
 "au FocusLost * :wa
 "au FocusLost * silent! wa
 autocmd BufLeave,FocusLost * stopinsert | silent! wall
+
+" Fix to NerdTree width for VIM 8 + Janus
+autocmd! AuNERDTreeCmd Vimenter *
 
 " save session and reload
 "nnoremap <leader>s :mksession<CR>
