@@ -107,7 +107,7 @@ set noswapfile
 ":map <xCSI>[62~ <MouseDown>
 
 " OSX Clipboard
-" set clipboard=unnamedplus
+"set clipboard=unnamedplus
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 "nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
 " groovyness in Insert mode (lets you paste and keep on typing)
@@ -317,6 +317,10 @@ autocmd BufLeave,FocusLost * stopinsert | silent! wall
 
 " Fix to NerdTree width for VIM 8 + Janus
 autocmd! AuNERDTreeCmd Vimenter *
+
+" Save fold and load information
+autocmd BufWrite * mkview
+autocmd BufRead * silent loadview
 
 " save session and reload
 "nnoremap <leader>s :mksession<CR>

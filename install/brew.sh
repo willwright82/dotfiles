@@ -32,6 +32,7 @@ apps=(
     postgresql
     reattach-to-user-namespace
     redis
+    shpotify
     speedtest_cli
     the_silver_searcher
     tmux
