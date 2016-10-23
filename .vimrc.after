@@ -102,6 +102,17 @@ set undofile
 set undodir=~/.vim/undo
 set noswapfile
 
+" Tweaks for Netrw file explorer
+let g:netrw_banner=0 " disable annoying banner
+let g:netrw_browse_split=4 " open in prior window
+let g:netrw_altv=1 " open splits to the right
+let g:netrw_liststyle=3 " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+" Now we can:
+" - :edit a folder to open file browser
+" - <CR>/v/t to open in h-split/v-split/tab
+
 " mouse settings
 :set mouse=a
 ":map <xCSI>[62~ <MouseDown>
@@ -164,6 +175,9 @@ set autoindent
 let g:indentLine_char = '·'
 let g:indentLine_concealcursor=0
 
+" Set path to recursive Subdirectories
+set path+=**
+
 " visual autocomplete for command menu
 set wildmenu
 
@@ -210,6 +224,7 @@ set foldlevelstart=20
 set nofoldenable
 " space open/closes folds
 nnoremap <space> za
+"au FileType html,htmldjango,css,sass,javascript,coffee,python,ruby,eruby setl foldmethod=indent foldenable
 
 " Remove Concealing
 set conceallevel=0
@@ -322,6 +337,13 @@ autocmd! AuNERDTreeCmd Vimenter *
 autocmd BufWrite * mkview
 autocmd BufRead * silent loadview
 
+" Create the Ctags tags file
+command! MakeTags !ctags -R .
+" Now we can:
+" - Use <CTRL>+] to jump to tag under cursor
+" - Use g+<CTRL>+] for ambiguous tags
+" - Use <CTRL>+t to jump back up the tag stack
+
 " save session and reload
 "nnoremap <leader>s :mksession<CR>
 let g:returnApp = "iTerm"
@@ -390,6 +412,13 @@ let g:buffergator_sort_regime = "mru"
 " Exit mode in Multiple-cursors
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
+
+" Disable YouCompleteMe
+let g:loaded_youcompleteme = 1
+
+" Remove <TAB> from YouCompleteMe
+let g:ycm_key_list_select_completion = []
+let g:ycm_key_list_previous_completion = []
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
