@@ -38,7 +38,9 @@ set background=dark
 let g:airline_theme='PaperColor'
 autocmd VimEnter * AirlineTheme PaperColor
 colorscheme PaperColor
-"let g:PaperColor_Dark_Override = { 'background' : '#3a3a3a' }
+" No Background
+hi Normal ctermbg=NONE
+"let g:PaperColor_Dark_Override = { 'background' : '#262626', 'vertspilt' : '#262626' }
 hi CursorLine cterm=NONE ctermbg=235
 " Hide Non text Characters
 "hi NonText guifg=bg
@@ -48,9 +50,9 @@ highlight VertSplit ctermfg=235 ctermbg=NONE
 "highlight StatusLineNC ctermfg=236 ctermbg=245
 " Change Line Number Colour
 "highlight LineNr ctermfg=237 ctermbg=NONE
+" Change Gutter Colour
+"highlight SignColumn ctermfg=238 ctermbg=NONE
 let g:indentLine_color_term = 238
-" No Background
-hi Normal ctermbg=NONE
 
 ""Light Theme
 "set background=light
