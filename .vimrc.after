@@ -456,11 +456,11 @@ endif
 " \'x'    : '#(/usr/bin/battery -t)',
 
 let g:tmuxline_preset = {
-      \'a'    : '#H',
+      \'a'    : '#(dig +short myip.opendns.com @resolver1.opendns.com)',
       \'b'    : '#S',
       \'c'    : '#W #(branch)',
       \'win'  : '#I #W',
       \'cwin' : '#I #W',
       \'x'    : '#(~/bin/tmux-charge)',
       \'y'    : '%a %d/%h %H:%M',
-      \'z'    : '#(ipconfig getifaddr en1) #h'}
+      \'z'    : '#h'}
