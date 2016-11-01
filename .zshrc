@@ -119,6 +119,7 @@ alias solrGo='(~/Dev/clazzoo; bundle exec rake sunspot:solr:start)'
 alias solrStop='(~/Dev/clazzoo; bundle exec rake sunspot:solr:stop)'
 alias railsGo='rails s -b 0.0.0.0'
 alias clazzoo="clear && tmuxinator start clazzoo"
+alias home="clear && tmuxinator start home"
 alias tests="rspec spec"
 alias starwars="telnet towel.blinkenlights.nl"
 alias moon="curl wttr\.in/Moon"
