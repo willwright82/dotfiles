@@ -306,6 +306,7 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.files/.vimrc.after<cr>
 " inoremap <buffer> -- —
 autocmd FileType markdown imap -- –
 autocmd FileType markdown imap --- —
+autocmd FileType markdown silent! TableModeEnable
 
 " Run Code
 autocmd FileType ruby nmap <leader>r :w<CR>:!ruby %<cr>
@@ -456,11 +457,11 @@ endif
 " \'x'    : '#(/usr/bin/battery -t)',
 
 let g:tmuxline_preset = {
-      \'a'    : '#H',
+      \'a'    : '#h',
       \'b'    : '#S',
       \'c'    : '#W #(branch)',
       \'win'  : '#I #W',
       \'cwin' : '#I #W',
       \'x'    : '#(~/bin/tmux-charge)',
       \'y'    : '%a %d/%h %H:%M',
-      \'z'    : '#(ipconfig getifaddr en1) #h'}
+      \'z'    : '#(dig +short myip.opendns.com @resolver1.opendns.com)'}
