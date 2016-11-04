@@ -246,6 +246,7 @@ vnoremap <tab> %
 nnoremap ; :
 
 " move lines up and down with ALT+J/K
+"let g:move_key_modifier = 'M'
 execute "set <M-j>=\ej"
 execute "set <M-k>=\ek"
 nnoremap <M-j> :m .+1<CR>==
@@ -255,6 +256,8 @@ inoremap <M-k> <Esc>:m .-2<CR>==gi
 vnoremap <M-j> :m '>+1<CR>gv=gv
 vnoremap <M-k> :m '<-2<CR>gv=gv
 
+
+" Smooth Scrolling
 noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 30, 2)<CR>
 noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 30, 2)<CR>
 noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 30, 4)<CR>
