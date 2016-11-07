@@ -83,3 +83,4 @@ git clone https://github.com/slim-template/vim-slim.git ~/.janus/vim-slim
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 git clone https://github.com/tpope/vim-repeat.git ~/.janus/vim-repeat
 git clone https://github.com/matze/vim-move.git ~/.janus/vim-move
+git clone https://github.com/frankier/vim-eve.git ~/.janus/vim-eve
