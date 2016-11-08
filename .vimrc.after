@@ -462,9 +462,9 @@ endif
 let g:tmuxline_preset = {
       \'a'    : '#h',
       \'b'    : '#S',
-      \'c'    : '#W #(branch)',
+      \'c'    : '#W ‹#(~/bin/branch.sh)›',
       \'win'  : '#I #W',
       \'cwin' : '#I #W',
       \'x'    : '#(~/bin/tmux-charge)',
-      \'y'    : '%a %d/%h %H:%M',
+      \'y'    : '%a %d/%h %H:%M #(~/bin/temperature)',
       \'z'    : '#(dig +short myip.opendns.com @resolver1.opendns.com)'}
