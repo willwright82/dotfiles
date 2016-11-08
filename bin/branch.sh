@@ -1,3 +1,2 @@
 #!/bin/bash
-git rev-parse --abbrev-ref HEAD
-#test2
+echo " $(git rev-parse --abbrev-ref HEAD)"

@@ -458,11 +458,12 @@ endif
 " #(shell-command)  First line of the command's output)
 " \'x'    : '#(~/bin/tmux-charge) [✉ #(~/bin/imap_check.py)]',
 " \'x'    : '#(/usr/bin/battery -t)',
+" \'c'    : ' #(~/bin/branch.sh)',
 
 let g:tmuxline_preset = {
       \'a'    : '#h',
       \'b'    : '#S',
-      \'c'    : '#W ‹#(~/bin/branch.sh)›',
+      \'c'    : '#W',
       \'win'  : '#I #W',
       \'cwin' : '#I #W',
       \'x'    : '#(~/bin/tmux-charge)',
