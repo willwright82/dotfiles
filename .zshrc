@@ -130,7 +130,6 @@ function matrix() {echo -e "\e[1;40m" ; clear ; characters=$( jot -c 94 33 | tr 
 
 function on() { noglob curl -X POST --data-urlencode "task=$*" https://api.workingon.co/hooks/incoming?token=fd536f24201290ed5eb055d9beaf104e7d4b34f224bf3e2003474449911cd653 >/dev/null 2>&1 echo "Task sent." }
 
-
 function gitvanity() {
     local code="$1" url="$2";
     echo 'creating vanity GitHub URL... ';
