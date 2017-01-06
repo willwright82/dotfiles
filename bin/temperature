@@ -1,0 +1,2 @@
+#!/bin/bash
+finger o:edinburgh@graph.no | awk '$1 == "edinburgh" {print $4"°C"}'

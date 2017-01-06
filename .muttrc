@@ -1,0 +1,17 @@
+set imap_user = "will@wright.is"
+#set imap_pass = "YOUR-PASSWORD"
+set smtp_url = "smtp://will@wright.is@smtp.gmail.com:587/"
+#set smtp_pass = "YOUR-PASSWORD"
+set from = "will@wright.is"
+set realname = "Will Wright"
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set postponed = "+[Gmail]/Drafts"
+set header_cache = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/certificates
+set move = no
+set timeout=15
+auto_view text/html
+set smtp_authenticators = 'gssapi:login'
+bind index G imap-fetch-mail

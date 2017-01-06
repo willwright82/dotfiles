@@ -1,28 +1,58 @@
+"           ██
+"          ░░
+"  ██    ██ ██ ██████████  ██████  █████
+" ░██   ░██░██░░██░░██░░██░░██░░█ ██░░░██
+" ░░██ ░██ ░██ ░██ ░██ ░██ ░██ ░ ░██  ░░
+"  ░░████  ░██ ░██ ░██ ░██ ░██   ░██   ██
+"   ░░██   ░██ ███ ░██ ░██░███   ░░█████
+"    ░░    ░░ ░░░  ░░  ░░ ░░░     ░░░░░
+"
+"  ▓▓▓▓▓▓▓▓▓▓
+" ░▓ author ▓ Will Wright <will@wright.is>
+" ░▓ tweet  ▓ @WilliamWright
+" ░▓ code   ▓ https://github.com/willwright82/dotfiles
+" ░▓▓▓▓▓▓▓▓▓▓
+" ░░░░░░░░░░
+
+
+" ╻┏┓╻╺┳╸┏━╸┏━┓┏━╸┏━┓┏━╸┏━╸
+" ┃┃┗┫ ┃ ┣╸ ┣┳┛┣╸ ┣━┫┃  ┣╸
+" ╹╹ ╹ ╹ ┗━╸╹┗╸╹  ╹ ╹┗━╸┗━╸
+
+" security
+"set modelines=0
+
 set t_Co=256   " This is may or may not needed.
 set wrap linebreak nolist
 set splitright
+
+set updatetime=250
 
 " enable syntax processing
 syntax enable
 
 "Dark Theme
 set background=dark
-let g:airline_theme='hybridline'
-autocmd VimEnter * AirlineTheme hybridline
+"let g:airline_theme='hybridline'
+"autocmd VimEnter * AirlineTheme hybridline
+let g:airline_theme='PaperColor'
+autocmd VimEnter * AirlineTheme PaperColor
 colorscheme PaperColor
-"let g:PaperColor_Dark_Override = { 'background' : '#3a3a3a' }
-"hi CursorLine cterm=NONE ctermbg=235
+" No Background
+hi Normal ctermbg=NONE
+"let g:PaperColor_Dark_Override = { 'background' : '#262626', 'vertspilt' : '#262626' }
+hi CursorLine cterm=NONE ctermbg=235
 " Hide Non text Characters
 "hi NonText guifg=bg
-hi NonText ctermfg=236 guifg=236 cterm=NONE gui=NONE
+hi NonText ctermfg=236 guifg=NONE cterm=NONE gui=NONE
 " Change Vertical Split Bar colour
 highlight VertSplit ctermfg=235 ctermbg=NONE
 "highlight StatusLineNC ctermfg=236 ctermbg=245
 " Change Line Number Colour
 "highlight LineNr ctermfg=237 ctermbg=NONE
-let g:indentLine_color_term = 237
-" No Background
-hi Normal ctermbg=NONE
+" Change Gutter Colour
+"highlight SignColumn ctermfg=238 ctermbg=NONE
+let g:indentLine_color_term = 238
 
 ""Light Theme
 "set background=light
@@ -66,19 +96,35 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Show hidden files
-let g:NERDTreeShowHidden=1
+" Keep Undo history
+set hidden
+
+" maintain undo history between sessions
+set undofile
+set undodir=~/.vim/undo
+set noswapfile
+
+" Tweaks for Netrw file explorer
+let g:netrw_banner=0 " disable annoying banner
+let g:netrw_browse_split=4 " open in prior window
+let g:netrw_altv=1 " open splits to the right
+let g:netrw_liststyle=3 " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+" Now we can:
+" - :edit a folder to open file browser
+" - <CR>/v/t to open in h-split/v-split/tab
 
 " mouse settings
 :set mouse=a
 ":map <xCSI>[62~ <MouseDown>
 
 " OSX Clipboard
-" set clipboard=unnamedplus
+"set clipboard=unnamedplus
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-" nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
+"nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
 " groovyness in Insert mode (lets you paste and keep on typing)
-imap <C-v> <Esc><C-v>a
+"imap <C-v> <Esc><C-v>a
 
 " Enclose in Brackets
 " vnoremap _( <Esc>`>a)<Esc>`<i(<Esc>
@@ -86,13 +132,19 @@ imap <C-v> <Esc><C-v>a
 " vnoremap _{ <Esc>`>a}<Esc>`<i{<Esc>
 
 " Auto close Brackets
-inoremap ( ()<Esc>i
-inoremap [ []<Esc>i
-inoremap { {}<Esc>i
-inoremap < <><ESC>i
+"inoremap ( ()<Esc>i
+"inoremap [ []<Esc>i
+"inoremap { {}<Esc>i
+"inoremap < <><ESC>i
+
+" add <angular brackets> and |pipes| to autoclose
+let g:AutoClosePairs_add = '<> |'
 
 " Fast Scrolling
 set ttyfast
+
+" stop unnecessary rendering
+set lazyredraw
 
 " show command in bottom bar
 set showcmd
@@ -103,16 +155,30 @@ set cursorline
 " Disable EXEC file highlight in NERDtree
 highlight link NERDTreeExecFile ModeMsg
 
+" Show hidden files
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeWinSize = 31
+let g:nerdtree_tabs_open_on_console_startup = 2
+let g:nerdtree_tabs_open_on_gui_startup = 2
+let g:nerdtree_tabs_autofind = 1
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
 " Remove pipes in window split bar
 set fillchars+=vert:\ 
 
 " load filetype-specific indent files
 filetype indent on
 
+set autoindent
+
 " IndentLine plugin Character
 "let g:indentLine_char = '⦙'
 let g:indentLine_char = '·'
 let g:indentLine_concealcursor=0
+
+" Set path to recursive Subdirectories
+set path+=**
 
 " visual autocomplete for command menu
 set wildmenu
@@ -124,6 +190,8 @@ nnoremap / /\v
 vnoremap / /\v
 set ignorecase
 set smartcase
+set infercase
+" the /g flag on :s substitutions by default
 set gdefault
 " search as characters are entered
 set incsearch
@@ -153,13 +221,19 @@ nnoremap \ :Ag<SPACE>
 
 " fold based on indent level
 set foldmethod=indent
+set foldlevelstart=20
 " disable folding
 set nofoldenable
 " space open/closes folds
 nnoremap <space> za
+"au FileType html,htmldjango,css,sass,javascript,coffee,python,ruby,eruby setl foldmethod=indent foldenable
 
 " Remove Concealing
 set conceallevel=0
+
+" ┏━╸┏━┓┏┳┓┏┳┓┏━┓┏┓╻╺┳┓┏━┓
+" ┃  ┃ ┃┃┃┃┃┃┃┣━┫┃┗┫ ┃┃┗━┓
+" ┗━╸┗━┛╹ ╹╹ ╹╹ ╹╹ ╹╺┻┛┗━┛
 
 " clear search
 nnoremap <leader><space> :noh<cr>
@@ -172,6 +246,7 @@ vnoremap <tab> %
 nnoremap ; :
 
 " move lines up and down with ALT+J/K
+"let g:move_key_modifier = 'M'
 execute "set <M-j>=\ej"
 execute "set <M-k>=\ek"
 nnoremap <M-j> :m .+1<CR>==
@@ -181,10 +256,18 @@ inoremap <M-k> <Esc>:m .-2<CR>==gi
 vnoremap <M-j> :m '>+1<CR>gv=gv
 vnoremap <M-k> :m '<-2<CR>gv=gv
 
+
+" Smooth Scrolling
 noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 30, 2)<CR>
 noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 30, 2)<CR>
 noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 30, 4)<CR>
 noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
+
+" Insert new line in insert mode
+imap <M-o> <Esc>o
+
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
 
 " Learning Mode
 "nnoremap <up> <nop>
@@ -197,11 +280,11 @@ noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 "inoremap <right> <nop>
 
 " Proper J & K
-nnoremap j gj
-nnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
 
 " Line number then ENTER goto line
-nnoremap <CR> G
+"nnoremap <CR> G
 
 " Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
@@ -226,22 +309,104 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.files/.vimrc.after<cr>
 " inoremap <buffer> -- —
 autocmd FileType markdown imap -- –
 autocmd FileType markdown imap --- —
+autocmd FileType markdown silent! TableModeEnable
 
 " Run Code
-autocmd FileType ruby nmap <leader>r :!ruby %<cr>
-autocmd FileType ruby nmap <leader>rb :call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
-autocmd FileType eruby nmap <leader>r :!ruby %<cr>
-autocmd FileType eruby nmap <leader>rb :call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
-autocmd FileType javascript nmap <leader>r :!node %<cr>
-autocmd FileType javascript nmap <leader>rb :call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<cr>
+autocmd FileType ruby nmap <leader>r :w<CR>:!ruby %<cr>
+autocmd FileType ruby imap <leader>r <ESC>:w<CR>:!ruby %<cr>
+autocmd FileType ruby nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
+autocmd FileType ruby imap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
+autocmd FileType ruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
+autocmd FileType ruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
+autocmd FileType ruby nmap <leader>rs :w<CR>:call VimuxRunCommand("clear; rspec spec")<cr>
+autocmd FileType ruby imap <leader>rs <ESC>:w<CR>:call VimuxRunCommand("clear; rspec spec")<cr>
+autocmd FileType eruby nmap <leader>r :w<CR>:!ruby %<cr>
+autocmd FileType eruby imap <leader>r <ESC>:w<CR>:!ruby %<cr>
+autocmd FileType eruby nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
+autocmd FileType eruby imap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
+autocmd FileType eruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
+autocmd FileType eruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
+autocmd FileType javascript nmap <leader>r :w<CR>:!node %<cr>
+autocmd FileType javascript imap <leader>r <ESC>:w<CR>:!node %<cr>
+autocmd FileType javascript nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<cr>
+autocmd FileType javascript nmap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<cr>
 
 " Save on losing focus
 "au FocusLost * :wa
 "au FocusLost * silent! wa
-autocmd BufLeave,FocusLost * silent! wall
+autocmd BufLeave,FocusLost * stopinsert | silent! wall
 
-" save session
-nnoremap <leader>s :mksession<CR>
+" Fix to NerdTree width for VIM 8 + Janus
+autocmd! AuNERDTreeCmd Vimenter *
+
+" Save fold and load information
+autocmd BufWrite * mkview
+autocmd BufRead * silent loadview
+
+" Create the Ctags tags file
+command! MakeTags !ctags -R .
+" Now we can:
+" - Use <CTRL>+] to jump to tag under cursor
+" - Use g+<CTRL>+] for ambiguous tags
+" - Use <CTRL>+t to jump back up the tag stack
+
+" save session and reload
+"nnoremap <leader>s :mksession<CR>
+let g:returnApp = "iTerm"
+nnoremap <leader>s :w<CR>:ChromeReload<CR>
+inoremap <leader>s <ESC>:w<CR>:ChromeReload<CR>
+
+" save session and preview
+nnoremap <leader>p :w<CR>:exe '!open -a "Google Chrome" %'<CR><CR>
+inoremap <leader>p <ESC>:w<CR>:exe '!open -a "Google Chrome" %'<CR><CR>
+
+" Autoformat code
+noremap <F2> :Autoformat<CR>
+
+" ┏━┓╻  ╻ ╻┏━╸╻┏┓╻   ┏━┓╺┳╸╻ ╻┏━╸┏━╸
+" ┣━┛┃  ┃ ┃┃╺┓┃┃┗┫   ┗━┓ ┃ ┃ ┃┣╸ ┣╸
+" ╹  ┗━╸┗━┛┗━┛╹╹ ╹   ┗━┛ ╹ ┗━┛╹  ╹
+
+" git-gutter http://git.io/vimgitgutter
+let g:gitgutter_realtime = 1
+let g:gitgutter_eager = 1
+"If you experience a lag, you can trade speed for accuracy:
+"let g:gitgutter_realtime = 0
+"let g:gitgutter_eager = 0
+
+"let g:gitgutter_diff_args = '-w'
+"let g:gitgutter_sign_added = '+'
+"let g:gitgutter_sign_modified = '~'
+"let g:gitgutter_sign_removed = '-'
+"let g:gitgutter_sign_removed_first_line = '^'
+"let g:gitgutter_sign_modified_removed = ':'
+let g:gitgutter_max_signs = 1500
+"highlight clear SignColumn
+"highlight GitGutterAdd ctermfg=green ctermbg=237
+"highlight GitGutterChange ctermfg=yellow ctermbg=237
+"highlight GitGutterDelete ctermfg=red ctermbg=237
+"highlight GitGutterChangeDelete ctermfg=red ctermbg=237
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+"let g:syntastic_quiet_messages = { '!level': 'errors' }
+"let g:syntastic_quiet_messages = { 'type': 'style' }
+let g:syntastic_quiet_messages = { 'regex': 'Line is too long' }
+"let g:syntastic_quiet_messages = { 'file:p':  ['\m^/usr/include/', '\m\c\.h$'] }
+
+" Use Eslint for React
+let g:syntastic_javascript_checkers = ['eslint']
+
+" Use Rubocop for Ruby
+"let g:syntastic_ruby_checkers = ['rubocop', 'rubylint']
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
 " buffergator tweaks
 " split below VIM window
@@ -249,6 +414,17 @@ let g:buffergator_viewport_split_policy = "b"
 " 15 lines height for window
 let g:buffergator_split_size = 15
 let g:buffergator_sort_regime = "mru"
+
+" Exit mode in Multiple-cursors
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
+
+" Disable YouCompleteMe
+let g:loaded_youcompleteme = 1
+
+" Remove <TAB> from YouCompleteMe
+let g:ycm_key_list_select_completion = []
+let g:ycm_key_list_previous_completion = []
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
@@ -261,6 +437,10 @@ endif
 
 " don't blink the cursor
 "set guicursor+=i:blinkwait0
+
+" ┏━┓╺┳╸┏━┓╺┳╸╻ ╻┏━┓╻  ╻┏┓╻┏━╸
+" ┗━┓ ┃ ┣━┫ ┃ ┃ ┃┗━┓┃  ┃┃┗┫┣╸
+" ┗━┛ ╹ ╹ ╹ ╹ ┗━┛┗━┛┗━╸╹╹ ╹┗━╸
 
 " let g:tmuxline_preset = 'nightly_fox'
 " or
@@ -278,13 +458,14 @@ endif
 " #(shell-command)  First line of the command's output)
 " \'x'    : '#(~/bin/tmux-charge) [✉ #(~/bin/imap_check.py)]',
 " \'x'    : '#(/usr/bin/battery -t)',
+" \'c'    : ' #(~/bin/branch.sh)',
 
 let g:tmuxline_preset = {
-      \'a'    : '#H',
+      \'a'    : '#h',
       \'b'    : '#S',
-      \'c'    : '#W #(branch)',
+      \'c'    : '#W',
       \'win'  : '#I #W',
       \'cwin' : '#I #W',
       \'x'    : '#(~/bin/tmux-charge)',
-      \'y'    : '%a %d/%h %H:%M',
-      \'z'    : '#(ipconfig getifaddr en1) #h'}
+      \'y'    : '%a %d/%h %H:%M #(~/bin/temperature)',
+      \'z'    : '#(dig +short myip.opendns.com @resolver1.opendns.com)'}

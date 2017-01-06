@@ -14,6 +14,10 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 
 set clipboard=unnamed
 
+" ┏━┓╻  ╻ ╻┏━╸╻┏┓╻   ┏━┓╺┳╸╻ ╻┏━╸┏━╸
+" ┣━┛┃  ┃ ┃┃╺┓┃┃┗┫   ┗━┓ ┃ ┃ ┃┣╸ ┣╸
+" ╹  ┗━╸┗━┛┗━┛╹╹ ╹   ┗━┛ ╹ ┗━┛╹  ╹
+
 " Disable plugins because I don't need them, but keep the bindings to remind me
 call janus#disable_plugin('vroom', "I don't need vroom")
 call janus#disable_plugin('papercolor', "I don't need papercolor")

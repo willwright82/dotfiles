@@ -1,0 +1,8 @@
+set folder=imaps://will@wright.is@imap.gmail.com
+set record=+Sent
+set from="Will Wright <will@wright.is>"
+set smtp-use-starttls
+set smtp=smtp://smtp.gmail.com
+set smtp-auth=login
+set smtp-auth-user=will@wright.is
+set from="Will Wright <will@wright.is>"
