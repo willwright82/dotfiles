@@ -7,19 +7,37 @@ nvm alias default 0.12
 # Globally install with npm
 
 packages=(
+    babel-eslint
+    bower
+    devtools-terminal
+    emoj
+    emojipacks
+    eslint
+    eslint-config-airbnb
+    eslint-plugin-react
+    fast-cli
+    feathers-cli
+    git-fire
+    git-watcher
     grunt
     gulp
-    http-server
     how2
-    nodemon
-    ntl
-    spot
-    vtop
+    http-server
+    imageoptim-cli
+    js-beautify
+    lighthouse
+    mediumcli
     node-tweet-cli
-    fast-cli
-    eslint
-    babel-eslint
-    eslint-plugin-react
+    nodemon
+    npm
+    ntl
+    phunt
+    quickscrape
+    resume-cli
+    slack-cli
+    spot
+    tern
+    vtop
 )
 
 npm install -g "${packages[@]}"
