@@ -92,6 +92,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-material.dark.sh"
 # aliases
 alias vim="/usr/local/bin/vim"
 alias vi="/usr/local/bin/vim"
+alias e="emacsclient -nw c"
 alias branch="~/bin/branch.sh"
 alias zshconfig="vi ~/.files/.zshrc"
 alias ohmyzsh="vi ~/.files/.oh-my-zsh"

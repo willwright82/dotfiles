@@ -266,18 +266,17 @@ noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 30, 4)<CR>
 " Insert new line in insert mode
 imap <M-o> <Esc>o
 
+" Insert one character in normal mode
+nnoremap <leader>i i_<Esc>r
+
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
 " Learning Mode
-"nnoremap <up> <nop>
-"nnoremap <down> <nop>
-"nnoremap <left> <nop>
-"nnoremap <right> <nop>
-"inoremap <up> <nop>
-"inoremap <down> <nop>
-"inoremap <left> <nop>
-"inoremap <right> <nop>
+"nnoremap <Left> :echoe 'Use h'<CR>
+"nnoremap <Right> :echoe 'Use l'<CR>
+"nnoremap <Up> :echoe 'Use k'<CR>
+"nnoremap <Down> :echoe 'Use j'<CR>
 
 " Proper J & K
 "nnoremap j gj
@@ -313,23 +312,34 @@ autocmd FileType markdown silent! TableModeEnable
 
 " Run Code
 autocmd FileType ruby nmap <leader>r :w<CR>:!ruby %<cr>
-autocmd FileType ruby imap <leader>r <ESC>:w<CR>:!ruby %<cr>
-autocmd FileType ruby nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
-autocmd FileType ruby imap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
-autocmd FileType ruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
-autocmd FileType ruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
-autocmd FileType ruby nmap <leader>rs :w<CR>:call VimuxRunCommand("clear; rspec spec")<cr>
-autocmd FileType ruby imap <leader>rs <ESC>:w<CR>:call VimuxRunCommand("clear; rspec spec")<cr>
-autocmd FileType eruby nmap <leader>r :w<CR>:!ruby %<cr>
-autocmd FileType eruby imap <leader>r <ESC>:w<CR>:!ruby %<cr>
-autocmd FileType eruby nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
-autocmd FileType eruby imap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<cr>
-autocmd FileType eruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
-autocmd FileType eruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear; rspec " . bufname("%"))<cr>
-autocmd FileType javascript nmap <leader>r :w<CR>:!node %<cr>
-autocmd FileType javascript imap <leader>r <ESC>:w<CR>:!node %<cr>
-autocmd FileType javascript nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<cr>
-autocmd FileType javascript nmap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<cr>
+autocmd FileType ruby nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
+autocmd FileType ruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
+autocmd FileType ruby nmap <leader>rn :w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
+autocmd FileType ruby nmap <leader>rs :w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
+
+autocmd FileType ruby imap <leader>r <ESC>:w<CR>:!ruby %<CR>
+autocmd FileType ruby imap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
+autocmd FileType ruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
+autocmd FileType ruby imap <leader>rn <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
+autocmd FileType ruby imap <leader>rs <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
+
+autocmd FileType eruby nmap <leader>r :w<CR>:!ruby %<CR>
+autocmd FileType eruby nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
+autocmd FileType eruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
+autocmd FileType eruby nmap <leader>rn :w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
+autocmd FileType eruby nmap <leader>rs :w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
+
+autocmd FileType eruby imap <leader>r <ESC>:w<CR>:!ruby %<CR>
+autocmd FileType eruby imap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
+autocmd FileType eruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
+autocmd FileType eruby imap <leader>rn <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
+autocmd FileType eruby imap <leader>rs <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
+
+autocmd FileType javascript nmap <leader>r :w<CR>:!node %<CR>
+autocmd FileType javascript nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
+autocmd FileType javascript nmap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
+
+autocmd FileType javascript imap <leader>r <ESC>:w<CR>:!node %<CR>
 
 " Save on losing focus
 "au FocusLost * :wa
@@ -362,6 +372,12 @@ inoremap <leader>p <ESC>:w<CR>:exe '!open -a "Google Chrome" %'<CR><CR>
 
 " Autoformat code
 noremap <F2> :Autoformat<CR>
+
+" Watch for changes in .vimrc and automatically reload the config
+augroup myvimrc
+  au!
+  au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
 
 " ┏━┓╻  ╻ ╻┏━╸╻┏┓╻   ┏━┓╺┳╸╻ ╻┏━╸┏━╸
 " ┣━┛┃  ┃ ┃┃╺┓┃┃┗┫   ┗━┓ ┃ ┃ ┃┣╸ ┣╸
@@ -425,6 +441,9 @@ let g:loaded_youcompleteme = 1
 " Remove <TAB> from YouCompleteMe
 let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_previous_completion = []
+
+" make test commands execute using vim
+let test#strategy = "dispatch"
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
