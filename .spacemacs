@@ -386,6 +386,9 @@ you should place your code here."
            :password ""
            :channels ("#emacs"))))
 
+  ;; Colortheme fix in terminal
+  (custom-set-faces (if (not window-system) '(default ((t (:background "#232E34"))))))
+
   ;; FiraCode and other glyphy fonts
   (mac-auto-operator-composition-mode)
 
