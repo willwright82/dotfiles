@@ -98,6 +98,7 @@ alias zshconfig="vi ~/.files/.zshrc"
 alias ohmyzsh="vi ~/.files/.oh-my-zsh"
 alias notes="vi ~/Dropbox/Quick\ Notes.md"
 alias swift="xcrun swift"
+#alias ggpush='git push origin $(git_current_branch) && git push old-origin $(git_current_branch)'
 alias ggprp="ggpur && ggpush"
 alias gn="ggpur && gco -b"
 alias gac="gaa && gcam"
