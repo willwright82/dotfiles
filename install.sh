@@ -62,12 +62,10 @@ git clone https://github.com/kana/vim-textobj-entire.git ~/.janus/vim-textobj-en
 git clone https://github.com/kana/vim-textobj-indent.git ~/.janus/vim-textobj-indent
 git clone https://github.com/kana/vim-textobj-line.git ~/.janus/vim-textobj-line
 git clone https://github.com/kana/vim-textobj-user.git ~/.janus/vim-textobj-user
-git clone https://github.com/dhruvasagar/vim-table-mode.git
-~/.janus/vim-table-mode
+git clone https://github.com/dhruvasagar/vim-table-mode.git ~/.janus/vim-table-mode
 git clone https://github.com/tpope/vim-ragtag.git ~/.janus/vim-ragtag
 git clone https://github.com/severin-lemaignan/vim-minimap.git ~/.janus/vim-minimap
-git clone https://github.com/jistr/vim-nerdtree-tabs.git
-~/.janus/vim-nerdtree-tabs
+git clone https://github.com/jistr/vim-nerdtree-tabs.git ~/.janus/vim-nerdtree-tabs
 git clone https://github.com/pangloss/vim-javascript.git ~/.janus/vim-javascript
 git clone https://github.com/mxw/vim-jsx.git ~/.janus/vim-jsx
 git clone https://github.com/christoomey/vim-titlecase.git ~/.janus/vim-titlecase
@@ -83,4 +81,5 @@ git clone https://github.com/slim-template/vim-slim.git ~/.janus/vim-slim
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 git clone https://github.com/tpope/vim-repeat.git ~/.janus/vim-repeat
 git clone https://github.com/matze/vim-move.git ~/.janus/vim-move
-git clone https://github.com/frankier/vim-eve.git ~/.janus/vim-eve
+git clone https://github.com/janko-m/vim-test.git ~/.janus/vim-test
+git clone https://github.com/mtth/scratch.vim ~/.janus/scratch

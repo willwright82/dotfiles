@@ -119,12 +119,10 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 :set mouse=a
 ":map <xCSI>[62~ <MouseDown>
 
-" OSX Clipboard
-"set clipboard=unnamedplus
-vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-"nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
-" groovyness in Insert mode (lets you paste and keep on typing)
-"imap <C-v> <Esc><C-v>a
+" https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
+" has to go after all theme declarations
+highlight Comment cterm=italic
+autocmd FileType javascript.jsx highlight xmlAttrib cterm=italic
 
 " Enclose in Brackets
 " vnoremap _( <Esc>`>a)<Esc>`<i(<Esc>
@@ -164,6 +162,9 @@ let g:nerdtree_tabs_open_on_gui_startup = 2
 let g:nerdtree_tabs_autofind = 1
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
+" Don't add the comment prefix when I hit enter or o/O on a comment line.
+autocmd FileType * setlocal formatoptions-=r formatoptions-=o
+
 " Remove pipes in window split bar
 set fillchars+=vert:\ 
 
@@ -202,6 +203,10 @@ set hlsearch
 " get the word under the cursor, and searches for it in the current directory and all subdirectories, opening the quickfix window when done
 map <F3> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " The Silver Searcher
  if executable('ag')
     " Use ag over grep
@@ -219,17 +224,29 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 
-" fold based on indent level
-set foldmethod=indent
-set foldlevelstart=20
-" disable folding
-set nofoldenable
+"" fold based on indent level
+"set foldmethod=indent
+"set foldlevelstart=20
+"" disable folding
+"set nofoldenable
+"" space open/closes folds
+"nnoremap <space> za
+""au FileType html,htmldjango,css,sass,javascript,coffee,python,ruby,eruby setl foldmethod=indent foldenable
+
 " space open/closes folds
-nnoremap <space> za
-"au FileType html,htmldjango,css,sass,javascript,coffee,python,ruby,eruby setl foldmethod=indent foldenable
+set foldmethod=syntax
+set foldlevel=99999
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
 
 " Remove Concealing
 set conceallevel=0
+
+" Watch for changes in .vimrc and automatically reload the config
+augroup myvimrc
+	au!
+	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
 
 " ┏━╸┏━┓┏┳┓┏┳┓┏━┓┏┓╻╺┳┓┏━┓
 " ┃  ┃ ┃┃┃┃┃┃┃┣━┫┃┗┫ ┃┃┗━┓
@@ -256,7 +273,6 @@ inoremap <M-k> <Esc>:m .-2<CR>==gi
 vnoremap <M-j> :m '>+1<CR>gv=gv
 vnoremap <M-k> :m '<-2<CR>gv=gv
 
-
 " Smooth Scrolling
 noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 30, 2)<CR>
 noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 30, 2)<CR>
@@ -269,8 +285,8 @@ imap <M-o> <Esc>o
 " Insert one character in normal mode
 nnoremap <leader>i i_<Esc>r
 
-" Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
+" Pressing ,sc will toggle and untoggle spell checking
+map <leader>sc :setlocal spell!<cr>
 
 " Learning Mode
 "nnoremap <Left> :echoe 'Use h'<CR>
@@ -279,11 +295,22 @@ map <leader>ss :setlocal spell!<cr>
 "nnoremap <Down> :echoe 'Use j'<CR>
 
 " Proper J & K
-"nnoremap j gj
 "nnoremap k gk
+"nnoremap j gj
+"nnoremap gk k
+"nnoremap gj j
 
 " Line number then ENTER goto line
 "nnoremap <CR> G
+
+" OSX Clipboard
+"set clipboard=unnamedplus
+vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+"nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
+" groovyness in Insert mode (lets you paste and keep on typing)
+"imap <C-v> <Esc><C-v>a
+" Better pasting from clipboard
+map <Leader>v :set paste<CR>"*]p:set nopaste<cr>==
 
 " Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
@@ -373,12 +400,6 @@ inoremap <leader>p <ESC>:w<CR>:exe '!open -a "Google Chrome" %'<CR><CR>
 " Autoformat code
 noremap <F2> :Autoformat<CR>
 
-" Watch for changes in .vimrc and automatically reload the config
-augroup myvimrc
-  au!
-  au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
-
 " ┏━┓╻  ╻ ╻┏━╸╻┏┓╻   ┏━┓╺┳╸╻ ╻┏━╸┏━╸
 " ┣━┛┃  ┃ ┃┃╺┓┃┃┗┫   ┗━┓ ┃ ┃ ┃┣╸ ┣╸
 " ╹  ┗━╸┗━┛┗━┛╹╹ ╹   ┗━┛ ╹ ┗━┛╹  ╹
@@ -444,6 +465,26 @@ let g:ycm_key_list_previous_completion = []
 
 " make test commands execute using vim
 let test#strategy = "dispatch"
+
+" mtth/scratch.vim
+let g:scratch_autohide = &hidden
+let g:scratch_top = 0
+let g:scratch_no_mappings = 1
+nmap <leader>ss <plug>(scratch-insert-reuse)
+nmap <leader>sS <plug>(scratch-insert-clear)
+xmap <leader>ss <plug>(scratch-selection-reuse)
+xmap <leader>sS <plug>(scratch-selection-clear)
+
+" FZF.vim
+"nnoremap <leader>t :Files<cr>
+"nnoremap <leader>b :Buffers<cr>
+"nmap <leader><tab> <plug>(fzf-maps-n)
+"xmap <leader><tab> <plug>(fzf-maps-x)
+"omap <leader><tab> <plug>(fzf-maps-o)
+"" Insert mode completion
+"imap <c-x><c-f> <plug>(fzf-complete-path)
+"imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+"let g:fzf_prefer_tmux = 1
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
