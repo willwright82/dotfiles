@@ -225,7 +225,7 @@ command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 
 "" fold based on indent level
-"set foldmethod=indent
+set foldmethod=indent
 "set foldlevelstart=20
 "" disable folding
 "set nofoldenable
@@ -234,7 +234,7 @@ nnoremap \ :Ag<SPACE>
 ""au FileType html,htmldjango,css,sass,javascript,coffee,python,ruby,eruby setl foldmethod=indent foldenable
 
 " space open/closes folds
-set foldmethod=syntax
+"set foldmethod=syntax
 set foldlevel=99999
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
@@ -247,6 +247,19 @@ augroup myvimrc
 	au!
 	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
+
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+	project_base_dir = os.environ['VIRTUAL_ENV']
+	activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+	execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+" Enable all Python syntax highlighting features
+let python_highlight_all = 1
 
 " ┏━╸┏━┓┏┳┓┏┳┓┏━┓┏┓╻╺┳┓┏━┓
 " ┃  ┃ ┃┃┃┃┃┃┃┣━┫┃┗┫ ┃┃┗━┓
@@ -338,35 +351,39 @@ autocmd FileType markdown imap --- —
 autocmd FileType markdown silent! TableModeEnable
 
 " Run Code
-autocmd FileType ruby nmap <leader>r :w<CR>:!ruby %<cr>
-autocmd FileType ruby nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
+autocmd FileType ruby nmap <leader>e :w<CR>:!ruby %<cr>
+autocmd FileType ruby nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
 autocmd FileType ruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
 autocmd FileType ruby nmap <leader>rn :w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
 autocmd FileType ruby nmap <leader>rs :w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
 
-autocmd FileType ruby imap <leader>r <ESC>:w<CR>:!ruby %<CR>
-autocmd FileType ruby imap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
+autocmd FileType ruby imap <leader>e <ESC>:w<CR>:!ruby %<CR>
+autocmd FileType ruby imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
 autocmd FileType ruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
 autocmd FileType ruby imap <leader>rn <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
 autocmd FileType ruby imap <leader>rs <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
 
-autocmd FileType eruby nmap <leader>r :w<CR>:!ruby %<CR>
-autocmd FileType eruby nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
+autocmd FileType eruby nmap <leader>e :w<CR>:!ruby %<CR>
+autocmd FileType eruby nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
 autocmd FileType eruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
 autocmd FileType eruby nmap <leader>rn :w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
 autocmd FileType eruby nmap <leader>rs :w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
 
-autocmd FileType eruby imap <leader>r <ESC>:w<CR>:!ruby %<CR>
-autocmd FileType eruby imap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
+autocmd FileType eruby imap <leader>e <ESC>:w<CR>:!ruby %<CR>
+autocmd FileType eruby imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
 autocmd FileType eruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
 autocmd FileType eruby imap <leader>rn <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
 autocmd FileType eruby imap <leader>rs <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
 
-autocmd FileType javascript nmap <leader>r :w<CR>:!node %<CR>
-autocmd FileType javascript nmap <leader>rb :w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
-autocmd FileType javascript nmap <leader>rb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
+autocmd FileType javascript nmap <leader>e :w<CR>:!node %<CR>
+autocmd FileType javascript nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
+autocmd FileType javascript imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
+autocmd FileType javascript imap <leader>e <ESC>:w<CR>:!node %<CR>
 
-autocmd FileType javascript imap <leader>r <ESC>:w<CR>:!node %<CR>
+autocmd FileType python nmap <leader>e :w<CR>:!python %<CR>
+autocmd FileType python nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
+autocmd FileType python imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
+autocmd FileType python imap <leader>e <ESC>:w<CR>:!python %<CR>
 
 " Save on losing focus
 "au FocusLost * :wa
@@ -456,8 +473,12 @@ let g:buffergator_sort_regime = "mru"
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 
+" YouCompleteMe 'Valloric/YouCompleteMe'
 " Disable YouCompleteMe
 let g:loaded_youcompleteme = 1
+
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Remove <TAB> from YouCompleteMe
 let g:ycm_key_list_select_completion = []
@@ -485,6 +506,49 @@ xmap <leader>sS <plug>(scratch-selection-clear)
 "imap <c-x><c-f> <plug>(fzf-complete-path)
 "imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 "let g:fzf_prefer_tmux = 1
+
+" Python-mode
+" Activate rope
+" Keys:
+" K             Show python docs
+" <Ctrl-Space>  Rope autocomplete
+" <Ctrl-c>g     Rope goto definition
+" <Ctrl-c>d     Rope show documentation
+" <Ctrl-c>f     Rope find occurrences
+" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
+" [[            Jump on previous class or function (normal, visual, operator modes)
+" ]]            Jump on next class or function (normal, visual, operator modes)
+" [M            Jump on previous class or method (normal, visual, operator modes)
+" ]M            Jump on next class or method (normal, visual, operator modes)
+let g:pymode_rope = 0
+
+" Documentation
+let g:pymode_doc = 1
+let g:pymode_doc_key = 'K'
+
+"Linting
+let g:pymode_lint = 1
+let g:pymode_lint_checker = "pyflakes,pep8"
+" Auto check on save
+let g:pymode_lint_write = 1
+
+" Support virtualenv
+let g:pymode_virtualenv = 1
+
+" Enable breakpoints plugin
+let g:pymode_breakpoint = 1
+"let g:pymode_breakpoint_bind = '<leader>b'
+
+" syntax highlighting
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+let g:pymode_options_max_line_length = 80
+let g:pymode_options_colorcolumn = 0
+
+" Don't autofold code
+let g:pymode_folding = 0
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
