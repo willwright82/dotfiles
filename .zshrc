@@ -112,6 +112,7 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 alias zip="zip -x *.DS_Store -x *__MACOSX* -x *.AppleDouble*"
 alias rainbowstream="source venv/bin/activate && rainbowstream"
 alias chrome='open -a "Google Chrome"'
+#alias cal='cal | ag --passthrough "\b$(date +%e | sed "s/ //g")\b"'
 alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app"
 alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app"
 alias watch:c='coffee -o javascripts -cw javascripts/coffee'
@@ -127,7 +128,6 @@ alias starwars="telnet towel.blinkenlights.nl"
 alias moon="curl wttr\.in/Moon"
 alias weather="finger edinburgh@graph.no"
 alias wget='wget -e robots=off --no-check-certificate --referer="http://www.google.com" --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6" --header="Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5" --header="Accept-Language: en-us,en;q=0.5" --header="Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7" --header="Keep-Alive: 300"'
-#alias cal='cal | ag --passthrough "\b$(date +%e | sed "s/ //g")"'
 
 function matrix() {echo -e "\e[1;40m" ; clear ; characters=$( jot -c 94 33 | tr -d '\n' ) ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) $characters ;sleep 0.05; done|gawk '{ letters=$5; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'}
 
@@ -139,6 +139,13 @@ function gitvanity() {
     ghurl=$(curl -s -i http://git.io -F "url=$url" -F "code=$code"           | grep Location           | awk '{print $2}');
     echo $ghurl | pbcopy;
     echo "copied to clipboard: ${ghurl}"
+}
+
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+
+function gpip(){
+	 PIP_REQUIRE_VIRTUALENV="" pip "$@"
 }
 
 # Avoid overwriting files - `set +o noclobber` to override

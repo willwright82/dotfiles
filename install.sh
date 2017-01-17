@@ -83,3 +83,5 @@ git clone https://github.com/tpope/vim-repeat.git ~/.janus/vim-repeat
 git clone https://github.com/matze/vim-move.git ~/.janus/vim-move
 git clone https://github.com/janko-m/vim-test.git ~/.janus/vim-test
 git clone https://github.com/mtth/scratch.vim ~/.janus/scratch
+git clone https://github.com/davidhalter/jedi-vim.git ~/.janus/jedi-vim
+git clone https://github.com/klen/python-mode.git ~/.janus/python-mode
