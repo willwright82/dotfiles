@@ -249,14 +249,14 @@ augroup myvimrc
 augroup END
 
 "python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-	project_base_dir = os.environ['VIRTUAL_ENV']
-	activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-	execfile(activate_this, dict(__file__=activate_this))
-EOF
+"py << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+	"project_base_dir = os.environ['VIRTUAL_ENV']
+	"activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+	"execfile(activate_this, dict(__file__=activate_this))
+"EOF
 
 " Enable all Python syntax highlighting features
 let python_highlight_all = 1
@@ -353,27 +353,27 @@ autocmd FileType markdown silent! TableModeEnable
 " Run Code
 autocmd FileType ruby nmap <leader>e :w<CR>:!ruby %<cr>
 autocmd FileType ruby nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
-autocmd FileType ruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
-autocmd FileType ruby nmap <leader>rn :w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
-autocmd FileType ruby nmap <leader>rs :w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
+autocmd FileType ruby nmap <leader>rt :w<CR>:TestFile<CR>
+autocmd FileType ruby nmap <leader>rn :w<CR>:TestNearest<CR>
+autocmd FileType ruby nmap <leader>rs :w<CR>:TestSuite<CR>
 
 autocmd FileType ruby imap <leader>e <ESC>:w<CR>:!ruby %<CR>
 autocmd FileType ruby imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
-autocmd FileType ruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
-autocmd FileType ruby imap <leader>rn <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
-autocmd FileType ruby imap <leader>rs <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
+autocmd FileType ruby imap <leader>rt <ESC>:w<CR>:TestFile<CR>
+autocmd FileType ruby imap <leader>rn <ESC>:w<CR>:TestNearest<CR>
+autocmd FileType ruby imap <leader>rs <ESC>:w<CR>:TestSuite<CR>
 
 autocmd FileType eruby nmap <leader>e :w<CR>:!ruby %<CR>
 autocmd FileType eruby nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
-autocmd FileType eruby nmap <leader>rt :w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
-autocmd FileType eruby nmap <leader>rn :w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
-autocmd FileType eruby nmap <leader>rs :w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
+autocmd FileType eruby nmap <leader>rt :w<CR>:TestFile<CR>
+autocmd FileType eruby nmap <leader>rn :w<CR>:TestNearest<CR>
+autocmd FileType eruby nmap <leader>rs :w<CR>:TestSuite<CR>
 
 autocmd FileType eruby imap <leader>e <ESC>:w<CR>:!ruby %<CR>
 autocmd FileType eruby imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
-autocmd FileType eruby imap <leader>rt <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestFile<CR>
-autocmd FileType eruby imap <leader>rn <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestNearest<CR>
-autocmd FileType eruby imap <leader>rs <ESC>:w<CR>:call VimuxRunCommand("clear")<CR>:TestSuite<CR>
+autocmd FileType eruby imap <leader>rt <ESC>:w<CR>:TestFile<CR>
+autocmd FileType eruby imap <leader>rn <ESC>:w<CR>:TestNearest<CR>
+autocmd FileType eruby imap <leader>rs <ESC>:w<CR>:TestSuite<CR>
 
 autocmd FileType javascript nmap <leader>e :w<CR>:!node %<CR>
 autocmd FileType javascript nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
@@ -384,6 +384,7 @@ autocmd FileType python nmap <leader>e :w<CR>:!python %<CR>
 autocmd FileType python nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
 autocmd FileType python imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
 autocmd FileType python imap <leader>e <ESC>:w<CR>:!python %<CR>
+autocmd FileType python map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 " Save on losing focus
 "au FocusLost * :wa
@@ -520,7 +521,8 @@ xmap <leader>sS <plug>(scratch-selection-clear)
 " ]]            Jump on next class or function (normal, visual, operator modes)
 " [M            Jump on previous class or method (normal, visual, operator modes)
 " ]M            Jump on next class or method (normal, visual, operator modes)
-let g:pymode_rope = 0
+let g:pymode_python = 'python3'
+let g:pymode_rope = 1
 
 " Documentation
 let g:pymode_doc = 1
@@ -537,7 +539,7 @@ let g:pymode_virtualenv = 1
 
 " Enable breakpoints plugin
 let g:pymode_breakpoint = 1
-"let g:pymode_breakpoint_bind = '<leader>b'
+let g:pymode_breakpoint_bind = '<leader>pb'
 
 " syntax highlighting
 let g:pymode_syntax = 1
@@ -549,6 +551,11 @@ let g:pymode_options_colorcolumn = 0
 
 " Don't autofold code
 let g:pymode_folding = 0
+
+let g:jedi#auto_initialization = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#rename_command = '<Leader>jr'
+let g:jedi#usages_command = '<Leader>jn'
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
