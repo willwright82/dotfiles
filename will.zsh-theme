@@ -72,13 +72,9 @@ RPS1="${return_code}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$Y%}‹"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$Y%}›%{$RESET%} "
-
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$R%}*"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
-
 ZSH_THEME_GIT_PROMPT_AHEAD="%{$B%}➔"
-
-
 ZSH_THEME_GIT_STATUS_PREFIX=" "
 
 # Staged
@@ -94,3 +90,12 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$R%}D"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$R%}UU"
 
 RPROMPT='%{$B%}[%*]'
+
+# Display Vi mode
+#function zle-line-init zle-keymap-select {
+    #RPS1="${${KEYMAP/vicmd/[-- NORMAL --]}/(main|viins)/[-- INSERT --]}%{$B%}[%*]"
+    #RPS2=$RPS1
+    #zle reset-prompt
+#}
+#zle -N zle-line-init
+#zle -N zle-keymap-select
