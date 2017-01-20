@@ -150,6 +150,9 @@ set showcmd
 " Highlight current line
 set cursorline
 
+" Fix to NerdTree width for VIM 8 + Janus
+autocmd! AuNERDTreeCmd Vimenter *
+
 " Disable EXEC file highlight in NERDtree
 highlight link NERDTreeExecFile ModeMsg
 
@@ -207,19 +210,9 @@ map <F3> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" The Silver Searcher
- if executable('ag')
-    " Use ag over grep
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-    " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
-endif
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
@@ -243,10 +236,10 @@ vnoremap <Space> zf
 set conceallevel=0
 
 " Watch for changes in .vimrc and automatically reload the config
-augroup myvimrc
-	au!
-	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
+augroup reload_vimrc " {
+		autocmd!
+		autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
 
 "python with virtualenv support
 "py << EOF
@@ -260,6 +253,9 @@ augroup END
 
 " Enable all Python syntax highlighting features
 let python_highlight_all = 1
+
+" Disable EX Mode for good
+nnoremap Q <nop>
 
 " ┏━╸┏━┓┏┳┓┏┳┓┏━┓┏┓╻╺┳┓┏━┓
 " ┃  ┃ ┃┃┃┃┃┃┃┣━┫┃┗┫ ┃┃┗━┓
@@ -343,6 +339,10 @@ nnoremap <leader>ft Vatzf
 " Quick vimrc edit in vertical split
 nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.files/.vimrc.after<cr>
 
+" Open and close Quickfix
+map <Leader>co :copen<CR>
+map <Leader>cc :cclose<CR>
+
 " For en/em dashes, respectively:
 " inoremap <buffer> --<space> –<space>
 " inoremap <buffer> -- —
@@ -390,9 +390,6 @@ autocmd FileType python map <Leader>n <plug>NERDTreeTabsToggle<CR>
 "au FocusLost * :wa
 "au FocusLost * silent! wa
 autocmd BufLeave,FocusLost * stopinsert | silent! wall
-
-" Fix to NerdTree width for VIM 8 + Janus
-autocmd! AuNERDTreeCmd Vimenter *
 
 " Save fold and load information
 autocmd BufWrite * mkview
@@ -502,6 +499,19 @@ nmap <leader>ss <plug>(scratch-insert-reuse)
 nmap <leader>sS <plug>(scratch-insert-clear)
 xmap <leader>ss <plug>(scratch-selection-reuse)
 xmap <leader>sS <plug>(scratch-selection-clear)
+
+" kien/ctrlp.vim 
+" Close NERDTree before opening CtrlP
+map <c-p> :NERDTreeTabsClose<CR>:CtrlP<CR>
+" Use The Silver Searcher
+ if executable('ag')
+		" Use ag over grep
+		set grepprg=ag\ --nogroup\ --nocolor
+		" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+		let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+		" ag is fast enough that CtrlP doesn't need to cache
+		let g:ctrlp_use_caching = 0
+endif
 
 " FZF.vim
 "nnoremap <leader>t :Files<cr>
