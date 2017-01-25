@@ -54,6 +54,7 @@ values."
            ruby-test-runner 'rspec)
      yaml
      ruby-on-rails
+     python
      rcirc
      chrome
      react
@@ -387,7 +388,8 @@ you should place your code here."
            :channels ("#emacs"))))
 
   ;; Colortheme fix in terminal
-  (custom-set-faces (if (not window-system) '(default ((t (:background "#232E34"))))))
+  (custom-set-faces (if (not window-system) '(default ((t (:background "28353B"))))))
+  (custom-set-faces (if (not window-system) '(linum ((t (:background "28353B"))))))
 
   ;; FiraCode and other glyphy fonts
   (mac-auto-operator-composition-mode)
