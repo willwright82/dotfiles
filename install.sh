@@ -86,3 +86,4 @@ git clone https://github.com/mtth/scratch.vim ~/.janus/scratch
 #git clone https://github.com/davidhalter/jedi-vim.git ~/.janus/jedi-vim
 git clone https://github.com/klen/python-mode.git ~/.janus/python-mode
 git clone git://github.com/tpope/vim-dispatch.git ~/.janus/vim-dispatch
+git clone https://github.com/maxbrunsfeld/vim-yankstack.git ~/.janus/vim-yankstack
