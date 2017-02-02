@@ -25,6 +25,7 @@ packages=(
     http-server
     imageoptim-cli
     js-beautify
+    jsonresume-theme-stackoverflow
     lighthouse
     mediumcli
     node-tweet-cli

@@ -415,6 +415,12 @@ inoremap <leader>p <ESC>:w<CR>:exe '!open -a "Google Chrome" %'<CR><CR>
 " Autoformat code
 noremap <F2> :Autoformat<CR>
 
+" Watch for changes in .vimrc and automatically reload the config
+augroup myvimrc
+  au!
+  au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
 " Rpdf converts PDF to text without line breaks
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
 " Rpdf converts PDF to text with line breaks
