@@ -28,7 +28,9 @@ apps=(
     gtypist
     heroku
     htop-osx
+    httpie
     irssi
+    jq
     libidn
     libksba
     libyaml
