@@ -22,3 +22,4 @@ set clipboard=unnamed
 call janus#disable_plugin('vroom', "I don't need vroom")
 call janus#disable_plugin('papercolor', "I don't need papercolor")
 call janus#disable_plugin('YouCompleteMe', "I don't need YouCompleteMe")
+call janus#disable_plugin('vim-snippets', "I have a copy in 'mysnippets'")
