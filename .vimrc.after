@@ -28,6 +28,10 @@ set splitright
 
 set updatetime=250
 
+
+" load filetype-specific indent files
+filetype plugin indent on
+
 " enable syntax processing
 syntax enable
 
@@ -170,9 +174,6 @@ autocmd FileType * setlocal formatoptions-=r formatoptions-=o
 
 " Remove pipes in window split bar
 set fillchars+=vert:\ 
-
-" load filetype-specific indent files
-filetype indent on
 
 set autoindent
 
@@ -492,6 +493,13 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " Remove <TAB> from YouCompleteMe
 let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_previous_completion = []
+
+" Snipmate
+let g:snipMate.scope_aliases['ruby'] = 'ruby,ruby-rails'
+let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript.es6.react,javascript.meteor'
+let g:snipMate.scope_aliases['html'] = 'html,html.meteor'
+"autocmd FileType js UltiSnipsAddFiletypes javascript.es6.react
+"autocmd FileType 'javascript.jsx' UltiSnipsAddFiletypes javascript-react
 
 " make test commands execute using vim
 let test#strategy = "dispatch"

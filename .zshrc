@@ -94,6 +94,7 @@ alias vim="/usr/local/bin/vim"
 alias vi="/usr/local/bin/vim"
 alias em='emacsclient -nw -c a ""'
 alias branch="~/bin/branch.sh"
+alias duviz="~/bin/duviz/duviz.py"
 alias zshconfig="vi ~/.files/.zshrc"
 alias ohmyzsh="vi ~/.files/.oh-my-zsh"
 alias notes="vi ~/Dropbox/Quick\ Notes.md"
