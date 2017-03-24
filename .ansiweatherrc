@@ -1,0 +1,22 @@
+location:Edinburgh,UK
+fetch_cmd:curl -sf
+units:metric
+symbols:true
+ansi:false
+forecast:0
+show_wind:true
+show_humidity:true
+show_pressure:true
+show_daylight:false
+dateformat:%a %b %d
+timeformat:%b %d %r
+api_key:85a4e3c55b73909f42c6a23ec35b7147
+sun:☀️ 
+moon:🌙 
+clouds:☁️ 
+rain:☔️ 
+fog:🌫 
+#mist:
+#haze:
+snow:❄️ 
+thunderstorm:🌩 

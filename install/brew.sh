@@ -9,6 +9,7 @@ brew upgrade
 apps=(
     ack
     archey
+    ansiweather
     cloog
     cmake
     ctags
@@ -29,6 +30,7 @@ apps=(
     heroku
     htop-osx
     httpie
+    hub
     irssi
     jq
     libidn
