@@ -19,7 +19,7 @@ set clipboard=unnamed
 " ╹  ┗━╸┗━┛┗━┛╹╹ ╹   ┗━┛ ╹ ┗━┛╹  ╹
 
 " Disable plugins because I don't need them, but keep the bindings to remind me
-call janus#disable_plugin('vroom', "I don't need vroom")
-call janus#disable_plugin('papercolor', "I don't need papercolor")
-call janus#disable_plugin('YouCompleteMe', "I don't need YouCompleteMe")
-call janus#disable_plugin('vim-snippets', "I have a copy in 'mysnippets'")
+call janus#disable_plugin('vroom', 'I do not need vroom')
+call janus#disable_plugin('papercolor', 'I do not need papercolor')
+call janus#disable_plugin('YouCompleteMe', 'I do not need YouCompleteMe')
+call janus#disable_plugin('vim-snippets', 'I have a copy in mysnippets')

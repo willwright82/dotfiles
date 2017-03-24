@@ -87,3 +87,5 @@ git clone https://github.com/mtth/scratch.vim ~/.janus/scratch
 git clone https://github.com/klen/python-mode.git ~/.janus/python-mode
 git clone git://github.com/tpope/vim-dispatch.git ~/.janus/vim-dispatch
 git clone https://github.com/vim-scripts/YankRing.vim.git ~/.janus/yankring-vim
+git clone https://github.com/wavded/vim-stylus.git ~/.janus/vim-stylus
+git clone https://github.com/junegunn/vim-easy-align.git ~/.janus/vim-easy-align
