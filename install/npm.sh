@@ -33,6 +33,7 @@ packages=(
     npm
     ntl
     phunt
+    prettier
     quickscrape
     resume-cli
     slack-cli
