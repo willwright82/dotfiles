@@ -89,3 +89,4 @@ git clone git://github.com/tpope/vim-dispatch.git ~/.janus/vim-dispatch
 git clone https://github.com/vim-scripts/YankRing.vim.git ~/.janus/yankring-vim
 git clone https://github.com/wavded/vim-stylus.git ~/.janus/vim-stylus
 git clone https://github.com/junegunn/vim-easy-align.git ~/.janus/vim-easy-align
+git clone https://github.com/chrisbra/NrrwRgn.git ~/.janus/NrrwRgn

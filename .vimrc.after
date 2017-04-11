@@ -423,6 +423,12 @@ inoremap <leader>p <ESC>:w<CR>:exe '!open -a "Google Chrome" %'<CR><CR>
 " Autoformat code
 noremap <F2> :Autoformat<CR>
 
+" Autoformat Javascript and JSX using prettier
+autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5\ --stdin
+" Run prettier on file save
+"autocmd BufWritePre *.js :normal gggqG
+"autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
+
 " Make CTRL-K list diagraphs before each digraph entry
 inoremap <expr> <C-K> ShowDigraphs()
 
@@ -433,10 +439,10 @@ function! ShowDigraphs ()
 endfunction
 
 " Watch for changes in .vimrc and automatically reload the config
-augroup myvimrc
-  au!
-  au BufWritePost .vimrc,.vimrc.after,.vimrc.before,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
+"augroup myvimrc
+  "au!
+  "au BufWritePost .vimrc,.vimrc.after,.vimrc.before,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+"augroup END
 
 " Open any file with a pre-existing swapfile in readonly mode
 augroup NoSimultaneousEdits
@@ -561,6 +567,12 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
+" EasyAlign
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " FZF.vim
 "nnoremap <leader>t :Files<cr>
