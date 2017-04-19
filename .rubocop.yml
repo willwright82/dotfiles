@@ -1,0 +1,34 @@
+AllCops:
+  UseCache: true
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  TargetRubyVersion: 2.3
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'Gemfile'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+
+StringLiterals:
+  Enabled: true
+
+Style/EmptyLinesAroundClassBody:
+  Enabled: true
+
+Style/EmptyLines:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 80
+
+Metrics/AbcSize:
+  Enabled: false
