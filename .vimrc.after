@@ -427,7 +427,7 @@ noremap <F2> :Autoformat<CR>
 autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5\ --stdin
 " Run prettier on file save
 "autocmd BufWritePre *.js :normal gggqG
-"autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
+"autocmd BufWritePre *.js exe 'normal! gggqG\<C-o>\<C-o>'
 
 " Make CTRL-K list diagraphs before each digraph entry
 inoremap <expr> <C-K> ShowDigraphs()
@@ -507,7 +507,7 @@ let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
 let g:syntastic_mode_map = {
       \ "mode": "active",
-      \ "active_filetypes": ["ruby", "javascript", "javascript.jsx", "css"],
+      \ "active_filetypes": ["ruby", "eruby", "javascript", "javascript.jsx", "css", "scss", "sass"],
       \ "passive_filetypes": ["markdown"] }
 
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
