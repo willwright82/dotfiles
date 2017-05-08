@@ -28,6 +28,7 @@ packages=(
     jsonresume-theme-stackoverflow
     lighthouse
     mediumcli
+    ngrok
     node-tweet-cli
     nodemon
     npm
