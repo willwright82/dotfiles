@@ -16,6 +16,11 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$DOTFILES_DIR/install/gem.sh"
 . "$DOTFILES_DIR/install/brew-cask.sh"
 
+# Recover message on Lock Screen
+sudo defaults write /Library/Preferences/com.apple.loginwindow \
+    LoginwindowText \
+    "Found this computer? Please contact Will Wright at will@wright.is"
+
 # Install extra stuff
 
 # Oh My ZSH

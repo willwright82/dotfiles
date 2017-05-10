@@ -438,6 +438,16 @@ function! ShowDigraphs ()
   return "\<C-K>"
 endfunction
 
+" Convert CSV table to Markdown table
+function! CsvToMd ()
+  set filetype=markdown
+  silent! %s/\,/\|/e
+  silent! %s/^/\|/e
+  silent! %s/$/\|/e
+  normal gg o |-+-|
+  "set filetype=csv
+endfunction
+
 " Watch for changes in .vimrc and automatically reload the config
 "augroup myvimrc
   "au!
