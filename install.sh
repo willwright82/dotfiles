@@ -95,3 +95,4 @@ git clone https://github.com/vim-scripts/YankRing.vim.git ~/.janus/yankring-vim
 git clone https://github.com/wavded/vim-stylus.git ~/.janus/vim-stylus
 git clone https://github.com/junegunn/vim-easy-align.git ~/.janus/vim-easy-align
 git clone https://github.com/chrisbra/NrrwRgn.git ~/.janus/NrrwRgn
+git clone https://github.com/mhinz/vim-startify.git ~/.janus/vim-startify
