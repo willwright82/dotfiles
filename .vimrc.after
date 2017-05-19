@@ -644,6 +644,10 @@ let g:jedi#auto_vim_configuration = 0
 let g:jedi#rename_command = '<Leader>jr'
 let g:jedi#usages_command = '<Leader>jn'
 
+" Vim-markdown
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_new_list_item_indent = 2
+
 " allows cursor change in tmux mode
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
