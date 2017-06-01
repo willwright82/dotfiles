@@ -432,12 +432,27 @@ function! ShowDigraphs ()
 endfunction
 
 " Markdown
+
 " For en/em dashes, respectively:
 " inoremap <buffer> --<space> –<space>
 " inoremap <buffer> -- —
 autocmd FileType markdown imap -- –
 autocmd FileType markdown imap --- —
+
+" No auto-wrap
 autocmd FileType markdown set textwidth=0
+
+" Convert to Docx using pandoc
+autocmd FileType markdown map <silent> <leader>c :silent w<CR> :!pandoc '%' -o '%:r.docx'<CR><CR>
+
+" Open and save doc & docx files as markdown
+autocmd BufReadPre *.docx silent set ro
+autocmd BufEnter *.docx silent set modifiable
+autocmd BufEnter *.docx silent %!pandoc --wrap=none -f docx -t markdown '%'
+autocmd BufEnter *.docx silent set filetype=markdown
+autocmd BufEnter *.docx silent set noreadonly
+"autocmd BufEnter *.docx silent set buftype: ''
+"autocmd BufWritePost *.docx %!pandoc -f markdown -t docx % > '%'
 
 autocmd FileType markdown silent! TableModeEnable
 
