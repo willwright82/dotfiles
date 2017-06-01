@@ -42,6 +42,7 @@ apps=(
     openvpn
     ossp-uuid
     p7zip
+    pandoc
     perl
     pgcli
     phantomjs
