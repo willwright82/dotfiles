@@ -350,13 +350,6 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.files/.vimrc.after<cr>
 map <Leader>co :copen<CR>
 map <Leader>cc :cclose<CR>
 
-" For en/em dashes, respectively:
-" inoremap <buffer> --<space> –<space>
-" inoremap <buffer> -- —
-autocmd FileType markdown imap -- –
-autocmd FileType markdown imap --- —
-autocmd FileType markdown silent! TableModeEnable
-
 " Run Code
 autocmd FileType ruby nmap <leader>e :w<CR>:!ruby %<cr>
 autocmd FileType ruby nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
@@ -437,6 +430,20 @@ function! ShowDigraphs ()
   call getchar()
   return "\<C-K>"
 endfunction
+
+" Markdown
+" For en/em dashes, respectively:
+" inoremap <buffer> --<space> –<space>
+" inoremap <buffer> -- —
+autocmd FileType markdown imap -- –
+autocmd FileType markdown imap --- —
+autocmd FileType markdown set textwidth=0
+
+autocmd FileType markdown silent! TableModeEnable
+
+autocmd FileType markdown
+    \ set formatoptions-=q |
+    \ set formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
 
 " Convert CSV table to Markdown table
 function! CsvToMd ()
