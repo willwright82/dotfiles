@@ -145,15 +145,6 @@ autocmd FileType javascript.jsx highlight xmlAttrib cterm=italic
 " vnoremap _[ <Esc>`>a]<Esc>`<i[<Esc>
 " vnoremap _{ <Esc>`>a}<Esc>`<i{<Esc>
 
-" Auto close Brackets
-"inoremap ( ()<Esc>i
-"inoremap [ []<Esc>i
-"inoremap { {}<Esc>i
-"inoremap < <><ESC>i
-
-" add <angular brackets> and |pipes| to autoclose
-let g:AutoClosePairs_add = '<> |'
-
 " Fix to NerdTree width for VIM 8 + Janus
 autocmd! AuNERDTreeCmd Vimenter *
 
@@ -185,6 +176,8 @@ set path+=**
 
 " visual autocomplete for command menu
 set wildmenu
+"set wildmode=longest,list:longest
+set completeopt+=longest
 
 set showmode
 
@@ -377,8 +370,15 @@ autocmd FileType eruby imap <leader>rs <ESC>:w<CR>:TestSuite<CR>
 
 autocmd FileType javascript nmap <leader>e :w<CR>:!node %<CR>
 autocmd FileType javascript nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
-autocmd FileType javascript imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
+autocmd FileType javascript nmap <leader>rt :w<CR>:TestFile<CR>
+autocmd FileType javascript nmap <leader>rn :w<CR>:TestNearest<CR>
+autocmd FileType javascript nmap <leader>rs :w<CR>:TestSuite<CR>
+
 autocmd FileType javascript imap <leader>e <ESC>:w<CR>:!node %<CR>
+autocmd FileType javascript imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
+autocmd FileType javascript imap <leader>rt <ESC>:w<CR>:TestFile<CR>
+autocmd FileType javascript imap <leader>rn <ESC>:w<CR>:TestNearest<CR>
+autocmd FileType javascript imap <leader>rs <ESC>:w<CR>:TestSuite<CR>
 
 autocmd FileType python nmap <leader>e :w<CR>:!python %<CR>
 autocmd FileType python nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
@@ -489,6 +489,9 @@ augroup END
 " Rpdf converts PDF to text without line breaks
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
 
+" Add numbers to a list
+:command! -nargs=0 -range=% Number <line1>,<line2>s/^\s*\zs/\=(line('.') - <line1>+1).'. '
+
 " Rpdf converts PDF to text with line breaks
 ":command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
 
@@ -555,20 +558,10 @@ let g:buffergator_sort_regime = "mru"
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 
-" YouCompleteMe 'Valloric/YouCompleteMe'
-" Disable YouCompleteMe
-let g:loaded_youcompleteme = 1
-
-"set completeopt=menu
-"let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-" Remove <TAB> from YouCompleteMe
-let g:ycm_key_list_select_completion = []
-let g:ycm_key_list_previous_completion = []
-
 " Snipmate
+" Use CTRL+J for snippet completion
+imap <C-J> <Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
 let g:snipMate.scope_aliases['ruby'] = 'ruby,ruby-rails'
 let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript.es6.react,javascript.meteor'
 let g:snipMate.scope_aliases['html'] = 'html,html.meteor'
