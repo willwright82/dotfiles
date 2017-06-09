@@ -80,7 +80,6 @@ git clone https://github.com/tell-k/vim-browsereload-mac.git ~/.janus/vim-browse
 git clone https://github.com/Chiel92/vim-autoformat.git ~/.janus/vim-autoformat
 git clone https://github.com/Valloric/MatchTagAlways.git ~/.janus/MatchTagAlways
 git clone https://github.com/vim-scripts/closetag.vim.git ~/.janus/closetag-vim
-git clone https://github.com/Townk/vim-autoclose.git ~/.janus/vim-autoclose
 git clone https://github.com/rizzatti/dash.vim.git ~/.janus/dash-vim
 git clone https://github.com/slim-template/vim-slim.git ~/.janus/vim-slim
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -94,5 +93,6 @@ git clone git://github.com/tpope/vim-dispatch.git ~/.janus/vim-dispatch
 git clone https://github.com/vim-scripts/YankRing.vim.git ~/.janus/yankring-vim
 git clone https://github.com/wavded/vim-stylus.git ~/.janus/vim-stylus
 git clone https://github.com/junegunn/vim-easy-align.git ~/.janus/vim-easy-align
-git clone https://github.com/chrisbra/NrrwRgn.git ~/.janus/NrrwRgn
 git clone https://github.com/mhinz/vim-startify.git ~/.janus/vim-startify
+git clone https://github.com/Raimondi/delimitMate.git ~/.janus/delimitMate
+git clone https://github.com/ajh17/VimCompletesMe.git ~/.janus/VimCompletesMe
