@@ -96,3 +96,4 @@ git clone https://github.com/junegunn/vim-easy-align.git ~/.janus/vim-easy-align
 git clone https://github.com/mhinz/vim-startify.git ~/.janus/vim-startify
 git clone https://github.com/Raimondi/delimitMate.git ~/.janus/delimitMate
 git clone https://github.com/ajh17/VimCompletesMe.git ~/.janus/VimCompletesMe
+git clone https://github.com/tpope/vim-haml.git ~/.janus/vim-haml
