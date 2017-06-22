@@ -344,41 +344,24 @@ map <Leader>co :copen<CR>
 map <Leader>cc :cclose<CR>
 
 " Run Code
-autocmd FileType ruby nmap <leader>e :w<CR>:!ruby %<cr>
-autocmd FileType ruby nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
-autocmd FileType ruby nmap <leader>rt :w<CR>:TestFile<CR>
-autocmd FileType ruby nmap <leader>rn :w<CR>:TestNearest<CR>
-autocmd FileType ruby nmap <leader>rs :w<CR>:TestSuite<CR>
-
-autocmd FileType ruby imap <leader>e <ESC>:w<CR>:!ruby %<CR>
-autocmd FileType ruby imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
-autocmd FileType ruby imap <leader>rt <ESC>:w<CR>:TestFile<CR>
-autocmd FileType ruby imap <leader>rn <ESC>:w<CR>:TestNearest<CR>
-autocmd FileType ruby imap <leader>rs <ESC>:w<CR>:TestSuite<CR>
-
-autocmd FileType eruby nmap <leader>e :w<CR>:!ruby %<CR>
-autocmd FileType eruby nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
-autocmd FileType eruby nmap <leader>rt :w<CR>:TestFile<CR>
-autocmd FileType eruby nmap <leader>rn :w<CR>:TestNearest<CR>
-autocmd FileType eruby nmap <leader>rs :w<CR>:TestSuite<CR>
-
-autocmd FileType eruby imap <leader>e <ESC>:w<CR>:!ruby %<CR>
-autocmd FileType eruby imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
-autocmd FileType eruby imap <leader>rt <ESC>:w<CR>:TestFile<CR>
-autocmd FileType eruby imap <leader>rn <ESC>:w<CR>:TestNearest<CR>
-autocmd FileType eruby imap <leader>rs <ESC>:w<CR>:TestSuite<CR>
-
+autocmd FileType ruby,eruby nmap <leader>e :w<CR>:!ruby %<cr>
+autocmd FileType ruby,eruby nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
 autocmd FileType javascript nmap <leader>e :w<CR>:!node %<CR>
 autocmd FileType javascript nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
-autocmd FileType javascript nmap <leader>rt :w<CR>:TestFile<CR>
-autocmd FileType javascript nmap <leader>rn :w<CR>:TestNearest<CR>
-autocmd FileType javascript nmap <leader>rs :w<CR>:TestSuite<CR>
+
+autocmd FileType ruby,eruby,javascript nmap <leader>rt :w<CR>:TestFile<CR>
+autocmd FileType ruby,eruby,javascript nmap <leader>rn :w<CR>:TestNearest<CR>
+autocmd FileType ruby,eruby,javascript nmap <leader>rs :w<CR>:TestSuite<CR>
+
+autocmd FileType ruby,eruby imap <leader>e <ESC>:w<CR>:!ruby %<CR>
+autocmd FileType ruby,eruby imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
 
 autocmd FileType javascript imap <leader>e <ESC>:w<CR>:!node %<CR>
 autocmd FileType javascript imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
-autocmd FileType javascript imap <leader>rt <ESC>:w<CR>:TestFile<CR>
-autocmd FileType javascript imap <leader>rn <ESC>:w<CR>:TestNearest<CR>
-autocmd FileType javascript imap <leader>rs <ESC>:w<CR>:TestSuite<CR>
+
+autocmd FileType ruby,eruby,javascript imap <leader>rt <ESC>:w<CR>:TestFile<CR>
+autocmd FileType ruby,eruby,javascript imap <leader>rn <ESC>:w<CR>:TestNearest<CR>
+autocmd FileType ruby,eruby,javascript imap <leader>rs <ESC>:w<CR>:TestSuite<CR>
 
 autocmd FileType python nmap <leader>e :w<CR>:!python %<CR>
 autocmd FileType python nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
@@ -570,6 +553,10 @@ let g:snipMate.scope_aliases['html'] = 'html,html.meteor'
 
 " Vim-test -- make test commands execute using vim
 let test#strategy = "dispatch"
+
+" groenewege/vim-less
+autocmd BufNewFile,BufRead *.less set filetype=less
+autocmd FileType css,sass,scss,less set omnifunc=csscomplete#CompleteCSS
 
 " mtth/scratch.vim
 let g:scratch_autohide = &hidden
