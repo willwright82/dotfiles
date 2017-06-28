@@ -134,6 +134,7 @@ alias qa='trello card move -l 58e21c2911b632275b8d2717 -o tsv -c'
 alias gtd-clazzoo="echo '🐛  Bugs:' && bugs && echo '------------' && echo '📅  Current Sprint: ' && sprint && echo '------------' && echo '💻  WIP (Work in Progress):' && wip"
 alias psql="ECHO 'Why not use pgcli instead?' && psql"
 alias home='clear && tmuxinator start home'
+alias udemy='clear && tmuxinator start udemy'
 alias directory='clear && tmuxinator start directory'
 alias tests="rspec spec"
 alias starwars="telnet towel.blinkenlights.nl"
@@ -179,3 +180,4 @@ export GOPATH=$HOME/Labs/go
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/Dropbox/.logs/zsh-history-$(date "+%Y-%m-%d").log; fi'
 
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+source /usr/local/share/zsh/site-functions/_aws

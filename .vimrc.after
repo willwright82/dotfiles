@@ -101,7 +101,7 @@ let g:indentLine_color_term = 238
 "autocmd VimEnter * AirlineTheme PaperColor
 "" Hide Non text Characters
 ""hi NonText guifg=bg
-"hi NonText ctermfg=254 guifg=254 cterm=NONE gui=NONE
+""hi NonText ctermfg=254 guifg=254 cterm=NONE gui=NONE
 "" Change Line Number Colour
 "highlight LineNr ctermfg=251 ctermbg=NONE
 "let g:indentLine_color_term = 251
