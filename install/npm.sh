@@ -20,6 +20,7 @@ packages=(
     git-fire
     git-watcher
     grunt
+    gtop
     gulp
     how2
     http-server
