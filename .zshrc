@@ -49,13 +49,13 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse vi-mode)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras osx meteor sublime sudo tmux tmuxinator common-aliases web-search brew npm nyan encode64 python rails url-tools)
+plugins=(aws brew common-aliases encode64 git git-extras meteor npm nyan osx python rails sublime sudo tmux tmuxinator url-tools web-search)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/Applications/Postgres.app/Contents/Versions/latest/bin"
+export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/Applications/Postgres.app/Contents/Versions/latest/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
@@ -115,7 +115,8 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 alias zip="zip -x *.DS_Store -x *__MACOSX* -x *.AppleDouble*"
 alias rainbowstream="source venv/bin/activate && rainbowstream"
 alias chrome='open -a "Google Chrome"'
-alias today='cal | ag --passthrough "\b$(date +%e | sed "s/ //g")\b"'
+#alias today='cal | ag --passthrough "\b$(date +%e | sed "s/ //g")\b"'
+alias cal='gcal --starting-day=1'
 alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app"
 alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app"
 alias watch:c='coffee -o javascripts -cw javascripts/coffee'
@@ -173,6 +174,7 @@ autoload -U promptinit
 promptinit
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export GOPATH=$HOME/Labs/go
@@ -181,3 +183,5 @@ export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:
 
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 source /usr/local/share/zsh/site-functions/_aws
+source ~/.profile
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
