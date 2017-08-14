@@ -40,6 +40,7 @@ set showcmd
 set cursorline
 
 " load filetype-specific indent files
+filetype off
 filetype plugin indent on
 
 " enable syntax processing
@@ -525,7 +526,7 @@ let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
 let g:syntastic_mode_map = {
       \ "mode": "active",
-      \ "active_filetypes": ["ruby", "eruby", "javascript", "javascript.jsx", "css", "scss", "sass"],
+      \ "active_filetypes": ["ruby", "eruby", "javascript", "javascript.jsx", "coffeescript", "css", "scss", "sass"],
       \ "passive_filetypes": ["markdown"] }
 
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
@@ -553,6 +554,8 @@ let g:snipMate.scope_aliases['html'] = 'html,html.meteor'
 
 " Vim-test -- make test commands execute using vim
 let test#strategy = "dispatch"
+
+autocmd BufEnter *.coffee.erb silent set filetype=coffee
 
 " groenewege/vim-less
 autocmd BufNewFile,BufRead *.less set filetype=less
