@@ -9,6 +9,7 @@ nvm alias default 0.12
 packages=(
     babel-eslint
     bower
+    coffee-script
     devtools-terminal
     emoj
     emojipacks
