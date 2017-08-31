@@ -102,8 +102,8 @@ alias swift="xcrun swift"
 #alias ggpush='git push origin $(git_current_branch) && git push old-origin $(git_current_branch)'
 alias ggprp="ggpur && ggpush"
 alias gn="ggpur && gco -b"
-#alias gac="gaa && gcam"
-alias gac='gaa && git commit -a -s -m'
+alias gac="gaa && gcam"
+#alias gac='gaa && git commit -a -s -m'
 alias gcd="gco staging"
 alias gsup="git standup -D \"format:%Y-%m-%d %H:%M\""
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -175,13 +175,13 @@ promptinit
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi # If using rbenv instead of RVM
 
 export GOPATH=$HOME/Labs/go
 
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/Dropbox/.logs/zsh-history-$(date "+%Y-%m-%d").log; fi'
 
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-source /usr/local/share/zsh/site-functions/_aws
+#source /usr/local/share/zsh/site-functions/_aws
 source ~/.profile
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
