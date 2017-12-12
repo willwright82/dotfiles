@@ -49,7 +49,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse vi-mode)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws brew common-aliases encode64 git git-extras meteor npm nyan osx python rails sublime sudo tmux tmuxinator url-tools web-search)
+plugins=(aws brew common-aliases encode64 git git-extras meteor npm osx python rails sudo tmux tmuxinator url-tools web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -59,6 +59,7 @@ export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/us
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # Ruby fix
 # export DYLD_FALLBACK_LIBRARY_PATH=/usr/lib
@@ -99,12 +100,11 @@ alias zshconfig="vi ~/.files/.zshrc"
 alias ohmyzsh="vi ~/.files/.oh-my-zsh"
 alias notes="vi ~/Dropbox/Quick\ Notes.md"
 alias swift="xcrun swift"
-#alias ggpush='git push origin $(git_current_branch) && git push old-origin $(git_current_branch)'
 alias ggprp="ggpur && ggpush"
 alias gn="ggpur && gco -b"
 alias gac="gaa && gcam"
-#alias gac='gaa && git commit -a -s -m'
-alias gcd="gco staging"
+alias gacs="gaa && git commit -a -s -m"
+alias gcd="gco develop"
 alias gsup="git standup -D \"format:%Y-%m-%d %H:%M\""
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
@@ -122,10 +122,12 @@ alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO; killall F
 alias watch:c='coffee -o javascripts -cw javascripts/coffee'
 alias watch:s="sass --watch sass/style.scss:style.css --style compressed"
 alias pgGo='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias solrGo='(~/Dev/clazzoo; bundle exec rake sunspot:solr:start)'
-alias solrStop='(~/Dev/clazzoo; bundle exec rake sunspot:solr:stop)'
+#alias solrGo='(~/Dev/clazzoo; bundle exec rake sunspot:solr:start)'
+#alias solrStop='(~/Dev/clazzoo; bundle exec rake sunspot:solr:stop)'
 alias railsGo='rails s -b 0.0.0.0'
-alias clazzoo='clear && tmuxinator start clazzoo'
+alias kindaba='clear && tmuxinator start kindaba'
+alias production-deploy="yarn build && mv build my.kindaba && scp -r my.kindaba kindaba-production:/home/ec2-user/app/ && rm -rf my.kindaba && echo '🎉 Successfully deployed to https://my.kindaba.com'"
+alias staging-deploy="yarn build && mv build dev.kindaba && scp -r dev.kindaba kindaba-staging:/home/ec2-user/app/ && rm -rf dev.kindaba && echo '🎉 Successfully deployed to http://dev.kindaba.com'"
 alias sprint='trello card list -b 58e21a5f5dc40c4fee175a7d -l 58e21c0fceeab090bdb2bd79 -o tsv'
 alias workon='trello card move -l 58e21d9e3c41999b1f33dbce -o tsv -c'
 alias wip='trello card list -b 58e21a5f5dc40c4fee175a7d -l 58e21d9e3c41999b1f33dbce -o tsv'
@@ -136,7 +138,6 @@ alias gtd-clazzoo="echo '🐛  Bugs:' && bugs && echo '------------' && echo '�
 alias psql="ECHO 'Why not use pgcli instead?' && psql"
 alias home='clear && tmuxinator start home'
 alias udemy='clear && tmuxinator start udemy'
-alias directory='clear && tmuxinator start directory'
 alias tests="rspec spec"
 alias starwars="telnet towel.blinkenlights.nl"
 alias moon="curl wttr\.in/Moon"
@@ -150,7 +151,7 @@ alias wget='wget -e robots=off --no-check-certificate --referer="http://www.goog
 
 function matrix() {echo -e "\e[1;40m" ; clear ; characters=$( jot -c 94 33 | tr -d '\n' ) ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) $characters ;sleep 0.05; done|gawk '{ letters=$5; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'}
 
-function on() { noglob curl -X POST --data-urlencode "task=$*" https://api.workingon.co/hooks/incoming?token=fd536f24201290ed5eb055d9beaf104e7d4b34f224bf3e2003474449911cd653 >/dev/null 2>&1 echo "Task sent." }
+#function on() { noglob curl -X POST --data-urlencode "task=$*" https://api.workingon.co/hooks/incoming?token=fd536f24201290ed5eb055d9beaf104e7d4b34f224bf3e2003474449911cd653 >/dev/null 2>&1 echo "Task sent." }
 
 function gitvanity() {
     local code="$1" url="$2";

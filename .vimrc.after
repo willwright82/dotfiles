@@ -55,7 +55,7 @@ set softtabstop=2 " number of spaces in tab when editing
 set expandtab " tabs are spaces
 
 " Relative Line Numbers
-set relativenumber
+set number relativenumber
 
 " list and invisible characters
 " set list
@@ -400,12 +400,6 @@ inoremap <leader>p <ESC>:w<CR>:exe '!open -a "Opera" %'<CR><CR>
 " Autoformat code
 noremap <F2> :Autoformat<CR>
 
-" Autoformat Javascript and JSX using prettier
-autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5\ --stdin
-" Run prettier on file save
-"autocmd BufWritePre *.js :normal gggqG
-"autocmd BufWritePre *.js exe 'normal! gggqG\<C-o>\<C-o>'
-
 " Make CTRL-K list diagraphs before each digraph entry
 inoremap <expr> <C-K> ShowDigraphs()
 
@@ -414,6 +408,9 @@ function! ShowDigraphs ()
   call getchar()
   return "\<C-K>"
 endfunction
+
+" Wrap Git commit messages at the recommended 72 columns
+autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " Markdown
 
@@ -424,7 +421,7 @@ autocmd FileType markdown imap -- –
 autocmd FileType markdown imap --- —
 
 " No auto-wrap
-autocmd FileType markdown set textwidth=0
+autocmd FileType markdown setlocal spell textwidth=0
 
 " Convert to Docx using pandoc
 autocmd FileType markdown map <silent> <leader>c :silent w<CR> :!pandoc '%' -o '%:r.docx'<CR><CR>
@@ -652,6 +649,36 @@ let g:jedi#usages_command = '<Leader>jn'
 " Vim-markdown
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_new_list_item_indent = 2
+
+" Vim-prettier
+let g:prettier#autoformat = 0
+nmap <Leader>py <Plug>(Prettier)
+" max line length that prettier will wrap on
+let g:prettier#config#print_width = 80
+" number of spaces per indentation level
+let g:prettier#config#tab_width = 2
+" use tabs over spaces
+let g:prettier#config#use_tabs = 'false'
+" print semicolons
+let g:prettier#config#semi = 'true'
+" single quotes over double quotes
+let g:prettier#config#single_quote = 'true'
+" print spaces between brackets
+let g:prettier#config#bracket_spacing = 'false'
+" put > on the last line instead of new line
+let g:prettier#config#jsx_bracket_same_line = 'true'
+" none|es5|all
+let g:prettier#config#trailing_comma = 'es5'
+" flow|babylon|typescript|postcss
+let g:prettier#config#parser = 'flow'
+" Running before saving async
+"autocmd BufWritePre *.js,*.jsx,*.css,*.scss,*.less PrettierAsync
+
+" Autoformat Javascript and JSX using prettier
+autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5\ --stdin
+" Run prettier on file save
+"autocmd BufWritePre *.js :normal gggqG
+"autocmd BufWritePre *.js exe 'normal! gggqG\<C-o>\<C-o>'
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
