@@ -22,7 +22,7 @@
 " security
 "set modelines=0
 
-set t_Co=256   " This is may or may not needed.
+"set t_Co=256   " This is may or may not needed.
 set wrap linebreak nolist
 set splitright
 set updatetime=250
@@ -72,22 +72,43 @@ set undofile
 set undodir=~/.vim/undo
 set noswapfile
 
+" The '^[' is a single character. You enter it by pressing Ctrl+v and then ESC.
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
 "Dark Theme
 set background=dark
 "let g:airline_theme='hybridline'
 "autocmd VimEnter * AirlineTheme hybridline
-let g:airline_theme='PaperColor'
-autocmd VimEnter * AirlineTheme PaperColor
-colorscheme PaperColor
+let g:airline_theme='papercolor'
+autocmd VimEnter * AirlineTheme papercolor
+"colorscheme PaperColor
+"let g:airline_theme='quantum'
+"autocmd VimEnter * AirlineTheme quantum
+colorscheme quantum
+
 " No Background
-hi Normal ctermbg=NONE
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermfg=NONE guifg=#27363B cterm=NONE gui=NONE
 "let g:PaperColor_Dark_Override = { 'background' : '#303030', 'vertspilt' : '#303030' }
-hi CursorLine cterm=NONE ctermbg=235
-" Hide Non text Characters
-"hi NonText guifg=bg
-hi NonText ctermfg=236 guifg=NONE cterm=NONE gui=NONE
+"let g:PaperColor_Theme_Options = {
+  "\   'theme': {
+  "\     'default.dark': {
+  "\       'transparent_background': 1,
+  "\       'allow_bold': 1,
+  "\       'allow_italic': 1,
+  "\       'override': {
+  "\         'color00' : ['#27363B', '232'],
+  "\         'cursorline' : ['#262626', '235'],
+  "\         'versplit_fg' : ['#27363B', '232'],
+  "\         'versplit_bg' : ['#27363B', '232']
+  "\       }
+  "\     }
+  "\   }
+  "\ }
+hi CursorLine cterm=NONE ctermbg=235 guibg=#262626
 " Change Vertical Split Bar colour
-highlight VertSplit ctermfg=235 ctermbg=NONE
+highlight VertSplit ctermfg=NONE ctermbg=NONE
 "highlight StatusLineNC ctermfg=236 ctermbg=245
 " Change Line Number Colour
 "highlight LineNr ctermfg=237 ctermbg=NONE
@@ -111,6 +132,15 @@ let g:indentLine_color_term = 238
 "set laststatus=2
 let g:airline_powerline_fonts = 1
 autocmd VimEnter * AirlineToggleWhitespace
+"if !exists('g:airline_symbols')
+  "let g:airline_symbols = {
+    "let g:airline_left_sep = '▶'
+  "}
+"endif
+
+if (has("termguicolors"))
+ set termguicolors
+endif
 
 " makes ,w split windows vertically
 nnoremap <leader>w <C-w>v<C-w>l
@@ -419,6 +449,7 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 " inoremap <buffer> -- —
 autocmd FileType markdown imap -- –
 autocmd FileType markdown imap --- —
+autocmd FileType markdown imap ... …
 
 " No auto-wrap
 autocmd FileType markdown setlocal spell textwidth=0
@@ -651,8 +682,8 @@ let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_new_list_item_indent = 2
 
 " Vim-prettier
-let g:prettier#autoformat = 0
 nmap <Leader>py <Plug>(Prettier)
+let g:prettier#autoformat = 0
 " max line length that prettier will wrap on
 let g:prettier#config#print_width = 80
 " number of spaces per indentation level
@@ -660,7 +691,7 @@ let g:prettier#config#tab_width = 2
 " use tabs over spaces
 let g:prettier#config#use_tabs = 'false'
 " print semicolons
-let g:prettier#config#semi = 'true'
+let g:prettier#config#semi = 'false'
 " single quotes over double quotes
 let g:prettier#config#single_quote = 'true'
 " print spaces between brackets
@@ -675,7 +706,7 @@ let g:prettier#config#parser = 'flow'
 "autocmd BufWritePre *.js,*.jsx,*.css,*.scss,*.less PrettierAsync
 
 " Autoformat Javascript and JSX using prettier
-autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5\ --stdin
+"autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5\ --stdin
 " Run prettier on file save
 "autocmd BufWritePre *.js :normal gggqG
 "autocmd BufWritePre *.js exe 'normal! gggqG\<C-o>\<C-o>'
