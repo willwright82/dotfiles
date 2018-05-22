@@ -98,7 +98,7 @@ alias branch="~/bin/branch.sh"
 alias duviz="~/bin/duviz/duviz.py"
 alias zshconfig="vi ~/.files/.zshrc"
 alias ohmyzsh="vi ~/.files/.oh-my-zsh"
-alias notes="vi ~/Dropbox/Quick\ Notes.md"
+alias notes="vi ~/Dropbox/life.org"
 alias swift="xcrun swift"
 alias ggprp="ggpur && ggpush"
 alias gn="ggpur && gco -b"
@@ -129,7 +129,7 @@ alias kindaba='clear && tmuxinator start kindaba'
 alias production-deploy="yarn build && mv build my.kindaba && scp -r my.kindaba kindaba-production:/home/ec2-user/app/ && rm -rf my.kindaba && echo '🎉 Successfully deployed to https://my.kindaba.com'"
 alias staging-deploy="yarn build && mv build dev.kindaba && scp -r dev.kindaba kindaba-staging:/home/ec2-user/app/ && rm -rf dev.kindaba && echo '🎉 Successfully deployed to http://dev.kindaba.com'"
 alias sprint='trello card list -b 58e21a5f5dc40c4fee175a7d -l 58e21c0fceeab090bdb2bd79 -o tsv'
-alias workon='trello card move -l 58e21d9e3c41999b1f33dbce -o tsv -c'
+alias work-on='trello card move -l 58e21d9e3c41999b1f33dbce -o tsv -c'
 alias wip='trello card list -b 58e21a5f5dc40c4fee175a7d -l 58e21d9e3c41999b1f33dbce -o tsv'
 alias bug='trello card create -b 58e21a5f5dc40c4fee175a7d -l 58e220fa80d88c98c3bbcefa -o tsv -n'
 alias bugs='trello card list -b 58e21a5f5dc40c4fee175a7d -l 5953dd2b4c626a5c3de9322d -o tsv'
@@ -161,12 +161,28 @@ function gitvanity() {
     echo "copied to clipboard: ${ghurl}"
 }
 
+function showcolor() {
+  display -size 400x400 "xc:$1";
+}
+
+function logo() {
+  echo '    __   _           __      __'
+  echo '   / /__(_)___  ____/ /___ _/ /_  ____ _'
+  echo '  / //_/ / __ \/ __  / __ `/ __ \/ __ `/'
+  echo ' / ,< / / / / / /_/ / /_/ / /_/ / /_/ /'
+  echo '/_/|_/_/_/ /_/\__,_/\__,_/_.___/\__,_/'
+  echo ''
+}
+
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 
 function gpip(){
 	 PIP_REQUIRE_VIRTUALENV="" pip "$@"
 }
+
+# To get virtualenvwrapper to create a virtual environment using pyvenv instead of virtualenv
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
 # Avoid overwriting files - `set +o noclobber` to override
 set -o noclobber
