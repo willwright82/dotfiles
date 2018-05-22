@@ -76,57 +76,62 @@ set noswapfile
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-"Dark Theme
-set background=dark
-"let g:airline_theme='hybridline'
-"autocmd VimEnter * AirlineTheme hybridline
-let g:airline_theme='papercolor'
-autocmd VimEnter * AirlineTheme papercolor
-"colorscheme PaperColor
-"let g:airline_theme='quantum'
-"autocmd VimEnter * AirlineTheme quantum
-colorscheme quantum
+let theme = 'dark'
 
-" No Background
-highlight Normal ctermbg=NONE guibg=NONE
-highlight NonText ctermfg=NONE guifg=#27363B cterm=NONE gui=NONE
-"let g:PaperColor_Dark_Override = { 'background' : '#303030', 'vertspilt' : '#303030' }
-"let g:PaperColor_Theme_Options = {
-  "\   'theme': {
-  "\     'default.dark': {
-  "\       'transparent_background': 1,
-  "\       'allow_bold': 1,
-  "\       'allow_italic': 1,
-  "\       'override': {
-  "\         'color00' : ['#27363B', '232'],
-  "\         'cursorline' : ['#262626', '235'],
-  "\         'versplit_fg' : ['#27363B', '232'],
-  "\         'versplit_bg' : ['#27363B', '232']
-  "\       }
-  "\     }
-  "\   }
-  "\ }
-hi CursorLine cterm=NONE ctermbg=235 guibg=#262626
-" Change Vertical Split Bar colour
-highlight VertSplit ctermfg=NONE ctermbg=NONE
-"highlight StatusLineNC ctermfg=236 ctermbg=245
-" Change Line Number Colour
-"highlight LineNr ctermfg=237 ctermbg=NONE
-" Change Gutter Colour
-"highlight SignColumn ctermfg=238 ctermbg=NONE
-let g:indentLine_color_term = 238
+if theme == 'dark'
+  set background=dark
+  "let g:airline_theme='hybridline'
+  "let g:airline_theme='quantum'
+  let g:airline_theme='papercolor'
+  "autocmd VimEnter * AirlineTheme hybridline
+  "autocmd VimEnter * AirlineTheme quantum
+  autocmd VimEnter * AirlineTheme papercolor
+  "colorscheme PaperColor
+  colorscheme quantum
+  let g:quantum_italics=1
+  " No Background
+  highlight NonText ctermfg=NONE guifg=#303030 cterm=NONE gui=NONE
+  " Change Vertical Split Bar colour
+  "highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#27363B guifg=#27363B
+  "let g:PaperColor_Dark_Override = { 'background' : '#303030', 'vertspilt' : '#303030' }
+  "let g:PaperColor_Theme_Options = {
+    "\   'theme': {
+    "\     'default.dark': {
+    "\       'transparent_background': 1,
+    "\       'allow_bold': 1,
+    "\       'allow_italic': 1,
+    "\       'override': {
+    "\         'color00' : ['#27363B', '232'],
+    "\         'cursorline' : ['#262626', '235'],
+    "\         'versplit_fg' : ['#27363B', '232'],
+    "\         'versplit_bg' : ['#27363B', '232']
+    "\       }
+    "\     }
+    "\   }
+    "\ }
+  "hi CursorLine cterm=NONE ctermbg=235 guibg=#262626
+  "highlight StatusLineNC ctermfg=236 ctermbg=245
+  " Change Line Number Colour
+  "highlight LineNr ctermfg=237 ctermbg=NONE
+  " Change Gutter Colour
+  "highlight SignColumn ctermfg=238 ctermbg=NONE
+  let g:indentLine_color_term = 238
+  if (has("termguicolors"))
+   set termguicolors
+  endif
+elseif theme == 'light'
+  set background=light
+  colorscheme PaperColor
+  let g:airline_theme='papercolor'
+  autocmd VimEnter * AirlineTheme papercolor
+  "" Hide Non text Characters
+  ""hi NonText guifg=bg
+  ""hi NonText ctermfg=254 guifg=254 cterm=NONE gui=NONE
+  "" Change Line Number Colour
+  highlight LineNr ctermfg=251 ctermbg=NONE
+  let g:indentLine_color_term = 251
+endif
 
-""Light Theme
-"set background=light
-"colorscheme PaperColor
-"let g:airline_theme='PaperColor'
-"autocmd VimEnter * AirlineTheme PaperColor
-"" Hide Non text Characters
-""hi NonText guifg=bg
-""hi NonText ctermfg=254 guifg=254 cterm=NONE gui=NONE
-"" Change Line Number Colour
-"highlight LineNr ctermfg=251 ctermbg=NONE
-"let g:indentLine_color_term = 251
 
 " load Airline on Startup
 "set laststatus=2
@@ -137,10 +142,6 @@ autocmd VimEnter * AirlineToggleWhitespace
     "let g:airline_left_sep = '▶'
   "}
 "endif
-
-if (has("termguicolors"))
- set termguicolors
-endif
 
 " makes ,w split windows vertically
 nnoremap <leader>w <C-w>v<C-w>l
@@ -345,6 +346,7 @@ map <leader>sc :setlocal spell!<cr>
 
 " OSX Clipboard
 "set clipboard=unnamedplus
+set clipboard=unnamed
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 "nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
 " groovyness in Insert mode (lets you paste and keep on typing)
@@ -373,6 +375,9 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.files/.vimrc.after<cr>
 " Open and close Quickfix
 map <Leader>co :copen<CR>
 map <Leader>cc :cclose<CR>
+
+" Toggle Tagbar
+nmap <F8> :TagbarToggle<CR>
 
 " Run Code
 autocmd FileType ruby,eruby nmap <leader>e :w<CR>:!ruby %<cr>
@@ -404,6 +409,9 @@ autocmd FileType python map <Leader>n <plug>NERDTreeTabsToggle<CR>
 "au FocusLost * :wa
 "au FocusLost * silent! wa
 autocmd BufLeave,FocusLost * stopinsert | silent! wall
+
+" Reload on gaining focus
+autocmd FocusGained,BufEnter * :silent! !
 
 " Save fold and load information
 autocmd BufWrite * mkview
@@ -447,15 +455,15 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 " For en/em dashes, respectively:
 " inoremap <buffer> --<space> –<space>
 " inoremap <buffer> -- —
-autocmd FileType markdown imap -- –
-autocmd FileType markdown imap --- —
-autocmd FileType markdown imap ... …
+autocmd FileType markdown,org imap -- –
+autocmd FileType markdown,org imap --- —
+autocmd FileType markdown,org imap ... …
 
 " No auto-wrap
 autocmd FileType markdown setlocal spell textwidth=0
 
 " Convert to Docx using pandoc
-autocmd FileType markdown map <silent> <leader>c :silent w<CR> :!pandoc '%' -o '%:r.docx'<CR><CR>
+autocmd FileType markdown,org map <silent> <leader>c :silent w<CR> :!pandoc '%' -o '%:r.docx'<CR><CR>
 
 " Open and save doc & docx files as markdown
 autocmd BufReadPre *.docx silent set ro
@@ -466,11 +474,11 @@ autocmd BufEnter *.docx silent set noreadonly
 "autocmd BufEnter *.docx silent set buftype: ''
 "autocmd BufWritePost *.docx %!pandoc -f markdown -t docx % > '%'
 
-autocmd FileType markdown silent! TableModeEnable
+autocmd FileType markdown,org silent! TableModeEnable
 
-autocmd FileType markdown
-    \ set formatoptions-=q |
-    \ set formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
+"autocmd FileType markdown
+    "\ set formatoptions-=q |
+    "\ set formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
 
 " Convert CSV table to Markdown table
 function! CsvToMd ()
@@ -479,8 +487,20 @@ function! CsvToMd ()
   silent! %s/^/\|/e
   silent! %s/$/\|/e
   normal gg o |-+-|
-  "set filetype=csv
 endfunction
+
+:command! CsvToMd :call CsvToMd()<CR>
+
+" Convert CSV table to Org table
+function! CsvToOrg ()
+  set filetype=org
+  silent! %s/\,/\|/e
+  silent! %s/^/\|/e
+  silent! %s/$/\|/e
+  normal gg o |-+-|
+endfunction
+
+:command! CsvToOrg :call CsvToOrg()<CR>
 
 " Watch for changes in .vimrc and automatically reload the config
 "augroup myvimrc
@@ -506,6 +526,9 @@ augroup END
 
 " Rpdf converts PDF to text with line breaks
 ":command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+
+" Find duplicates in a sorted file
+:command! Duplicates :g/^\(.*\)$\n\1$/p
 
 " ┏━┓╻  ╻ ╻┏━╸╻┏┓╻   ┏━┓╺┳╸╻ ╻┏━╸┏━╸
 " ┣━┛┃  ┃ ┃┃╺┓┃┃┗┫   ┗━┓ ┃ ┃ ┃┣╸ ┣╸
@@ -582,6 +605,7 @@ let g:snipMate.scope_aliases['html'] = 'html,html.meteor'
 
 " Vim-test -- make test commands execute using vim
 let test#strategy = "dispatch"
+let test#javascript#jest#file_pattern = 'spec.js'
 
 autocmd BufEnter *.coffee.erb silent set filetype=coffee
 
@@ -627,6 +651,9 @@ nmap ga <Plug>(EasyAlign)
 "imap <c-x><c-f> <plug>(fzf-complete-path)
 "imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 "let g:fzf_prefer_tmux = 1
+
+"CSV
+"let g:csv_arrange_align = 'lc.'
 
 " Python-mode
 " Activate rope
@@ -679,7 +706,8 @@ let g:jedi#usages_command = '<Leader>jn'
 
 " Vim-markdown
 let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_follow_anchor = 1
 
 " Vim-prettier
 nmap <Leader>py <Plug>(Prettier)
@@ -711,6 +739,33 @@ let g:prettier#config#parser = 'flow'
 "autocmd BufWritePre *.js :normal gggqG
 "autocmd BufWritePre *.js exe 'normal! gggqG\<C-o>\<C-o>'
 
+" Goyo
+let g:goyo_width=100
+
+" Vim-OrgMode
+let g:org_indent = 0
+let g:org_export_emacs = "/usr/bin/emacs"
+let g:org_export_init_script = "~/.emacs.d"
+autocmd FileType org setlocal spell
+autocmd FileType org setlocal textwidth=0
+
+function! s:goyo_enter()
+  "if exists('$TMUX')
+    "silent !tmux set status off
+  "endif
+  NERDTreeClose
+endfunction
+
+function! s:goyo_leave()
+  "if exists('$TMUX')
+    "silent !tmux set status on
+  "endif
+  highlight NonText ctermfg=NONE guifg=#303030 cterm=NONE gui=NONE
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
 " allows cursor change in tmux mode
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -726,6 +781,8 @@ endif
 " ┏━┓╺┳╸┏━┓╺┳╸╻ ╻┏━┓╻  ╻┏┓╻┏━╸
 " ┗━┓ ┃ ┣━┫ ┃ ┃ ┃┗━┓┃  ┃┃┗┫┣╸
 " ┗━┛ ╹ ╹ ╹ ╹ ┗━┛┗━┛┗━╸╹╹ ╹┗━╸
+
+"let g:airline_section_z= ' chars'
 
 " let g:tmuxline_preset = 'nightly_fox'
 " or
