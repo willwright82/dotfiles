@@ -234,6 +234,9 @@ set hlsearch
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+" makes <F3> output character count
+nnoremap <F3> :!wc -m %<CR>
+
 " Use shell to run command on current line
 noremap Q !!$SHELL<CR>
 
@@ -285,6 +288,14 @@ let python_highlight_all = 1
 
 " Disable EX Mode for good
 "nnoremap Q <nop>
+
+" JavaScript (tab width 2 chr)
+autocmd FileType javascript set shiftwidth=2
+autocmd FileType javascript set tabstop=2
+autocmd FileType javascript set softtabstop=2
+autocmd FileType javascript.jsx set shiftwidth=2
+autocmd FileType javascript.jsx set tabstop=2
+autocmd FileType javascript.jsx set softtabstop=2
 
 " ┏━╸┏━┓┏┳┓┏┳┓┏━┓┏┓╻╺┳┓┏━┓
 " ┃  ┃ ┃┃┃┃┃┃┃┣━┫┃┗┫ ┃┃┗━┓
@@ -580,7 +591,7 @@ let g:syntastic_mode_map = {
       \ "active_filetypes": ["ruby", "eruby", "javascript", "javascript.jsx", "coffeescript", "css", "scss", "sass"],
       \ "passive_filetypes": ["markdown"] }
 
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+"let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " buffergator tweaks
 " split below VIM window
@@ -723,11 +734,11 @@ let g:prettier#config#semi = 'false'
 " single quotes over double quotes
 let g:prettier#config#single_quote = 'true'
 " print spaces between brackets
-let g:prettier#config#bracket_spacing = 'false'
+let g:prettier#config#bracket_spacing = 'true'
 " put > on the last line instead of new line
 let g:prettier#config#jsx_bracket_same_line = 'true'
 " none|es5|all
-let g:prettier#config#trailing_comma = 'es5'
+let g:prettier#config#trailing_comma = 'none'
 " flow|babylon|typescript|postcss
 let g:prettier#config#parser = 'flow'
 " Running before saving async
