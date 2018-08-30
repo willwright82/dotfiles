@@ -12,6 +12,7 @@
 [core]
 	excludesfile = /Users/willwright/.gitignore_global
 	editor = /usr/bin/vim
+	autocrlf = false
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 

@@ -9,7 +9,14 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="superjarin"
 # ZSH_THEME="sunrise"
 # ZSH_THEME="steeef"
-ZSH_THEME="will"
+#ZSH_THEME="will"
+ZSH_THEME="spaceship"
+SPACESHIP_PROMPT_ADD_NEWLINE="false"
+SPACESHIP_PROMPT_SEPARATE_LINE="false"
+SPACESHIP_USER_SHOW="always"
+SPACESHIP_PACKAGE_SHOW="false"
+SPACESHIP_NODE_SHOW="false"
+SPACESHIP_EXEC_TIME_SHOW="false"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -71,8 +78,8 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
  else
-   #export EDITOR='mvim'
-   export EDITOR='vim'
+   export EDITOR='mvim'
+   #export EDITOR='vim'
  fi
 
 # Compilation flags
@@ -92,7 +99,8 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-material.dark.sh"
 #
 # aliases
 alias vim="/usr/local/bin/vim"
-alias vi="/usr/local/bin/vim"
+#alias vi="/usr/local/bin/vim"
+alias vi="mvim"
 alias em='emacsclient -nw -c a ""'
 alias branch="~/bin/branch.sh"
 alias duviz="~/bin/duviz/duviz.py"
@@ -144,6 +152,7 @@ alias moon="curl wttr\.in/Moon"
 #alias weather="finger edinburgh@graph.no"
 alias wttr="curl -s wttr.in | head -7 | tail -5"
 alias weather="ansiweather -p false -h false"
+alias wtf='~/Labs/wtf_0.0.3_darwin_amd64/wtf'
 alias maps="telnet mapscii.me"
 alias wget='wget -e robots=off --no-check-certificate --referer="http://www.google.com" --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6" --header="Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5" --header="Accept-Language: en-us,en;q=0.5" --header="Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7" --header="Keep-Alive: 300"'
 
@@ -195,6 +204,8 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 #if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi # If using rbenv instead of RVM
 
 export GOPATH=$HOME/Labs/go
+
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/Dropbox/.logs/zsh-history-$(date "+%Y-%m-%d").log; fi'
 
