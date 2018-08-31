@@ -98,9 +98,9 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-material.dark.sh"
 # For a full list of active aliases, run `alias`.
 #
 # aliases
-alias vim="/usr/local/bin/vim"
-#alias vi="/usr/local/bin/vim"
-alias vi="mvim"
+#alias vim="/usr/local/bin/vim"
+##alias vi="/usr/local/bin/vim"
+#alias vi="mvim"
 alias em='emacsclient -nw -c a ""'
 alias branch="~/bin/branch.sh"
 alias duviz="~/bin/duviz/duviz.py"
@@ -211,5 +211,5 @@ export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:
 
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 #source /usr/local/share/zsh/site-functions/_aws
-source ~/.profile
+#source ~/.profile
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
