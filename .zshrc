@@ -62,11 +62,11 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/Applications/Postgres.app/Contents/Versions/latest/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+## export MANPATH="/usr/local/man:$MANPATH"
+# export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/Applications/Postgres.app/Contents/Versions/latest/bin"
+# export PATH="/usr/local/bin:$PATH"
+# export PATH="/usr/local/sbin:$PATH"
+# export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # Ruby fix
 # export DYLD_FALLBACK_LIBRARY_PATH=/usr/lib
@@ -204,7 +204,6 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 #if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi # If using rbenv instead of RVM
 
 export GOPATH=$HOME/Labs/go
-
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/Dropbox/.logs/zsh-history-$(date "+%Y-%m-%d").log; fi'
