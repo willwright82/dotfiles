@@ -15,7 +15,7 @@ SPACESHIP_PROMPT_ADD_NEWLINE="false"
 SPACESHIP_PROMPT_SEPARATE_LINE="false"
 SPACESHIP_USER_SHOW="always"
 SPACESHIP_PACKAGE_SHOW="false"
-SPACESHIP_NODE_SHOW="false"
+SPACESHIP_NODE_SHOW="true"
 SPACESHIP_EXEC_TIME_SHOW="false"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -98,9 +98,9 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-material.dark.sh"
 # For a full list of active aliases, run `alias`.
 #
 # aliases
-#alias vim="/usr/local/bin/vim"
+alias vim="/usr/local/bin/vim"
 ##alias vi="/usr/local/bin/vim"
-#alias vi="mvim"
+alias vi="mvim"
 alias em='emacsclient -nw -c a ""'
 alias branch="~/bin/branch.sh"
 alias duviz="~/bin/duviz/duviz.py"
@@ -212,3 +212,7 @@ export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:
 #source /usr/local/share/zsh/site-functions/_aws
 #source ~/.profile
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+export NODE_PATH='/usr/local/lib/node_modules'

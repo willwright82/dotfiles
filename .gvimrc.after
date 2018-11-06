@@ -1,3 +1,6 @@
+" Open in Fullscreen
+"set fu
+
 " Remove scrollbars
 set guioptions=
 
