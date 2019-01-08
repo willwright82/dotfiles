@@ -584,7 +584,6 @@ endif
 " don't blink the cursor
 "set guicursor+=i:blinkwait0
 
-
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
