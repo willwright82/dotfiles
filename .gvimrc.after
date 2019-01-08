@@ -9,7 +9,7 @@ set macligatures
 set linespace=5
 
 " " Enable ALT key
-set macmeta
+"set macmeta
 
 "set background=dark
 "let g:airline_theme='hybridline'
