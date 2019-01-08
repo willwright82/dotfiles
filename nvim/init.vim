@@ -1,220 +1,35 @@
-"           ██
-"          ░░
-"  ██    ██ ██ ██████████  ██████  █████
-" ░██   ░██░██░░██░░██░░██░░██░░█ ██░░░██
-" ░░██ ░██ ░██ ░██ ░██ ░██ ░██ ░ ░██  ░░
-"  ░░████  ░██ ░██ ░██ ░██ ░██   ░██   ██
-"   ░░██   ░██ ███ ░██ ░██░███   ░░█████
-"    ░░    ░░ ░░░  ░░  ░░ ░░░     ░░░░░
-"
-"  ▓▓▓▓▓▓▓▓▓▓
-" ░▓ author ▓ Will Wright <will@wright.is>
-" ░▓ tweet  ▓ @WilliamWright
-" ░▓ code   ▓ https://github.com/willwright82/dotfiles
-" ░▓▓▓▓▓▓▓▓▓▓
-" ░░░░░░░░░░
-
-
 " ╻┏┓╻╺┳╸┏━╸┏━┓┏━╸┏━┓┏━╸┏━╸
 " ┃┃┗┫ ┃ ┣╸ ┣┳┛┣╸ ┣━┫┃  ┣╸
 " ╹╹ ╹ ╹ ┗━╸╹┗╸╹  ╹ ╹┗━╸┗━╸
 
-" security
-"set modelines=0
-
-"set t_Co=256   " This is may or may not needed.
-set wrap linebreak nolist
-set splitright
-set updatetime=250
-
-" Fast Scrolling
-set ttyfast
-
-" stop unnecessary rendering
-set lazyredraw
-
-" show command in bottom bar
-set showcmd
 
 " Highlight current line
 set cursorline
 
-" load filetype-specific indent files
-filetype off
-filetype plugin indent on
-
-" enable syntax processing
-syntax enable
+" show command in bottom bar
+set showcmd
 
 set autoindent
 
-" screw those standards, i like my tabs being just that. tabs.
 set tabstop=2 " number of visual spaces per TAB
 set shiftwidth=2
 set softtabstop=2 " number of spaces in tab when editing
 set expandtab " tabs are spaces
 
-" Relative Line Numbers
+set termguicolors
 set number relativenumber
 
-" list and invisible characters
-" set list
-" set listchars=tab:▸\ ,eol:¬
-
-" setup the leader key
-let mapleader = ","
-
-" remap § to <ESC>
-noremap § <ESC>
-imap § <ESC>
-
-" Keep Undo history
-set hidden
-
-" maintain undo history between sessions
-set undofile
-set undodir=~/.vim/undo
-set noswapfile
-
-" The '^[' is a single character. You enter it by pressing Ctrl+v and then ESC.
-if &term =~# '^screen'
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-
-if (has("termguicolors"))
- set termguicolors
-endif
-
 let theme = 'dark'
-
-if theme == 'dark'
-  set background=dark
-  "let g:airline_theme='hybridline'
-  "let g:airline_theme='quantum'
-  let g:airline_theme='papercolor'
-  "autocmd VimEnter * AirlineTheme hybridline
-  "autocmd VimEnter * AirlineTheme quantum
-  autocmd VimEnter * AirlineTheme papercolor
-  "colorscheme PaperColor
-  colorscheme quantum
-  let g:quantum_italics=1
-  " No Tildes
-  highlight NonText ctermfg=NONE guifg=#303030 cterm=NONE gui=NONE
-  " No Background
-  highlight NonText guibg=#303030 ctermbg=NONE
-  highlight Normal guibg=#303030 ctermbg=NONE
-  highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#303030 guifg=#303030
-  " Change Vertical Split Bar colour
-  "highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#27363B guifg=#27363B
-  "let g:PaperColor_Dark_Override = { 'background' : '#303030', 'vertspilt' : '#303030' }
-  "let g:PaperColor_Theme_Options = {
-    "\   'theme': {
-    "\     'default.dark': {
-    "\       'transparent_background': 1,
-    "\       'allow_bold': 1,
-    "\       'allow_italic': 1,
-    "\       'override': {
-    "\         'color00' : ['#27363B', '232'],
-    "\         'cursorline' : ['#262626', '235'],
-    "\         'versplit_fg' : ['#27363B', '232'],
-    "\         'versplit_bg' : ['#27363B', '232']
-    "\       }
-    "\     }
-    "\   }
-    "\ }
-  "hi CursorLine cterm=NONE ctermbg=235 guibg=#262626
-  "highlight StatusLineNC ctermfg=236 ctermbg=245
-  " Change Line Number Colour
-  "highlight LineNr ctermfg=237 ctermbg=NONE
-  " Change Gutter Colour
-  "highlight SignColumn ctermfg=238 ctermbg=NONE
-  let g:indentLine_color_term = 238
-elseif theme == 'light'
-  set background=light
-  colorscheme PaperColor
-  let g:airline_theme='papercolor'
-  autocmd VimEnter * AirlineTheme papercolor
-  "" Hide Non text Characters
-  ""hi NonText guifg=bg
-  ""hi NonText ctermfg=254 guifg=254 cterm=NONE gui=NONE
-  "" Change Line Number Colour
-  highlight LineNr ctermfg=251 ctermbg=NONE
-  let g:indentLine_color_term = 251
-endif
-
-
-" load Airline on Startup
-"set laststatus=2
-let g:airline_powerline_fonts = 1
-autocmd VimEnter * AirlineToggleWhitespace
-"if !exists('g:airline_symbols')
-  "let g:airline_symbols = {
-    "let g:airline_left_sep = '▶'
-  "}
-"endif
-
-" makes ,w split windows vertically
-nnoremap <leader>w <C-w>v<C-w>l
-
-" split window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Tweaks for Netrw file explorer
-let g:netrw_banner=0 " disable annoying banner
-let g:netrw_browse_split=4 " open in prior window
-let g:netrw_altv=1 " open splits to the right
-let g:netrw_liststyle=3 " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-" Now we can:
-" - :edit a folder to open file browser
-" - <CR>/v/t to open in h-split/v-split/tab
-
-" mouse settings
-:set mouse=a
-":map <xCSI>[62~ <MouseDown>
-
-" https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
-" has to go after all theme declarations
-highlight Comment cterm=italic
-autocmd FileType javascript.jsx highlight xmlAttrib cterm=italic
-
-" Enclose in Brackets
-" vnoremap _( <Esc>`>a)<Esc>`<i(<Esc>
-" vnoremap _[ <Esc>`>a]<Esc>`<i[<Esc>
-" vnoremap _{ <Esc>`>a}<Esc>`<i{<Esc>
-
-" Fix to NerdTree width for VIM 8 + Janus
-autocmd! AuNERDTreeCmd Vimenter *
-
-" Disable EXEC file highlight in NERDtree
-highlight link NERDTreeExecFile ModeMsg
-
-" Show hidden files
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeWinSize = 31
-let g:nerdtree_tabs_open_on_console_startup = 2
-let g:nerdtree_tabs_open_on_gui_startup = 2
-let g:nerdtree_tabs_autofind = 1
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
-
-" Don't add the comment prefix when I hit enter or o/O on a comment line.
-autocmd FileType * setlocal formatoptions-=r formatoptions-=o
 
 " Remove pipes in window split bar
 set fillchars+=vert:\ 
 
-" IndentLine plugin Character
-"let g:indentLine_char = '⦙'
-"let g:indentLine_char = '┊'
-let g:indentLine_char = '⎸'
-"let g:indentLine_char = '·'
-let g:indentLine_concealcursor=0
+" load Airline on Startup
+let g:airline_powerline_fonts = 1
+autocmd VimEnter * AirlineToggleWhitespace
+
+" Don't add the comment prefix when I hit enter or o/O on a comment line.
+autocmd FileType * setlocal formatoptions-=r formatoptions-=o
 
 " Set path to recursive Subdirectories
 set path+=**
@@ -247,6 +62,57 @@ set hlsearch
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+"" fold based on indent level
+set foldmethod=indent
+set foldlevel=99999
+" space open/closes folds
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
+
+" Remove Concealing
+set conceallevel=0
+
+" JavaScript (tab width 2 chr)
+autocmd FileType javascript set shiftwidth=2
+autocmd FileType javascript set tabstop=2
+autocmd FileType javascript set softtabstop=2
+autocmd FileType javascript.jsx set shiftwidth=2
+autocmd FileType javascript.jsx set tabstop=2
+autocmd FileType javascript.jsx set softtabstop=2
+
+" https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
+" has to go after all theme declarations
+highlight Comment cterm=italic
+autocmd FileType javascript.jsx highlight xmlAttrib cterm=italic
+
+" ┏━╸┏━┓┏┳┓┏┳┓┏━┓┏┓╻╺┳┓┏━┓
+" ┃  ┃ ┃┃┃┃┃┃┃┣━┫┃┗┫ ┃┃┗━┓
+" ┗━╸┗━┛╹ ╹╹ ╹╹ ╹╹ ╹╺┻┛┗━┛
+
+" setup the leader key
+let mapleader = ','
+
+" remap § to <ESC>
+noremap § <ESC>
+imap § <ESC>
+
+" Keep Undo history
+set hidden
+
+" maintain undo history between sessions
+set undofile
+set undodir=/Users/willwright/.local/share/nvim/undo
+set noswapfile
+
+" makes ,w split windows vertically
+nnoremap <leader>w <C-w>v<C-w>l
+
+" split window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 " makes <F3> output character count
 nnoremap <F3> :!wc -m %<CR>
 
@@ -262,58 +128,6 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 
-"" fold based on indent level
-set foldmethod=indent
-"set foldlevelstart=20
-"" disable folding
-"set nofoldenable
-"" space open/closes folds
-"nnoremap <space> za
-""au FileType html,htmldjango,css,sass,javascript,coffee,python,ruby,eruby setl foldmethod=indent foldenable
-
-" space open/closes folds
-"set foldmethod=syntax
-set foldlevel=99999
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-vnoremap <Space> zf
-
-" Remove Concealing
-set conceallevel=0
-
-" Watch for changes in .vimrc and automatically reload the config
-"augroup reload_vimrc " {
-  "autocmd!
-  "autocmd BufWritePost $MYVIMRC source $MYVIMRC
-"augroup END " }
-
-"python with virtualenv support
-"py << EOF
-"import os
-"import sys
-"if 'VIRTUAL_ENV' in os.environ:
-"project_base_dir = os.environ['VIRTUAL_ENV']
-"activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"execfile(activate_this, dict(__file__=activate_this))
-"EOF
-
-" Enable all Python syntax highlighting features
-let python_highlight_all = 1
-
-" Disable EX Mode for good
-"nnoremap Q <nop>
-
-" JavaScript (tab width 2 chr)
-autocmd FileType javascript set shiftwidth=2
-autocmd FileType javascript set tabstop=2
-autocmd FileType javascript set softtabstop=2
-autocmd FileType javascript.jsx set shiftwidth=2
-autocmd FileType javascript.jsx set tabstop=2
-autocmd FileType javascript.jsx set softtabstop=2
-
-" ┏━╸┏━┓┏┳┓┏┳┓┏━┓┏┓╻╺┳┓┏━┓
-" ┃  ┃ ┃┃┃┃┃┃┃┣━┫┃┗┫ ┃┃┗━┓
-" ┗━╸┗━┛╹ ╹╹ ╹╹ ╹╹ ╹╺┻┛┗━┛
-
 " clear search
 nnoremap <leader><space> :noh<cr>
 
@@ -326,12 +140,9 @@ nnoremap ; :
 inoremap ;w <ESC>:w
 
 inoremap <silent> <M-3> #
-"imap <silent> <M-3> #
 
 " move lines up and down with ALT+J/K
 "let g:move_key_modifier = 'M'
-execute "set <M-j>=\ej"
-execute "set <M-k>=\ek"
 nnoremap <M-j> :m .+1<CR>==
 nnoremap <M-k> :m .-2<CR>==
 inoremap <M-j> <Esc>:m .+1<CR>==gi
@@ -366,14 +177,10 @@ map <leader>sc :setlocal spell!<cr>
 "nnoremap gk k
 "nnoremap gj j
 
-" Line number then ENTER goto line
-"nnoremap <CR> G
-
 " OSX Clipboard
 "set clipboard=unnamedplus
 set clipboard=unnamed
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-"nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
 " groovyness in Insert mode (lets you paste and keep on typing)
 "imap <C-v> <Esc><C-v>a
 " Better pasting from clipboard
@@ -395,44 +202,18 @@ nnoremap <backspace> dhi
 nnoremap <leader>ft Vatzf
 
 " Quick vimrc edit in vertical split
-nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.files/.vimrc.after<cr>
+nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.files/nvim/init.vim<cr>
 
 " Open and close Quickfix
 map <Leader>co :copen<CR>
 map <Leader>cc :cclose<CR>
 
+map <leader>zw :ZoomWin<CR>
+
 " Toggle Tagbar
 nmap <F8> :TagbarToggle<CR>
 
-" Run Code
-autocmd FileType ruby,eruby nmap <leader>e :w<CR>:!ruby %<cr>
-autocmd FileType ruby,eruby nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
-autocmd FileType javascript nmap <leader>e :w<CR>:!node %<CR>
-autocmd FileType javascript nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
-
-autocmd FileType ruby,eruby,javascript nmap <leader>rt :w<CR>:TestFile<CR>
-autocmd FileType ruby,eruby,javascript nmap <leader>rn :w<CR>:TestNearest<CR>
-autocmd FileType ruby,eruby,javascript nmap <leader>rs :w<CR>:TestSuite<CR>
-
-autocmd FileType ruby,eruby imap <leader>e <ESC>:w<CR>:!ruby %<CR>
-autocmd FileType ruby,eruby imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
-
-autocmd FileType javascript imap <leader>e <ESC>:w<CR>:!node %<CR>
-autocmd FileType javascript imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
-
-autocmd FileType ruby,eruby,javascript imap <leader>rt <ESC>:w<CR>:TestFile<CR>
-autocmd FileType ruby,eruby,javascript imap <leader>rn <ESC>:w<CR>:TestNearest<CR>
-autocmd FileType ruby,eruby,javascript imap <leader>rs <ESC>:w<CR>:TestSuite<CR>
-
-autocmd FileType python nmap <leader>e :w<CR>:!python %<CR>
-autocmd FileType python nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
-autocmd FileType python imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
-autocmd FileType python imap <leader>e <ESC>:w<CR>:!python %<CR>
-autocmd FileType python map <Leader>n <plug>NERDTreeTabsToggle<CR>
-
 " Save on losing focus
-"au FocusLost * :wa
-"au FocusLost * silent! wa
 autocmd BufLeave,FocusLost * stopinsert | silent! wall
 
 " Reload on gaining focus
@@ -442,15 +223,7 @@ autocmd FocusGained,BufEnter * :silent! !
 autocmd BufWrite * mkview
 autocmd BufRead * silent loadview
 
-" Create the Ctags tags file
-command! MakeTags !ctags -R .
-" Now we can:
-" - Use <CTRL>+] to jump to tag under cursor
-" - Use g+<CTRL>+] for ambiguous tags
-" - Use <CTRL>+t to jump back up the tag stack
-
 " save session and reload
-"nnoremap <leader>s :mksession<CR>
 let g:returnAppFlag = 0
 let g:returnApp = 'iTerm'
 nnoremap <leader>s :w<CR>:OperaReload<CR>
@@ -483,27 +256,19 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd FileType markdown,org imap -- –
 autocmd FileType markdown,org imap --- —
 autocmd FileType markdown,org imap ... …
-
 " No auto-wrap
 autocmd FileType markdown setlocal spell textwidth=0
-
 " Convert to Docx using pandoc
 autocmd FileType markdown,org map <silent> <leader>c :silent w<CR> :!pandoc '%' -o '%:r.docx'<CR><CR>
-
 " Open and save doc & docx files as markdown
 autocmd BufReadPre *.docx silent set ro
 autocmd BufEnter *.docx silent set modifiable
 autocmd BufEnter *.docx silent %!pandoc --wrap=none -f docx -t markdown '%'
 autocmd BufEnter *.docx silent set filetype=markdown
 autocmd BufEnter *.docx silent set noreadonly
-"autocmd BufEnter *.docx silent set buftype: ''
-"autocmd BufWritePost *.docx %!pandoc -f markdown -t docx % > '%'
-
 autocmd FileType markdown,org silent! TableModeEnable
 
-"autocmd FileType markdown
-    "\ set formatoptions-=q |
-    "\ set formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
+" CSV
 
 " Convert CSV table to Markdown table
 function! CsvToMd ()
@@ -513,9 +278,7 @@ function! CsvToMd ()
   silent! %s/$/\|/e
   normal gg o |-+-|
 endfunction
-
 :command! CsvToMd :call CsvToMd()<CR>
-
 " Convert CSV table to Org table
 function! CsvToOrg ()
   set filetype=org
@@ -524,14 +287,7 @@ function! CsvToOrg ()
   silent! %s/$/\|/e
   normal gg o |-+-|
 endfunction
-
 :command! CsvToOrg :call CsvToOrg()<CR>
-
-" Watch for changes in .vimrc and automatically reload the config
-"augroup myvimrc
-  "au!
-  "au BufWritePost .vimrc,.vimrc.after,.vimrc.before,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-"augroup END
 
 " Open any file with a pre-existing swapfile in readonly mode
 augroup NoSimultaneousEdits
@@ -543,14 +299,8 @@ augroup NoSimultaneousEdits
   autocmd SwapExists * sleep 2
 augroup END
 
-" Rpdf converts PDF to text without line breaks
-:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
-
 " Add numbers to a list
 :command! -nargs=0 -range=% Number <line1>,<line2>s/^\s*\zs/\=(line('.') - <line1>+1).'. '
-
-" Rpdf converts PDF to text with line breaks
-":command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
 
 " Find duplicates in a sorted file
 :command! Duplicates :g/^\(.*\)$\n\1$/p
@@ -559,25 +309,50 @@ augroup END
 " ┣━┛┃  ┃ ┃┃╺┓┃┃┗┫   ┗━┓ ┃ ┃ ┃┣╸ ┣╸
 " ╹  ┗━╸┗━┛┗━┛╹╹ ╹   ┗━┛ ╹ ┗━┛╹  ╹
 
+" Tweaks for Netrw file explorer
+let g:netrw_banner=0 " disable annoying banner
+let g:netrw_browse_split=4 " open in prior window
+let g:netrw_altv=1 " open splits to the right
+let g:netrw_liststyle=3 " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+" Now we can:
+" - :edit a folder to open file browser
+" - <CR>/v/t to open in h-split/v-split/tab
+
+" mouse settings
+:set mouse=a
+
+" Disable EXEC file highlight in NERDtree
+highlight link NERDTreeExecFile ModeMsg
+" Show hidden files
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeWinSize = 31
+let g:nerdtree_tabs_open_on_console_startup = 2
+let g:nerdtree_tabs_open_on_gui_startup = 2
+let g:nerdtree_tabs_autofind = 1
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+" IndentLine plugin Character
+"let g:indentLine_char = '⦙'
+"let g:indentLine_char = '┊'
+let g:indentLine_char = '⎸'
+"let g:indentLine_char = '·'
+let g:indentLine_concealcursor=0
+
+" scrooloose/nerdcommenter
+let g:NERDCustomDelimiters={
+  \ 'javascript.jsx': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' },
+\}
+
+" Enable all Python syntax highlighting features
+let python_highlight_all = 1
+
 " git-gutter http://git.io/vimgitgutter
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
-"If you experience a lag, you can trade speed for accuracy:
-"let g:gitgutter_realtime = 0
-"let g:gitgutter_eager = 0
-
-"let g:gitgutter_diff_args = '-w'
-"let g:gitgutter_sign_added = '+'
-"let g:gitgutter_sign_modified = '~'
-"let g:gitgutter_sign_removed = '-'
-"let g:gitgutter_sign_removed_first_line = '^'
-"let g:gitgutter_sign_modified_removed = ':'
 let g:gitgutter_max_signs = 1500
-"highlight clear SignColumn
-"highlight GitGutterAdd ctermfg=green ctermbg=237
-"highlight GitGutterChange ctermfg=yellow ctermbg=237
-"highlight GitGutterDelete ctermfg=red ctermbg=237
-"highlight GitGutterChangeDelete ctermfg=red ctermbg=237
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -588,24 +363,18 @@ let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-"let g:syntastic_quiet_messages = { '!level': 'errors' }
-"let g:syntastic_quiet_messages = { 'type': 'style' }
 let g:syntastic_quiet_messages = { 'regex': 'Line is too long' }
-"let g:syntastic_quiet_messages = { 'file:p':  ['\m^/usr/include/', '\m\c\.h$'] }
 
 " Use Eslint for React
 let g:syntastic_javascript_checkers = ['eslint']
 
 " Use Rubocop for Ruby
-"let g:syntastic_ruby_checkers = ['rubocop', 'rubylint']
 let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
 let g:syntastic_mode_map = {
       \ "mode": "active",
       \ "active_filetypes": ["ruby", "eruby", "javascript", "javascript.jsx", "coffeescript", "css", "scss", "sass"],
       \ "passive_filetypes": ["markdown"] }
-
-"let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " buffergator tweaks
 " split below VIM window
@@ -620,19 +389,35 @@ let g:multi_cursor_exit_from_insert_mode = 0
 
 " Snipmate
 " Use CTRL+J for snippet completion
-imap <C-J> <Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
-let g:snipMate.scope_aliases['ruby'] = 'ruby,ruby-rails'
-let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript.es6.react,javascript.meteor'
-let g:snipMate.scope_aliases['html'] = 'html,html.meteor'
-"autocmd FileType js UltiSnipsAddFiletypes javascript.es6.react
-"autocmd FileType 'javascript.jsx' UltiSnipsAddFiletypes javascript-react
+" imap <C-J> <Plug>snipMateNextOrTrigger
+" smap <C-J> <Plug>snipMateNextOrTrigger
+"let g:snipMate.scope_aliases['ruby'] = 'ruby,ruby-rails'
+"let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript.es6.react,javascript.meteor'
+"let g:snipMate.scope_aliases['html'] = 'html,html.meteor'
+
+" Shougo/neosnippet
+" Plugin key-mappings
+imap <C-j>     <Plug>(neosnippet_expand_or_jump)
+smap <C-j>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-j>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be 'imap' and 'smap'.  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? '\<C-n>' :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    '\<Plug>(neosnippet_expand_or_jump)' : '\<TAB>'
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ '\<Plug>(neosnippet_expand_or_jump)' : '\<TAB>'
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 " Vim-test -- make test commands execute using vim
 let test#strategy = "dispatch"
 "let test#javascript#jest#file_pattern = 'spec.js'
-
-autocmd BufEnter *.coffee.erb silent set filetype=coffee
 
 " groenewege/vim-less
 autocmd BufNewFile,BufRead *.less set filetype=less
@@ -648,8 +433,9 @@ xmap <leader>ss <plug>(scratch-selection-reuse)
 xmap <leader>sS <plug>(scratch-selection-clear)
 
 " kien/ctrlp.vim
+let g:ctrlp_map = '<c-p>'
 " Close NERDTree before opening CtrlP
-map <c-p> :NERDTreeTabsClose<CR>:CtrlP<CR>
+let g:ctrlp_cmd = 'NERDTreeTabsClose<CR>:CtrlP'
 " Use The Silver Searcher
 if executable('ag')
   " Use ag over grep
@@ -666,20 +452,6 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" FZF.vim
-"nnoremap <leader>t :Files<cr>
-"nnoremap <leader>b :Buffers<cr>
-"nmap <leader><tab> <plug>(fzf-maps-n)
-"xmap <leader><tab> <plug>(fzf-maps-x)
-"omap <leader><tab> <plug>(fzf-maps-o)
-"" Insert mode completion
-"imap <c-x><c-f> <plug>(fzf-complete-path)
-"imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-"let g:fzf_prefer_tmux = 1
-
-"CSV
-"let g:csv_arrange_align = 'lc.'
-
 " Python-mode
 " Activate rope
 " Keys:
@@ -695,18 +467,14 @@ nmap ga <Plug>(EasyAlign)
 " ]M            Jump on next class or method (normal, visual, operator modes)
 let g:pymode_python = 'python3'
 "let g:pymode_rope = 1
-
 " Support virtualenv
 let g:pymode_virtualenv = 1
-
 " Documentation
 let g:pymode_doc = 1
 let g:pymode_doc_key = 'K'
-
 " Enable breakpoints plugin
 let g:pymode_breakpoint = 1
 let g:pymode_breakpoint_bind = '<leader>pb'
-
 " syntax highlighting
 let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
@@ -714,16 +482,13 @@ let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_options_max_line_length = 80
 let g:pymode_options_colorcolumn = 0
-
 " Don't autofold code
 let g:pymode_folding = 0
-
 "Linting
 let g:pymode_lint = 1
 let g:pymode_lint_checker = "pyflakes,pep8"
  "Auto check on save
 let g:pymode_lint_write = 1
-
 let g:jedi#auto_initialization = 0
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#rename_command = '<Leader>jr'
@@ -819,29 +584,150 @@ endif
 " don't blink the cursor
 "set guicursor+=i:blinkwait0
 
+
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=/Users/willwright/.local/share/dein/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('/Users/willwright/.local/share/dein')
+  call dein#begin('/Users/willwright/.local/share/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('/Users/willwright/.local/share/dein/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here like this:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+
+  "call dein#add('NLKNguyen/papercolor-theme.git')
+  "call dein#add('Valloric/YouCompleteMe')
+  "call dein#add('bonsaiben/bootstrap-snippets.git')
+  "call dein#add('davidhalter/jedi-vim.git')
+  "call dein#add('jdkanani/vim-material-theme.git')
+  "call dein#add('junegunn/vim-peekaboo.git')
+  "call dein#add('kristijanhusak/vim-hybrid-material.git')
+  "call dein#add('mtth/scratch.vim')
+  "call dein#add('rizzatti/dash.vim.git')
+  "call dein#add('severin-lemaignan/vim-minimap.git')
+  "call dein#add('slim-template/vim-slim.git')
+  "call dein#add('tpope/vim-haml.git')
+  "call dein#add('vim-scripts/ReplaceWithRegister.git')
+  "call dein#add('vim-scripts/YankRing.vim.git')
+  call dein#add('Chiel92/vim-autoformat.git')
+  call dein#add('Lokaltog/vim-easymotion')
+  call dein#add('MarcWeber/vim-addon-mw-utils.git')
+  call dein#add('Raimondi/delimitMate.git')
+  call dein#add('Valloric/MatchTagAlways.git')
+  call dein#add('Yggdroot/indentLine.git')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('ajh17/VimCompletesMe.git')
+  call dein#add('benmills/vimux.git')
+  call dein#add('bronson/vim-trailing-whitespace')
+  call dein#add('christoomey/vim-sort-motion.git')
+  call dein#add('christoomey/vim-system-copy.git')
+  call dein#add('christoomey/vim-titlecase.git')
+  call dein#add('ctrlpvim/ctrlp.vim')
+  call dein#add('ddollar/nerdcommenter')
+  call dein#add('dhruvasagar/vim-table-mode.git')
+  call dein#add('edkolev/tmuxline.vim.git')
+  call dein#add('elzr/vim-json')
+  call dein#add('ervandew/supertab')
+  " call dein#add('garbas/vim-snipmate')
+  call dein#add('groenewege/vim-less.git')
+  call dein#add('iberianpig/tig-explorer.vim.git')
+  call dein#add('janko-m/vim-test.git')
+  call dein#add('jeetsukumaran/vim-buffergator')
+  call dein#add('jistr/vim-nerdtree-tabs.git')
+  call dein#add('junegunn/goyo.vim.git')
+  call dein#add('junegunn/vim-easy-align.git')
+  call dein#add('kana/vim-textobj-entire.git')
+  call dein#add('kana/vim-textobj-indent.git')
+  call dein#add('kana/vim-textobj-line.git')
+  call dein#add('kana/vim-textobj-user.git')
+  call dein#add('klen/python-mode.git')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('mattn/emmet-vim.git')
+  call dein#add('mattn/gist-vim.git')
+  call dein#add('matze/vim-move.git')
+  call dein#add('mhinz/vim-startify.git')
+  call dein#add('mileszs/ack.vim')
+  call dein#add('mxw/vim-jsx.git')
+  call dein#add('pangloss/vim-javascript.git')
+  call dein#add('plasticboy/vim-markdown.git')
+  call dein#add('qpkorr/vim-bufkill.git')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('scrooloose/syntastic')
+  call dein#add('sjl/vitality.vim.git')
+  call dein#add('skalnik/vim-vroom')
+  call dein#add('tell-k/vim-browsereload-mac.git')
+  call dein#add('ternjs/tern_for_vim.git')
+  call dein#add('terryma/vim-multiple-cursors')
+  call dein#add('terryma/vim-smooth-scroll.git')
+  call dein#add('tomtom/tlib_vim.git')
+  call dein#add('tpope/vim-commentary.git')
+  call dein#add('tpope/vim-dispatch.git')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-ragtag.git')
+  call dein#add('tpope/vim-rails.git')
+  call dein#add('tpope/vim-repeat.git')
+  call dein#add('tpope/vim-surround.git')
+  call dein#add('tpope/vim-unimpaired')
+  call dein#add('tyrannicaltoucan/vim-quantum')
+  call dein#add('vim-airline/vim-airline-themes.git')
+  call dein#add('vim-airline/vim-airline.git')
+  call dein#add('vim-ruby/vim-ruby.git')
+  call dein#add('vim-scripts/ZoomWin')
+  call dein#add('vim-scripts/closetag.vim.git')
+  call dein#add('wavded/vim-stylus.git')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+
+"End dein Scripts-------------------------
+
+if theme == 'dark'
+  set background=dark
+  let g:airline_theme='papercolor'
+  autocmd VimEnter * AirlineTheme papercolor
+  colorscheme quantum
+  let g:quantum_italics=1
+  " No Tildes
+  highlight NonText ctermfg=NONE guifg=#303030 cterm=NONE gui=NONE
+  " No Background
+  highlight NonText guibg=#303030 ctermbg=NONE
+  highlight Normal guibg=#303030 ctermbg=NONE
+  highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#303030 guifg=#303030
+  let g:indentLine_color_term = 238
+elseif theme == 'light'
+  set background=light
+  colorscheme PaperColor
+  let g:airline_theme='papercolor'
+  autocmd VimEnter * AirlineTheme papercolor
+  "" Change Line Number Colour
+  highlight LineNr ctermfg=251 ctermbg=NONE
+  let g:indentLine_color_term = 251
+endif
+
 " ┏━┓╺┳╸┏━┓╺┳╸╻ ╻┏━┓╻  ╻┏┓╻┏━╸
 " ┗━┓ ┃ ┣━┫ ┃ ┃ ┃┗━┓┃  ┃┃┗┫┣╸
 " ┗━┛ ╹ ╹ ╹ ╹ ┗━┛┗━┛┗━╸╹╹ ╹┗━╸
-
-"let g:airline_section_z= ' chars'
-
-" let g:tmuxline_preset = 'nightly_fox'
-" or
-" let g:tmuxline_preset = 'full'
-" or
-"let g:tmuxline_preset = 'tmux'
-" other presets available in autoload/tmuxline/presets/*
-"
-" #H    Hostname of local host
-" #h    Hostname of local host without the domain name
-" #F    Current window flag
-" #I    Current window index
-" #S    Session name
-" #W    Current window name
-" #(shell-command)  First line of the command's output)
-" \'x'    : '#(~/bin/tmux-charge) [✉ #(~/bin/imap_check.py)]',
-" \'x'    : '#(/usr/bin/battery -t)',
-" \'c'    : ' #(~/bin/branch.sh)',
 
 let g:tmuxline_preset = {
       \'a'    : '#h',
@@ -852,3 +738,68 @@ let g:tmuxline_preset = {
       \'x'    : '#(~/bin/tmux-charge)',
       \'y'    : '%a %d/%h %H:%M #(~/bin/temperature)',
       \'z'    : '#(dig +short myip.opendns.com @resolver1.opendns.com)'}
+
+" From .Janus
+"VimCompletesMe
+"bootstrap-snippets
+"calendar-vim
+"closetag-vim
+"dash-vim
+"delimitMate
+"emmet-vim
+"gist-vim
+"goyo-vim
+"hybrid-material
+"indentLine
+"jedi-vim
+"mysnippets
+"papercolor-theme
+"python-mode
+"scratch
+"tagbar
+"taglist-vim
+"tender-vim
+"tern_for_vim
+"tig-explorer-vim
+"tmuxline.vim
+"tyrannicaltoucan-vim-quantum
+"vim-SyntaxRange
+"vim-airline
+"vim-airline-themes
+"vim-autoformat
+"vim-browsereload-mac
+"vim-bufkill
+"vim-commentary
+"vim-dispatch
+"vim-easy-align
+"vim-haml
+"vim-javascript
+"vim-jsx
+"vim-less
+"vim-markdown
+"vim-material-theme
+"vim-move
+"vim-nerdtree-tabs
+"vim-orgmode
+"vim-peekaboo
+"vim-prettier
+"vim-ragtag
+"vim-rails
+"vim-repeat
+"vim-ruby
+"vim-slim
+"vim-smooth-scroll
+"vim-sort-motion
+"vim-speeddating
+"vim-startify
+"vim-surround
+"vim-system-copy
+"vim-table-mode
+"vim-test
+"vim-textobj-entire
+"vim-textobj-indent
+"vim-textobj-line
+"vim-textobj-user
+"vim-titlecase
+"vimux
+"vitality.vim

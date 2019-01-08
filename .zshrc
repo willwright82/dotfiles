@@ -78,8 +78,8 @@ source $ZSH/oh-my-zsh.sh
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
  else
-   export EDITOR='mvim'
-   #export EDITOR='vim'
+   #export EDITOR='mvim'
+   export EDITOR='vim'
  fi
 
 # Compilation flags
@@ -98,9 +98,11 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-material.dark.sh"
 # For a full list of active aliases, run `alias`.
 #
 # aliases
-alias vim="/usr/local/bin/vim"
-##alias vi="/usr/local/bin/vim"
-alias vi="mvim"
+alias vim='/usr/local/bin/vim'
+alias vi='/usr/local/bin/vim'
+alias vi='nvim'
+#alias vi='mvim'
+alias git='hub'
 alias em='emacsclient -nw -c a ""'
 alias branch="~/bin/branch.sh"
 alias duviz="~/bin/duviz/duviz.py"
@@ -111,8 +113,11 @@ alias swift="xcrun swift"
 alias ggprp="ggpur && ggpush"
 alias gn="ggpur && gco -b"
 alias gac="gaa && gcam"
+alias gac!="gaa && gcam --amend"
 alias gacs="gaa && git commit -a -s -m"
 alias gcd="gco develop"
+alias ggrh="git reset --hard origin/$(current_branch)"
+alias gpr="git pull-request -b"
 alias gsup="git standup -D \"format:%Y-%m-%d %H:%M\""
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
@@ -169,6 +174,15 @@ function gitvanity() {
     echo $ghurl | pbcopy;
     echo "copied to clipboard: ${ghurl}"
 }
+
+function gitparent() {
+  git show-branch -a \
+    | grep '\*' \
+    | grep -v `git rev-parse --abbrev-ref HEAD` \
+    | head -n1 \
+    | sed 's/.*\[\(.*\)\].*/\1/' \
+    | sed 's/[\^~].*//'
+  }
 
 function showcolor() {
   display -size 400x400 "xc:$1";

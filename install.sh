@@ -98,3 +98,5 @@ git clone https://github.com/Raimondi/delimitMate.git ~/.janus/delimitMate
 git clone https://github.com/ajh17/VimCompletesMe.git ~/.janus/VimCompletesMe
 git clone https://github.com/tpope/vim-haml.git ~/.janus/vim-haml
 git clone https://github.com/groenewege/vim-less.git ~/.janus/vim-less
+git clone https://github.com/iberianpig/tig-explorer.vim.git ~/.janus/tig-explorer-vim
+git clone https://github.com/junegunn/vim-peekaboo.git ~/.janus/vim-peekaboo
