@@ -148,6 +148,8 @@ alias bug='trello card create -b 58e21a5f5dc40c4fee175a7d -l 58e220fa80d88c98c3b
 alias bugs='trello card list -b 58e21a5f5dc40c4fee175a7d -l 5953dd2b4c626a5c3de9322d -o tsv'
 alias qa='trello card move -l 58e21c2911b632275b8d2717 -o tsv -c'
 alias gtd-clazzoo="echo '🐛  Bugs:' && bugs && echo '------------' && echo '📅  Current Sprint: ' && sprint && echo '------------' && echo '💻  WIP (Work in Progress):' && wip"
+alias bitrise-builds="echo 'kindaba-react-production' && bitrise :io builds --app eb026b484a32cbee --limit=1 && echo 'kindaba-react-staging' && bitrise :io builds --app b4cee09b3da20bed --limit=1 && echo 'kindaba-react-native-production' && bitrise :io builds --app c6a535b01f96daa4 --limit=1 && echo 'kindaba-react-native-staging' && bitrise :io builds --app a8488fb73b09955d --limit=1"
+alias tasks="task list"
 alias psql="ECHO 'Why not use pgcli instead?' && psql"
 alias home='clear && tmuxinator start home'
 alias udemy='clear && tmuxinator start udemy'

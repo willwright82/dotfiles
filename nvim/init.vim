@@ -205,8 +205,8 @@ nnoremap <leader>ft Vatzf
 nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.files/nvim/init.vim<cr>
 
 " Open and close Quickfix
-map <Leader>co :copen<CR>
-map <Leader>cc :cclose<CR>
+map <Leader>fo :copen<CR>
+map <Leader>fc :cclose<CR>
 
 map <leader>zw :ZoomWin<CR>
 
@@ -340,6 +340,7 @@ map <Leader>n <plug>NERDTreeTabsToggle<CR>
 let g:indentLine_char = '⎸'
 "let g:indentLine_char = '·'
 let g:indentLine_concealcursor=0
+let g:indentLine_setConceal = 0
 
 " scrooloose/nerdcommenter
 let g:NERDCustomDelimiters={
@@ -498,6 +499,7 @@ let g:jedi#usages_command = '<Leader>jn'
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_conceal = 0
 
 " Vim-prettier
 nmap <Leader>py <Plug>(Prettier)
@@ -604,13 +606,11 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
 
-  "call dein#add('NLKNguyen/papercolor-theme.git')
+  " call dein#add('garbas/vim-snipmate')
   "call dein#add('Valloric/YouCompleteMe')
   "call dein#add('bonsaiben/bootstrap-snippets.git')
   "call dein#add('davidhalter/jedi-vim.git')
-  "call dein#add('jdkanani/vim-material-theme.git')
   "call dein#add('junegunn/vim-peekaboo.git')
-  "call dein#add('kristijanhusak/vim-hybrid-material.git')
   "call dein#add('mtth/scratch.vim')
   "call dein#add('rizzatti/dash.vim.git')
   "call dein#add('severin-lemaignan/vim-minimap.git')
@@ -621,6 +621,7 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('Chiel92/vim-autoformat.git')
   call dein#add('Lokaltog/vim-easymotion')
   call dein#add('MarcWeber/vim-addon-mw-utils.git')
+  call dein#add('NLKNguyen/papercolor-theme.git')
   call dein#add('Raimondi/delimitMate.git')
   call dein#add('Valloric/MatchTagAlways.git')
   call dein#add('Yggdroot/indentLine.git')
@@ -637,10 +638,10 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('edkolev/tmuxline.vim.git')
   call dein#add('elzr/vim-json')
   call dein#add('ervandew/supertab')
-  " call dein#add('garbas/vim-snipmate')
   call dein#add('groenewege/vim-less.git')
   call dein#add('iberianpig/tig-explorer.vim.git')
   call dein#add('janko-m/vim-test.git')
+  call dein#add('jdkanani/vim-material-theme.git')
   call dein#add('jeetsukumaran/vim-buffergator')
   call dein#add('jistr/vim-nerdtree-tabs.git')
   call dein#add('junegunn/goyo.vim.git')
@@ -650,6 +651,7 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('kana/vim-textobj-line.git')
   call dein#add('kana/vim-textobj-user.git')
   call dein#add('klen/python-mode.git')
+  call dein#add('kristijanhusak/vim-hybrid-material.git')
   call dein#add('majutsushi/tagbar')
   call dein#add('mattn/emmet-vim.git')
   call dein#add('mattn/gist-vim.git')
