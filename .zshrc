@@ -102,7 +102,9 @@ alias vim='/usr/local/bin/vim'
 alias vi='/usr/local/bin/vim'
 alias vi='nvim'
 #alias vi='mvim'
+alias e='vi'
 alias git='hub'
+alias mkdir='mkdir -pv'
 alias em='emacsclient -nw -c a ""'
 alias branch="~/bin/branch.sh"
 alias duviz="~/bin/duviz/duviz.py"
@@ -162,6 +164,9 @@ alias weather="ansiweather -p false -h false"
 alias wtf='~/Labs/wtf_0.0.3_darwin_amd64/wtf'
 alias maps="telnet mapscii.me"
 alias wget='wget -e robots=off --no-check-certificate --referer="http://www.google.com" --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6" --header="Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5" --header="Accept-Language: en-us,en;q=0.5" --header="Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7" --header="Keep-Alive: 300"'
+alias listenforpwd="sudo tcpdump port http or port ftp or port smtp or port imap or port pop3 or port telnet -lA | egrep -i -B5 'pass=|pwd=|log=|login=|user=|username=|pw=|passw=|passwd=|password=|pass:|user:|username:|password:|login:|pass |user '"
+alias listenforuseragent="sudo tcpdump -vvAls0 | ag 'User-Agent:'"
+alias listenforgetreq="sudo tcpdump -vvAls0 | ag 'GET'"
 
 #function emacs () { pgrep -xiq emacs && emacsclient -n $@ || emacsclient -n -c --alternate-editor="" $@; }
 
@@ -188,6 +193,21 @@ function gitparent() {
 
 function showcolor() {
   display -size 400x400 "xc:$1";
+}
+
+function cheat() {
+  curl cht.sh/$1
+}
+
+function mkcd() {
+  mkdir "$*"
+  cd "$*"
+}
+
+# Have I been pwned?
+# usage: `hibp email@example.com`
+hibp() {
+  curl -fsS "https://haveibeenpwned.com/api/v2/breachedaccount/$1" | jq -r 'sort_by(.BreachDate)[] | [.Title,.Domain,.BreachDate,.PwnCount] | @tsv' | column -t -s$'\t'
 }
 
 function logo() {
