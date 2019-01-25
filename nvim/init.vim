@@ -26,7 +26,7 @@ set fillchars+=vert:\
 
 " load Airline on Startup
 let g:airline_powerline_fonts = 1
-autocmd VimEnter * AirlineToggleWhitespace
+autocmd VimEnter * silent! AirlineToggleWhitespace
 
 " Don't add the comment prefix when I hit enter or o/O on a comment line.
 autocmd FileType * setlocal formatoptions-=r formatoptions-=o
@@ -534,6 +534,9 @@ let g:prettier#config#parser = 'flow'
 " Goyo
 let g:goyo_width=100
 
+" Shougo/Deoplete.nvim
+let g:deoplete#enable_at_startup = 1
+
 "iberianpig/tig-explorer.vim
 " open tig with current file
 nnoremap <Leader>to :TigOpenCurrentFile<CR>
@@ -605,6 +608,11 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   " Add or remove your plugins here like this:
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/deoplete.nvim')
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
 
   " call dein#add('garbas/vim-snipmate')
   "call dein#add('Valloric/YouCompleteMe')
@@ -699,9 +707,9 @@ filetype plugin indent on
 syntax enable
 
 " If you want to install not installed plugins on startup.
-"if dein#check_install()
+" if dein#check_install()
 "  call dein#install()
-"endif
+" endif
 
 "End dein Scripts-------------------------
 
