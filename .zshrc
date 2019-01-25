@@ -99,7 +99,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-material.dark.sh"
 #
 # aliases
 alias vim='/usr/local/bin/vim'
-alias vi='/usr/local/bin/vim'
+# alias vi='/usr/local/bin/vim'
 alias vi='nvim'
 #alias vi='mvim'
 alias e='vi'
