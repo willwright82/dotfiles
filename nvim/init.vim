@@ -536,6 +536,15 @@ let g:goyo_width=100
 
 " Shougo/Deoplete.nvim
 let g:deoplete#enable_at_startup = 1
+" Disable deoplete when using vim-multiple-cursors
+function g:Multiple_cursors_before()
+  call deoplete#custom#buffer_option('auto_complete', v:false)
+endfunction
+function g:Multiple_cursors_after()
+  call deoplete#custom#buffer_option('auto_complete', v:true)
+endfunction
+" Disable deoplete for org, markdown and LaTex
+autocmd FileType org,markdown,tex call deoplete#custom#buffer_option('auto_complete', v:false)
 
 "iberianpig/tig-explorer.vim
 " open tig with current file
@@ -618,6 +627,7 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   "call dein#add('Valloric/YouCompleteMe')
   "call dein#add('bonsaiben/bootstrap-snippets.git')
   "call dein#add('davidhalter/jedi-vim.git')
+  "call dein#add('zchee/deoplete-jedi')
   "call dein#add('junegunn/vim-peekaboo.git')
   "call dein#add('mtth/scratch.vim')
   "call dein#add('rizzatti/dash.vim.git')
