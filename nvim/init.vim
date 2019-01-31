@@ -533,6 +533,29 @@ let g:prettier#config#parser = 'flow'
 
 " Goyo
 let g:goyo_width=100
+function! s:goyo_enter()
+  "if exists('$TMUX')
+    "silent !tmux set status off
+  "endif
+  NERDTreeClose
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+  set wrap
+  setlocal textwidth=0
+  setlocal wrapmargin=0
+endfunction
+function! s:goyo_leave()
+  "if exists('$TMUX')
+    "silent !tmux set status on
+  "endif
+  highlight NonText guibg=#303030 ctermbg=NONE
+  highlight Normal guibg=#303030 ctermbg=NONE
+  highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#303030 guifg=#303030
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " Shougo/Deoplete.nvim
 let g:deoplete#enable_at_startup = 1
@@ -566,25 +589,11 @@ nnoremap <Leader>tb :TigBlame<CR>
 let g:org_indent = 0
 let g:org_export_emacs = "/usr/bin/emacs"
 let g:org_export_init_script = "~/.emacs.d"
-autocmd FileType org setlocal spell
+" No text wrap
 autocmd FileType org setlocal textwidth=0
-
-function! s:goyo_enter()
-  "if exists('$TMUX')
-    "silent !tmux set status off
-  "endif
-  NERDTreeClose
-endfunction
-
-function! s:goyo_leave()
-  "if exists('$TMUX')
-    "silent !tmux set status on
-  "endif
-  highlight NonText ctermfg=NONE guifg=#303030 cterm=NONE gui=NONE
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+let g:org_tag_column = 0
+" Enable Spell Checker
+autocmd FileType org setlocal spell
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
