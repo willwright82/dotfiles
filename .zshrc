@@ -235,6 +235,10 @@ function gpip3(){
 # To get virtualenvwrapper to create a virtual environment using pyvenv instead of virtualenv
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
+export WORKON_HOME=~/.virtualenvs
+mkdir -p $WORKON_HOME
+source /usr/local/bin/virtualenvwrapper.sh
+
 # Avoid overwriting files - `set +o noclobber` to override
 set -o noclobber
 

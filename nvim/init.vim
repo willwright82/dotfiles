@@ -1,3 +1,12 @@
+"
+"  ▓▓▓▓▓▓▓▓▓▓
+" ░▓ author ▓ Will Wright <will@wright.is>
+" ░▓ tweet  ▓ @WilliamWright
+" ░▓ code   ▓ https://github.com/willwright82/dotfiles
+" ░▓▓▓▓▓▓▓▓▓▓
+" ░░░░░░░░░░
+
+
 " ╻┏┓╻╺┳╸┏━╸┏━┓┏━╸┏━┓┏━╸┏━╸
 " ┃┃┗┫ ┃ ┣╸ ┣┳┛┣╸ ┣━┫┃  ┣╸
 " ╹╹ ╹ ╹ ┗━╸╹┗╸╹  ╹ ╹┗━╸┗━╸
@@ -213,6 +222,32 @@ map <leader>zw :ZoomWin<CR>
 " Toggle Tagbar
 nmap <F8> :TagbarToggle<CR>
 
+" Run Code
+autocmd FileType ruby,eruby nmap <leader>e :w<CR>:!ruby %<cr>
+autocmd FileType ruby,eruby nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
+autocmd FileType javascript nmap <leader>e :w<CR>:!node %<CR>
+autocmd FileType javascript nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
+
+autocmd FileType python nmap <leader>e :w<CR>:!python %<CR>
+autocmd FileType python nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
+autocmd FileType python imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
+autocmd FileType python imap <leader>e <ESC>:w<CR>:!python %<CR>
+autocmd FileType python map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+autocmd FileType ruby,eruby imap <leader>e <ESC>:w<CR>:!ruby %<CR>
+autocmd FileType ruby,eruby imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
+
+autocmd FileType javascript imap <leader>e <ESC>:w<CR>:!node %<CR>
+autocmd FileType javascript imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; node " . bufname("%"),0)<CR>
+
+" Run Tests
+autocmd FileType ruby,eruby,javascript,javascript.jsx nmap <leader>rt :w<CR>:TestFile<CR>
+autocmd FileType ruby,eruby,javascript,javascript.jsx imap <leader>rt <ESC>:w<CR>:TestFile<CR>
+autocmd FileType ruby,eruby,javascript,javascript.jsx nmap <leader>rn :w<CR>:TestNearest<CR>
+autocmd FileType ruby,eruby,javascript,javascript.jsx imap <leader>rn <ESC>:w<CR>:TestNearest<CR>
+autocmd FileType ruby,eruby,javascript,javascript.jsx nmap <leader>rs :w<CR>:TestSuite<CR>
+autocmd FileType ruby,eruby,javascript,javascript.jsx imap <leader>rs <ESC>:w<CR>:TestSuite<CR>
+
 " Save on losing focus
 autocmd BufLeave,FocusLost * stopinsert | silent! wall
 
@@ -417,7 +452,12 @@ if has('conceal')
 endif
 
 " Vim-test -- make test commands execute using vim
-let test#strategy = "dispatch"
+" let test#strategy = 'dispatch'
+let test#strategy = 'neovim'
+let g:test#runner_commands = ['RSpec', 'Jest', 'Mocha']
+let test#javascript#jest#options = '--updateSnapshot --silent --runInBand --reporters jest-nyan-reporter'
+" let test#javascript#jest#executable = 'yarn test --updateSnapshot --silent --runInBand --reporters jest-nyan-reporter'
+let test#javascript#jest#file_pattern = '\.js'
 "let test#javascript#jest#file_pattern = 'spec.js'
 
 " groenewege/vim-less
