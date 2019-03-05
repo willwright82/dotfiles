@@ -8,26 +8,36 @@ brew upgrade
 
 apps=(
     ack
-    archey
+    ansible
     ansiweather
+    archey
+    automake
+    aws-shell
+    awscli
+    bitrise
     cloog
     cmake
+    coreutils
+    cscope
     ctags
     cvs
     dark-mode
-    railwaycat/emacsmacport/emacs-mac
     gawk
+    gcal
     gcc
-    homebrew/versions/gcc49
     git
     git-cal
     git-extras
-    thoughtbot/formulae/gitsh
+    git-secret
     gnu-sed
     gnu-typist
     gnupg
+    go
     gtypist
     heroku
+    heroku/brew/heroku
+    homebrew/versions/gcc49
+    htop
     htop-osx
     httpie
     hub
@@ -35,10 +45,15 @@ apps=(
     jq
     libidn
     libksba
+    libtool
     libyaml
     lynx
     macvim
+    mongodb
+    neomutt
+    neovim
     nvm
+    openssl@1.1
     openvpn
     ossp-uuid
     p7zip
@@ -47,21 +62,28 @@ apps=(
     pgcli
     phantomjs
     postgresql
-    reattach-to-user-namespace
+    railwaycat/emacsmacport/emacs-mac
     rbenv
     rbenv-default-gems
     rbenv-gemset
+    reattach-to-user-namespace
     redis
     ruby-build
     shpotify
     speedtest_cli
+    sphinx-doc
+    task
+    telnet
     the_silver_searcher
+    thoughtbot/formulae/gitsh
     tig
     tmux
     tree
     vim
     watch
+    watchman
     wget
+    yarn
     zsh
 )
 
