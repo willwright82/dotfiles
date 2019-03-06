@@ -436,6 +436,10 @@ let g:multi_cursor_exit_from_insert_mode = 0
 imap <C-j>     <Plug>(neosnippet_expand_or_jump)
 smap <C-j>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-j>     <Plug>(neosnippet_expand_target)
+" inoremap <silent><expr><CR>\
+"       \ pumvisible() ? deoplete#mappings#close_popup()\
+"       \ '\<Plug>(neosnippet_expand_or_jump)' :\
+"       \ '\<CR>'
 
 " SuperTab like snippets behavior.
 " Note: It must be 'imap' and 'smap'.  It uses <Plug> mappings.
@@ -445,6 +449,12 @@ xmap <C-j>     <Plug>(neosnippet_expand_target)
 " \    '\<Plug>(neosnippet_expand_or_jump)' : '\<TAB>'
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ '\<Plug>(neosnippet_expand_or_jump)' : '\<TAB>'
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 
 " For conceal markers.
 if has('conceal')
