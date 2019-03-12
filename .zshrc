@@ -219,6 +219,17 @@ function logo() {
   echo ''
 }
 
+function willwright() {
+  echo ''
+  echo '           _ ____              _       __    __ '
+  echo ' _      __(_) / /      _______(_)___ _/ /_  / /_'
+  echo '| | /| / / / / / | /| / / ___/ / __ `/ __ \/ __/'
+  echo '| |/ |/ / / / /| |/ |/ / /  / / /_/ / / / / /_  '
+  echo '|__/|__/_/_/_/ |__/|__/_/  /_/\__, /_/ /_/\__/  '
+  echo '                             /____/             '
+  echo ''
+}
+
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 
