@@ -56,7 +56,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse vi-mode)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws brew common-aliases encode64 git git-extras meteor npm osx python rails sudo tmux tmuxinator url-tools web-search)
+plugins=(aws brew common-aliases encode64 git git-extras meteor npm osx python rails sudo tmux tmuxinator urltools web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,6 +101,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-material.dark.sh"
 alias vim='/usr/local/bin/vim'
 # alias vi='/usr/local/bin/vim'
 alias vi='nvim'
+alias nvimd='nvim -d'
 #alias vi='mvim'
 alias e='vi'
 alias git='hub'
@@ -121,6 +122,7 @@ alias gcd="gco develop"
 alias ggrh="git reset --hard origin/$(current_branch)"
 alias gpr="git pull-request -b"
 alias gsup="git standup -D \"format:%Y-%m-%d %H:%M\""
+alias gcleanup="git branch --merged | egrep -v '(^\*|master|dev|develop|staging)' | xargs git branch -d"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
 alias fast="networksetup -getairportnetwork en0 | cut -c 24- && fast"
@@ -141,6 +143,7 @@ alias pgGo='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.
 #alias solrStop='(~/Dev/clazzoo; bundle exec rake sunspot:solr:stop)'
 alias railsGo='rails s -b 0.0.0.0'
 alias kindaba='clear && tmuxinator start kindaba'
+alias machinelabs='clear && tmuxinator start machinelabs'
 alias production-deploy="yarn build && mv build my.kindaba && scp -r my.kindaba kindaba-production:/home/ec2-user/app/ && rm -rf my.kindaba && echo '🎉 Successfully deployed to https://my.kindaba.com'"
 alias staging-deploy="yarn build && mv build dev.kindaba && scp -r dev.kindaba kindaba-staging:/home/ec2-user/app/ && rm -rf dev.kindaba && echo '🎉 Successfully deployed to http://dev.kindaba.com'"
 alias sprint='trello card list -b 58e21a5f5dc40c4fee175a7d -l 58e21c0fceeab090bdb2bd79 -o tsv'
@@ -244,10 +247,15 @@ function gpip3(){
 }
 
 # To get virtualenvwrapper to create a virtual environment using pyvenv instead of virtualenv
-export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+# export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
 export WORKON_HOME=~/.virtualenvs
 mkdir -p $WORKON_HOME
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+
 source /usr/local/bin/virtualenvwrapper.sh
 
 # Avoid overwriting files - `set +o noclobber` to override

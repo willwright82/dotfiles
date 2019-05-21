@@ -31,7 +31,7 @@ set number relativenumber
 let theme = 'dark'
 
 " Remove pipes in window split bar
-set fillchars+=vert:\ 
+set fillchars+=vert:\
 
 " load Airline on Startup
 let g:airline_powerline_fonts = 1
@@ -89,10 +89,8 @@ autocmd FileType javascript.jsx set shiftwidth=2
 autocmd FileType javascript.jsx set tabstop=2
 autocmd FileType javascript.jsx set softtabstop=2
 
-" https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
-" has to go after all theme declarations
-highlight Comment cterm=italic
-autocmd FileType javascript.jsx highlight xmlAttrib cterm=italic
+" VueJS
+" set includeexpr=substitute(v:fname,'\\@','/src/','g')
 
 " ┏━╸┏━┓┏┳┓┏┳┓┏━┓┏┓╻╺┳┓┏━┓
 " ┃  ┃ ┃┃┃┃┃┃┃┣━┫┃┗┫ ┃┃┗━┓
@@ -181,10 +179,12 @@ map <leader>sc :setlocal spell!<cr>
 "nnoremap <Down> :echoe 'Use j'<CR>
 
 " Proper J & K
-"nnoremap k gk
-"nnoremap j gj
-"nnoremap gk k
-"nnoremap gj j
+nnoremap k gk
+nnoremap <Up> gk
+nnoremap j gj
+nnoremap <Down> gj
+nnoremap gk k
+nnoremap gj j
 
 " OSX Clipboard
 "set clipboard=unnamedplus
@@ -256,7 +256,7 @@ autocmd FocusGained,BufEnter * :silent! !
 
 " Save fold and load information
 autocmd BufWrite * mkview
-autocmd BufRead * silent loadview
+autocmd BufRead * silent! loadview
 
 " save session and reload
 let g:returnAppFlag = 0
@@ -288,9 +288,12 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 " For en/em dashes, respectively:
 " inoremap <buffer> --<space> –<space>
 " inoremap <buffer> -- —
-autocmd FileType markdown,org imap -- –
-autocmd FileType markdown,org imap --- —
-autocmd FileType markdown,org imap ... …
+" autocmd FileType markdown,org imap -- –
+" autocmd FileType markdown,org imap --- —
+" autocmd FileType markdown,org imap ... …
+imap -- –
+imap --- —
+imap ... …
 " No auto-wrap
 autocmd FileType markdown setlocal spell textwidth=0
 " Convert to Docx using pandoc
@@ -363,6 +366,7 @@ highlight link NERDTreeExecFile ModeMsg
 " Show hidden files
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeMouseMode = 2
 let g:NERDTreeWinSize = 31
 let g:nerdtree_tabs_open_on_console_startup = 2
 let g:nerdtree_tabs_open_on_gui_startup = 2
@@ -380,12 +384,14 @@ let g:indentLine_setConceal = 0
 " scrooloose/nerdcommenter
 let g:NERDCustomDelimiters={
   \ 'javascript.jsx': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' },
+  \ 'vue': { 'left': '<!-- ', 'right': ' -->', 'leftAlt': '//', 'rightAlt': '' },
 \}
 
 " Enable all Python syntax highlighting features
 let python_highlight_all = 1
 
 " git-gutter http://git.io/vimgitgutter
+let g:gitgutter_enable = 1
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_max_signs = 1500
@@ -404,12 +410,15 @@ let g:syntastic_quiet_messages = { 'regex': 'Line is too long' }
 " Use Eslint for React
 let g:syntastic_javascript_checkers = ['eslint']
 
+" Use Eslint for Vue
+let g:syntastic_vue_checkers = ['eslint']
+
 " Use Rubocop for Ruby
 let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
 let g:syntastic_mode_map = {
       \ "mode": "active",
-      \ "active_filetypes": ["ruby", "eruby", "javascript", "javascript.jsx", "coffeescript", "css", "scss", "sass"],
+      \ "active_filetypes": ["ruby", "eruby", "javascript", "javascript.jsx", "vue", "coffeescript", "css", "scss", "sass"],
       \ "passive_filetypes": ["markdown"] }
 
 " buffergator tweaks
@@ -454,7 +463,8 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+"let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+let g:neosnippet#snippets_directory='~/.config/nvim/vim-snippets/snippets'
 
 " For conceal markers.
 if has('conceal')
@@ -551,35 +561,39 @@ let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_follow_anchor = 1
 let g:vim_markdown_conceal = 0
 
-" Vim-prettier
-nmap <Leader>py <Plug>(Prettier)
-let g:prettier#autoformat = 0
-" max line length that prettier will wrap on
-let g:prettier#config#print_width = 80
-" number of spaces per indentation level
-let g:prettier#config#tab_width = 2
-" use tabs over spaces
-let g:prettier#config#use_tabs = 'false'
-" print semicolons
-let g:prettier#config#semi = 'false'
-" single quotes over double quotes
-let g:prettier#config#single_quote = 'true'
-" print spaces between brackets
-let g:prettier#config#bracket_spacing = 'true'
-" put > on the last line instead of new line
-let g:prettier#config#jsx_bracket_same_line = 'true'
-" none|es5|all
-let g:prettier#config#trailing_comma = 'none'
-" flow|babylon|typescript|postcss
-let g:prettier#config#parser = 'flow'
-" Running before saving async
-"autocmd BufWritePre *.js,*.jsx,*.css,*.scss,*.less PrettierAsync
+" Neoformat sbdchd/neoformat
+nmap <Leader>af <Plug>(Neoformat)
+" autocmd BufWritePre *.js Neoformat prettier
 
-" Autoformat Javascript and JSX using prettier
-"autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5\ --stdin
-" Run prettier on file save
-"autocmd BufWritePre *.js :normal gggqG
-"autocmd BufWritePre *.js exe 'normal! gggqG\<C-o>\<C-o>'
+"" Vim-prettier
+"nmap <Leader>py <Plug>(Prettier)
+"let g:prettier#autoformat = 0
+"" max line length that prettier will wrap on
+"let g:prettier#config#print_width = 80
+"" number of spaces per indentation level
+"let g:prettier#config#tab_width = 2
+"" use tabs over spaces
+"let g:prettier#config#use_tabs = 'false'
+"" print semicolons
+"let g:prettier#config#semi = 'false'
+"" single quotes over double quotes
+"let g:prettier#config#single_quote = 'true'
+"" print spaces between brackets
+"let g:prettier#config#bracket_spacing = 'true'
+"" put > on the last line instead of new line
+"let g:prettier#config#jsx_bracket_same_line = 'true'
+"" none|es5|all
+"let g:prettier#config#trailing_comma = 'none'
+"" flow|babylon|typescript|postcss
+"let g:prettier#config#parser = 'flow'
+"" Running before saving async
+""autocmd BufWritePre *.js,*.jsx,*.css,*.scss,*.less PrettierAsync
+"
+"" Autoformat Javascript and JSX using prettier
+""autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5\ --stdin
+"" Run prettier on file save
+""autocmd BufWritePre *.js :normal gggqG
+""autocmd BufWritePre *.js exe 'normal! gggqG\<C-o>\<C-o>'
 
 " Goyo
 let g:goyo_width=100
@@ -618,6 +632,26 @@ function g:Multiple_cursors_after()
 endfunction
 " Disable deoplete for org, markdown and LaTex
 autocmd FileType org,markdown,tex call deoplete#custom#buffer_option('auto_complete', v:false)
+
+" w0rp/ALE
+" " Use ALE and also some plugin 'foobar' as completion sources for all code.
+" let g:deoplete#sources = {'_': ['ale', 'foobar']}
+let g:ale_completion_enabled = 0
+" Only lint on save
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save = 1
+" Don't lint on opening a file
+let g:ale_lint_on_enter = 0
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint', 'prettier'],
+\   'vue': ['prettier'],
+\}
+
+" Fix files automatically on save
+let g:ale_fix_on_save = 1
 
 "iberianpig/tig-explorer.vim
 " open tig with current file
@@ -682,11 +716,10 @@ if dein#load_state('/Users/willwright/.local/share/dein')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 
-  " call dein#add('garbas/vim-snipmate')
   "call dein#add('Valloric/YouCompleteMe')
   "call dein#add('bonsaiben/bootstrap-snippets.git')
   "call dein#add('davidhalter/jedi-vim.git')
-  "call dein#add('zchee/deoplete-jedi')
+  "call dein#add('garbas/vim-snipmate')
   "call dein#add('junegunn/vim-peekaboo.git')
   "call dein#add('mtth/scratch.vim')
   "call dein#add('rizzatti/dash.vim.git')
@@ -695,8 +728,11 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   "call dein#add('tpope/vim-haml.git')
   "call dein#add('vim-scripts/ReplaceWithRegister.git')
   "call dein#add('vim-scripts/YankRing.vim.git')
+  "call dein#add('zchee/deoplete-jedi')
+	" call dein#add('tpope/vim-afterimage')
+
+  " call dein#add('neoclide/coc.nvim')
   call dein#add('Chiel92/vim-autoformat.git')
-  call dein#add('jparise/vim-graphql')
   call dein#add('Lokaltog/vim-easymotion')
   call dein#add('MarcWeber/vim-addon-mw-utils.git')
   call dein#add('NLKNguyen/papercolor-theme.git')
@@ -704,7 +740,7 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('Valloric/MatchTagAlways.git')
   call dein#add('Yggdroot/indentLine.git')
   call dein#add('airblade/vim-gitgutter')
-  call dein#add('ajh17/VimCompletesMe.git')
+  " call dein#add('ajh17/VimCompletesMe.git')
   call dein#add('benmills/vimux.git')
   call dein#add('bronson/vim-trailing-whitespace')
   call dein#add('christoomey/vim-sort-motion.git')
@@ -714,7 +750,7 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('ddollar/nerdcommenter')
   call dein#add('dhruvasagar/vim-table-mode.git')
   call dein#add('edkolev/tmuxline.vim.git')
-  call dein#add('elzr/vim-json')
+  " call dein#add('elzr/vim-json')
   call dein#add('ervandew/supertab')
   call dein#add('groenewege/vim-less.git')
   call dein#add('iberianpig/tig-explorer.vim.git')
@@ -723,6 +759,7 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('jdkanani/vim-material-theme.git')
   call dein#add('jeetsukumaran/vim-buffergator')
   call dein#add('jistr/vim-nerdtree-tabs.git')
+  call dein#add('jparise/vim-graphql')
   call dein#add('junegunn/goyo.vim.git')
   call dein#add('junegunn/vim-easy-align.git')
   call dein#add('kana/vim-textobj-entire.git')
@@ -737,10 +774,13 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('matze/vim-move.git')
   call dein#add('mhinz/vim-startify.git')
   call dein#add('mileszs/ack.vim')
-  call dein#add('mxw/vim-jsx.git')
-  call dein#add('pangloss/vim-javascript.git')
-  call dein#add('plasticboy/vim-markdown.git')
+  " call dein#add('mxw/vim-jsx.git')
+  " call dein#add('pangloss/vim-javascript.git')
+  call dein#add('sheerun/vim-polyglot')
+  " call dein#add('plasticboy/vim-markdown.git')
+  " call dein#add('posva/vim-vue.git')
   call dein#add('qpkorr/vim-bufkill.git')
+  call dein#add('sbdchd/neoformat')
   call dein#add('scrooloose/nerdtree')
   call dein#add('scrooloose/syntastic')
   call dein#add('sjl/vitality.vim.git')
@@ -762,10 +802,11 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('tyrannicaltoucan/vim-quantum')
   call dein#add('vim-airline/vim-airline-themes.git')
   call dein#add('vim-airline/vim-airline.git')
-  call dein#add('vim-ruby/vim-ruby.git')
+  " call dein#add('vim-ruby/vim-ruby.git')
   call dein#add('vim-scripts/ZoomWin')
   call dein#add('vim-scripts/closetag.vim.git')
-  call dein#add('wavded/vim-stylus.git')
+  " call dein#add('wavded/vim-stylus.git')
+  call dein#add('w0rp/ale')
 
   " Required:
   call dein#end()
@@ -805,6 +846,12 @@ elseif theme == 'light'
   highlight LineNr ctermfg=251 ctermbg=NONE
   let g:indentLine_color_term = 251
 endif
+
+" https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
+" has to go after all theme declarations
+highlight Comment cterm=italic
+autocmd FileType javascript.jsx highlight xmlAttrib cterm=italic
+
 
 " ┏━┓╺┳╸┏━┓╺┳╸╻ ╻┏━┓╻  ╻┏┓╻┏━╸
 " ┗━┓ ┃ ┣━┫ ┃ ┃ ┃┗━┓┃  ┃┃┗┫┣╸
