@@ -232,7 +232,7 @@ autocmd FileType python nmap <leader>e :w<CR>:!python %<CR>
 autocmd FileType python nmap <leader>eb :w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
 autocmd FileType python imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; python " . bufname("%"),0)<CR>
 autocmd FileType python imap <leader>e <ESC>:w<CR>:!python %<CR>
-autocmd FileType python map <Leader>n <plug>NERDTreeTabsToggle<CR>
+autocmd FileType python map <silent> <Leader>n :NERDTreeToggle<CR>
 
 autocmd FileType ruby,eruby imap <leader>e <ESC>:w<CR>:!ruby %<CR>
 autocmd FileType ruby,eruby imap <leader>eb <ESC>:w<CR>:call VimuxRunCommandInDir("clear; ruby " . bufname("%"),0)<CR>
@@ -363,15 +363,25 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
 " Disable EXEC file highlight in NERDtree
 highlight link NERDTreeExecFile ModeMsg
+" Open NERDTree on startup
+if isdirectory(argv(0))
+		bd
+		autocmd vimenter * exe "cd" argv(0)
+		autocmd VimEnter * NERDTree
+endif
 " Show hidden files
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeMouseMode = 2
 let g:NERDTreeWinSize = 31
-let g:nerdtree_tabs_open_on_console_startup = 2
-let g:nerdtree_tabs_open_on_gui_startup = 2
-let g:nerdtree_tabs_autofind = 1
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
+" let g:nerdtree_tabs_open_on_console_startup = 2
+" let g:nerdtree_tabs_open_on_gui_startup = 2
+" let g:nerdtree_tabs_autofind = 1
+" map <silent> <Leader>n :NERDTreeToggle<CR>
+nnoremap <silent> <expr> <Leader>n g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 
 " IndentLine plugin Character
 "let g:indentLine_char = '⦙'
@@ -463,7 +473,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-"let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+" let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 let g:neosnippet#snippets_directory='~/.config/nvim/vim-snippets/snippets'
 
 " For conceal markers.
@@ -495,14 +505,16 @@ xmap <leader>sS <plug>(scratch-selection-clear)
 
 " kien/ctrlp.vim
 let g:ctrlp_map = '<c-p>'
+" Show hidden dotfiles and dotdirs
+let g:ctrlp_show_hidden = 1
 " Close NERDTree before opening CtrlP
-let g:ctrlp_cmd = 'NERDTreeTabsClose<CR>:CtrlP'
+let g:ctrlp_cmd = 'NERDTreeClose<CR>:CtrlP'
 " Use The Silver Searcher
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
@@ -644,6 +656,8 @@ let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
+" let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
+" let g:ale_linters = {'vue': ['eslint', 'vls']}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint', 'prettier'],
@@ -732,6 +746,7 @@ if dein#load_state('/Users/willwright/.local/share/dein')
 	" call dein#add('tpope/vim-afterimage')
 
   " call dein#add('neoclide/coc.nvim')
+	call dein#add('ap/vim-css-color')
   call dein#add('Chiel92/vim-autoformat.git')
   call dein#add('Lokaltog/vim-easymotion')
   call dein#add('MarcWeber/vim-addon-mw-utils.git')
@@ -755,10 +770,10 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('groenewege/vim-less.git')
   call dein#add('iberianpig/tig-explorer.vim.git')
   call dein#add('janko-m/vim-test.git')
-  call dein#add('jceb/vim-orgmode')
+	call dein#add('jceb/vim-orgmode')
   call dein#add('jdkanani/vim-material-theme.git')
   call dein#add('jeetsukumaran/vim-buffergator')
-  call dein#add('jistr/vim-nerdtree-tabs.git')
+  " call dein#add('jistr/vim-nerdtree-tabs.git')
   call dein#add('jparise/vim-graphql')
   call dein#add('junegunn/goyo.vim.git')
   call dein#add('junegunn/vim-easy-align.git')
@@ -858,7 +873,7 @@ autocmd FileType javascript.jsx highlight xmlAttrib cterm=italic
 " ┗━┛ ╹ ╹ ╹ ╹ ┗━┛┗━┛┗━╸╹╹ ╹┗━╸
 
 let g:tmuxline_preset = {
-      \'a'    : '#h',
+      \'a'    : "#h [#(df -g / | awk 'FNR==2' | awk '{print $5}')]",
       \'b'    : '#S',
       \'c'    : '#W',
       \'win'  : '#I #W',
