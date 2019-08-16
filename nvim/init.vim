@@ -25,7 +25,10 @@ set shiftwidth=2
 set softtabstop=2 " number of spaces in tab when editing
 set expandtab " tabs are spaces
 
-set termguicolors
+if (has('termguicolors'))
+	set termguicolors
+endif
+
 set number relativenumber
 
 let theme = 'dark'
@@ -261,12 +264,12 @@ autocmd BufRead * silent! loadview
 " save session and reload
 let g:returnAppFlag = 0
 let g:returnApp = 'iTerm'
-nnoremap <leader>s :w<CR>:OperaReload<CR>
-inoremap <leader>s <ESC>:w<CR>:OperaReload<CR>
+nnoremap <leader>s :w<CR>:BraveReload<CR>
+inoremap <leader>s <ESC>:w<CR>:BraveReload<CR>
 
 " save session and preview
-nnoremap <leader>p :w<CR>:exe '!open -a "Opera" %'<CR><CR>
-inoremap <leader>p <ESC>:w<CR>:exe '!open -a "Opera" %'<CR><CR>
+nnoremap <leader>p :w<CR>:exe '!open -a "Brave Browser" %'<CR><CR>
+inoremap <leader>p <ESC>:w<CR>:exe '!open -a "Brave Browser" %'<CR><CR>
 
 " Autoformat code
 noremap <F2> :Autoformat<CR>
@@ -625,9 +628,9 @@ function! s:goyo_leave()
   "if exists('$TMUX')
     "silent !tmux set status on
   "endif
-  highlight NonText guibg=#303030 ctermbg=NONE
-  highlight Normal guibg=#303030 ctermbg=NONE
-  highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#303030 guifg=#303030
+  highlight NonText guibg=#263238 ctermbg=NONE
+  highlight Normal guibg=#263238 ctermbg=NONE
+  highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#263238 guifg=#263238
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -661,6 +664,7 @@ let g:ale_sign_warning = '⚠️'
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint', 'prettier'],
+\   'scss': ['stylelint'],
 \   'vue': ['prettier'],
 \}
 
@@ -771,18 +775,19 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('iberianpig/tig-explorer.vim.git')
   call dein#add('janko-m/vim-test.git')
 	call dein#add('jceb/vim-orgmode')
-  call dein#add('jdkanani/vim-material-theme.git')
+  " call dein#add('jdkanani/vim-material-theme.git')
   call dein#add('jeetsukumaran/vim-buffergator')
   " call dein#add('jistr/vim-nerdtree-tabs.git')
   call dein#add('jparise/vim-graphql')
   call dein#add('junegunn/goyo.vim.git')
   call dein#add('junegunn/vim-easy-align.git')
+	call dein#add('kaicataldo/material.vim')
   call dein#add('kana/vim-textobj-entire.git')
   call dein#add('kana/vim-textobj-indent.git')
   call dein#add('kana/vim-textobj-line.git')
   call dein#add('kana/vim-textobj-user.git')
   call dein#add('klen/python-mode.git')
-  call dein#add('kristijanhusak/vim-hybrid-material.git')
+  " call dein#add('kristijanhusak/vim-hybrid-material.git')
   call dein#add('majutsushi/tagbar')
   call dein#add('mattn/emmet-vim.git')
   call dein#add('mattn/gist-vim.git')
@@ -793,14 +798,14 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   " call dein#add('pangloss/vim-javascript.git')
   call dein#add('sheerun/vim-polyglot')
   " call dein#add('plasticboy/vim-markdown.git')
-  " call dein#add('posva/vim-vue.git')
+	" call dein#add('posva/vim-vue.git')
   call dein#add('qpkorr/vim-bufkill.git')
   call dein#add('sbdchd/neoformat')
   call dein#add('scrooloose/nerdtree')
   call dein#add('scrooloose/syntastic')
+	call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
   call dein#add('sjl/vitality.vim.git')
   call dein#add('skalnik/vim-vroom')
-  call dein#add('tell-k/vim-browsereload-mac.git')
   call dein#add('ternjs/tern_for_vim.git')
   call dein#add('terryma/vim-multiple-cursors')
   call dein#add('terryma/vim-smooth-scroll.git')
@@ -822,6 +827,7 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('vim-scripts/closetag.vim.git')
   " call dein#add('wavded/vim-stylus.git')
   call dein#add('w0rp/ale')
+	call dein#add('willwright82/browsereload-mac.vim')
 
   " Required:
   call dein#end()
@@ -843,18 +849,27 @@ if theme == 'dark'
   set background=dark
   let g:airline_theme='papercolor'
   autocmd VimEnter * AirlineTheme papercolor
-  colorscheme quantum
-  let g:quantum_italics=1
+  " colorscheme quantum
+	" let g:quantum_italics=1
+	let g:material_terminal_italics = 1
+	let g:material_theme_style = 'default'
+  colorscheme material
+	highlight CursorLine guibg=#252525
+	set nocursorcolumn
   " No Tildes
-  highlight NonText ctermfg=NONE guifg=#303030 cterm=NONE gui=NONE
+	highlight NonText ctermfg=NONE guifg=#263238 cterm=NONE gui=NONE
   " No Background
-  highlight NonText guibg=#303030 ctermbg=NONE
-  highlight Normal guibg=#303030 ctermbg=NONE
-  highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#303030 guifg=#303030
+	" highlight NonText guibg=#263238 ctermbg=NONE
+	" highlight Normal guibg=#263238 ctermbg=NONE
+	" No Split bars
+	highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#263238 guifg=#263238
   let g:indentLine_color_term = 238
 elseif theme == 'light'
   set background=light
-  colorscheme PaperColor
+  " colorscheme PaperColor
+	let g:material_terminal_italics = 1
+	let g:material_theme_style = 'lighter'
+  colorscheme material
   let g:airline_theme='papercolor'
   autocmd VimEnter * AirlineTheme papercolor
   "" Change Line Number Colour
@@ -867,6 +882,8 @@ endif
 highlight Comment cterm=italic
 autocmd FileType javascript.jsx highlight xmlAttrib cterm=italic
 
+au WinLeave * set nocursorline
+au WinEnter * set cursorline
 
 " ┏━┓╺┳╸┏━┓╺┳╸╻ ╻┏━┓╻  ╻┏┓╻┏━╸
 " ┗━┓ ┃ ┣━┫ ┃ ┃ ┃┗━┓┃  ┃┃┗┫┣╸
