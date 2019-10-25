@@ -855,6 +855,7 @@ if theme == 'dark'
 	let g:material_theme_style = 'default'
   colorscheme material
 	highlight CursorLine guibg=#252525
+	highlight Visual guibg=#65738e
 	set nocursorcolumn
   " No Tildes
 	highlight NonText ctermfg=NONE guifg=#263238 cterm=NONE gui=NONE

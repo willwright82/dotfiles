@@ -214,7 +214,7 @@ hibp() {
   curl -fsS "https://haveibeenpwned.com/api/v2/breachedaccount/$1" | jq -r 'sort_by(.BreachDate)[] | [.Title,.Domain,.BreachDate,.PwnCount] | @tsv' | column -t -s$'\t'
 }
 
-function logo() {
+function kindabalogo() {
   echo '    __   _           __      __'
   echo '   / /__(_)___  ____/ /___ _/ /_  ____ _'
   echo '  / //_/ / __ \/ __  / __ `/ __ \/ __ `/'
@@ -231,6 +231,17 @@ function willwright() {
   echo '| |/ |/ / / / /| |/ |/ / /  / / /_/ / / / / /_  '
   echo '|__/|__/_/_/_/ |__/|__/_/  /_/\__, /_/ /_/\__/  '
   echo '                             /____/             '
+  echo ''
+}
+
+function logo() {
+  echo ''
+  echo '    __  ___           __    _               __          __        '
+  echo '   /  |/  /___ ______/ /_  (_)___  ___     / /   ____ _/ /_  _____'
+  echo '  / /|_/ / __ `/ ___/ __ \/ / __ \/ _ \   / /   / __ `/ __ \/ ___/'
+  echo ' / /  / / /_/ / /__/ / / / / / / /  __/  / /___/ /_/ / /_/ (__  ) '
+  echo '/_/  /_/\__,_/\___/_/ /_/_/_/ /_/\___/  /_____/\__,_/_.___/____/  '
+  echo '                                                                  '
   echo ''
 }
 
