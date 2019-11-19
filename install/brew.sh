@@ -8,6 +8,7 @@ brew upgrade
 
 apps=(
     ack
+    aerc
     ansible
     ansiweather
     archey
@@ -15,25 +16,39 @@ apps=(
     aws-shell
     awscli
     bitrise
+    boto3
+    bradp/vv/vv
     cloog
     cmake
+    composer
     coreutils
     cscope
     ctags
     cvs
     dark-mode
+    docker
+    duviz
+    emacs
+    eslint
+    eslint@5.13.0
+    fast
+    fast-cli
     gawk
     gcal
     gcc
     git
+    git-absorb
     git-cal
     git-extras
     git-secret
+    git-standup
     gnu-sed
     gnu-typist
     gnupg
     go
+    gtop
     gtypist
+    gulp
     heroku
     heroku/brew/heroku
     homebrew/versions/gcc49
@@ -62,6 +77,10 @@ apps=(
     pgcli
     phantomjs
     postgresql
+    pulumi
+    python
+    python3
+    python@2
     railwaycat/emacsmacport/emacs-mac
     rbenv
     rbenv-default-gems
@@ -69,6 +88,7 @@ apps=(
     reattach-to-user-namespace
     redis
     ruby-build
+    scdoc
     shpotify
     speedtest_cli
     sphinx-doc
@@ -78,13 +98,16 @@ apps=(
     thoughtbot/formulae/gitsh
     tig
     tmux
+    tmuxinator
     tree
+    vagrant
     vim
+    vls
     watch
     watchman
     wget
     yarn
-    zsh
+    zshn
 )
 
 brew install "${apps[@]}"
