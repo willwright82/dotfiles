@@ -29,6 +29,8 @@ if (has('termguicolors'))
 	set termguicolors
 endif
 
+set encoding=UTF-8
+
 set number relativenumber
 
 let theme = 'dark'
@@ -665,7 +667,7 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint', 'prettier'],
 \   'scss': ['stylelint'],
-\   'vue': ['prettier'],
+\   'vue': ['eslint', 'prettier'],
 \}
 
 " Fix files automatically on save
@@ -800,6 +802,7 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   " call dein#add('plasticboy/vim-markdown.git')
 	" call dein#add('posva/vim-vue.git')
   call dein#add('qpkorr/vim-bufkill.git')
+  call dein#add('ryanoasis/vim-devicons')
   call dein#add('sbdchd/neoformat')
   call dein#add('scrooloose/nerdtree')
   call dein#add('scrooloose/syntastic')
