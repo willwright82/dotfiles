@@ -6,7 +6,7 @@ brew upgrade
 
 # Install packages
 
-apps=(
+OLDapps=(
     ack
     aerc
     ansible
@@ -108,6 +108,56 @@ apps=(
     wget
     yarn
     zshn
+)
+
+apps=(
+  ansiweather
+  archey
+  automake
+  aws-shell
+  awscli
+  bandwhich
+  composer
+  marceloboeira/formulas/confirm-before
+  coreutils
+  docker
+  duviz
+  gawk
+  gcal
+  github/gh/gh
+  git
+  git-absorb
+  git-extras
+  git-standup
+  gnu-typist
+  gnutls
+  go
+  hub
+  irssi
+  jemalloc
+  jp2a
+  libksba
+  libtool
+  libyaml
+  neovim
+  nnn
+  nvm
+  pandoc
+  pgcli
+  postgresql
+  pulumi
+  pyenv-virtualenv
+  scdoc
+  telnet
+  the_silver_searcher
+  tig
+  tmux
+  typescript
+  bradp/vv/vv
+  watch
+  yarn
+  zlib
+  zsh
 )
 
 brew install "${apps[@]}"

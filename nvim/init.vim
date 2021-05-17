@@ -276,6 +276,8 @@ inoremap <leader>p <ESC>:w<CR>:exe '!open -a "Brave Browser" %'<CR><CR>
 " Autoformat code
 noremap <F2> :Autoformat<CR>
 
+noremap <leader>/ F>ya<`.pT<i/<ESC>F<h
+
 " Make CTRL-K list diagraphs before each digraph entry
 inoremap <expr> <C-K> ShowDigraphs()
 
@@ -348,6 +350,9 @@ augroup END
 " Find duplicates in a sorted file
 :command! Duplicates :g/^\(.*\)$\n\1$/p
 
+" Open a new tab for notes
+nnoremap <Leader><CR> :tab drop tmp/notes.org<CR>
+
 " ┏━┓╻  ╻ ╻┏━╸╻┏┓╻   ┏━┓╺┳╸╻ ╻┏━╸┏━╸
 " ┣━┛┃  ┃ ┃┃╺┓┃┃┗┫   ┗━┓ ┃ ┃ ┃┣╸ ┣╸
 " ╹  ┗━╸┗━┛┗━┛╹╹ ╹   ┗━┛ ╹ ┗━┛╹  ╹
@@ -382,6 +387,8 @@ let g:NERDTreeMouseMode = 2
 let g:NERDTreeWinSize = 31
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 " let g:nerdtree_tabs_open_on_console_startup = 2
 " let g:nerdtree_tabs_open_on_gui_startup = 2
 " let g:nerdtree_tabs_autofind = 1
@@ -395,6 +402,7 @@ let g:indentLine_char = '⎸'
 "let g:indentLine_char = '·'
 let g:indentLine_concealcursor=0
 let g:indentLine_setConceal = 0
+let g:indentLine_setColors = 1
 
 " scrooloose/nerdcommenter
 let g:NERDCustomDelimiters={
@@ -412,29 +420,26 @@ let g:gitgutter_eager = 1
 let g:gitgutter_max_signs = 1500
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_quiet_messages = { 'regex': 'Line is too long' }
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_aggregate_errors = 1
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_quiet_messages = { 'regex': 'Line is too long' }
 
 " Use Eslint for React
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['eslint']
 
 " Use Eslint for Vue
-let g:syntastic_vue_checkers = ['eslint']
+" let g:syntastic_vue_checkers = ['eslint']
 
 " Use Rubocop for Ruby
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+" let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
-let g:syntastic_mode_map = {
-      \ "mode": "active",
-      \ "active_filetypes": ["ruby", "eruby", "javascript", "javascript.jsx", "vue", "coffeescript", "css", "scss", "sass"],
-      \ "passive_filetypes": ["markdown"] }
+" let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby', 'eruby', 'javascript', 'javascript.jsx', 'vue', 'coffeescript', 'css', 'scss', 'sass'], 'passive_filetypes': ['markdown'] }
 
 " buffergator tweaks
 " split below VIM window
@@ -579,8 +584,8 @@ let g:vim_markdown_follow_anchor = 1
 let g:vim_markdown_conceal = 0
 
 " Neoformat sbdchd/neoformat
-nmap <Leader>af <Plug>(Neoformat)
-" autocmd BufWritePre *.js Neoformat prettier
+" nmap <Leader>af <Plug>(Neoformat)
+"" autocmd BufWritePre *.js Neoformat prettier
 
 "" Vim-prettier
 "nmap <Leader>py <Plug>(Prettier)
@@ -661,13 +666,14 @@ let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
-" let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
+let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
 " let g:ale_linters = {'vue': ['eslint', 'vls']}
+let g:ale_linters = {'vue': ['eslint']}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint', 'prettier'],
+\   'javascript': ['eslint'],
 \   'scss': ['stylelint'],
-\   'vue': ['eslint', 'prettier'],
+\   'vue': ['eslint'],
 \}
 
 " Fix files automatically on save
@@ -707,6 +713,13 @@ else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+
+"ryanoasis/vim-devicons
+let g:DevIconsEnableFoldersOpenClose = 1
+
+"alvan/vim-closetag
+" Shortcut for closing tags, default is '>'
+" let g:closetag_close_shortcut = '<leader>/'
 
 " don't blink the cursor
 "set guicursor+=i:blinkwait0
@@ -768,8 +781,10 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('christoomey/vim-system-copy.git')
   call dein#add('christoomey/vim-titlecase.git')
   call dein#add('ctrlpvim/ctrlp.vim')
+  call dein#add('arcticicestudio/nord-vim')
   call dein#add('ddollar/nerdcommenter')
   call dein#add('dhruvasagar/vim-table-mode.git')
+  " call dein#add('drewtempelmeyer/palenight.vim')
   call dein#add('edkolev/tmuxline.vim.git')
   " call dein#add('elzr/vim-json')
   call dein#add('ervandew/supertab')
@@ -803,9 +818,9 @@ if dein#load_state('/Users/willwright/.local/share/dein')
 	" call dein#add('posva/vim-vue.git')
   call dein#add('qpkorr/vim-bufkill.git')
   call dein#add('ryanoasis/vim-devicons')
-  call dein#add('sbdchd/neoformat')
+  " call dein#add('sbdchd/neoformat')
   call dein#add('scrooloose/nerdtree')
-  call dein#add('scrooloose/syntastic')
+  " call dein#add('scrooloose/syntastic')
 	call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
   call dein#add('sjl/vitality.vim.git')
   call dein#add('skalnik/vim-vroom')
@@ -831,6 +846,8 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   " call dein#add('wavded/vim-stylus.git')
   call dein#add('w0rp/ale')
 	call dein#add('willwright82/browsereload-mac.vim')
+	" https://github.com/drzel/vim-repo-edit
+	call dein#add('drzel/vim-repo-edit')
 
   " Required:
   call dein#end()
@@ -850,13 +867,21 @@ syntax enable
 
 if theme == 'dark'
   set background=dark
-  let g:airline_theme='papercolor'
-  autocmd VimEnter * AirlineTheme papercolor
+	"Papercolor
+  "let g:airline_theme='papercolor'
+	"Quantum
+  "let g:airline_theme='quantum'
+  "autocmd VimEnter * AirlineTheme quantum
   " colorscheme quantum
 	" let g:quantum_italics=1
-	let g:material_terminal_italics = 1
-	let g:material_theme_style = 'default'
-  colorscheme material
+	" Material
+	"let g:material_terminal_italics = 1
+	"let g:material_theme_style = 'default'
+  "colorscheme material
+	"Nord
+  let g:airline_theme='nord'
+  autocmd VimEnter * AirlineTheme nord
+  colorscheme nord
 	highlight CursorLine guibg=#252525
 	highlight Visual guibg=#65738e
 	set nocursorcolumn
@@ -865,6 +890,7 @@ if theme == 'dark'
   " No Background
 	" highlight NonText guibg=#263238 ctermbg=NONE
 	" highlight Normal guibg=#263238 ctermbg=NONE
+	highlight Normal guibg=NONE ctermbg=NONE
 	" No Split bars
 	highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#263238 guifg=#263238
   let g:indentLine_color_term = 238
@@ -894,7 +920,7 @@ au WinEnter * set cursorline
 " ┗━┛ ╹ ╹ ╹ ╹ ┗━┛┗━┛┗━╸╹╹ ╹┗━╸
 
 let g:tmuxline_preset = {
-      \'a'    : "#h [#(df -g / | awk 'FNR==2' | awk '{print $5}')]",
+      \'a'    : "#h [#(df -HT apfs | awk 'FNR==2' | awk '{print $4}')B free]",
       \'b'    : '#S',
       \'c'    : '#W',
       \'win'  : '#I #W',

@@ -1,3 +1,4 @@
 #!/bin/bash
 #finger o:edinburgh@graph.no | awk '$1 == "edinburgh" {print $4"°C"}'
-ansiweather | awk -F'[=>|-]' '{print $3}'
+# ansiweather | awk -F'[=>|-]' '{print $3}'
+ansiweather | awk -F'[:|-]' '{print $2}'

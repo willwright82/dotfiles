@@ -12,11 +12,12 @@ export ZSH=$HOME/.oh-my-zsh
 #ZSH_THEME="will"
 ZSH_THEME="spaceship"
 SPACESHIP_PROMPT_ADD_NEWLINE="false"
-SPACESHIP_PROMPT_SEPARATE_LINE="false"
+SPACESHIP_PROMPT_SEPARATE_LINE="true"
 SPACESHIP_USER_SHOW="always"
 SPACESHIP_PACKAGE_SHOW="false"
 SPACESHIP_NODE_SHOW="true"
 SPACESHIP_EXEC_TIME_SHOW="false"
+SPACESHIP_TIME_SHOW="false"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -56,7 +57,28 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse vi-mode)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws brew common-aliases encode64 git git-extras meteor npm osx python rails sudo tmux tmuxinator urltools web-search)
+plugins=(
+  aws
+  brew
+  common-aliases
+  docker
+  docker-compose
+  encode64
+  git
+  git-extras
+  gulp
+  httpie
+  jsontools
+  npm
+  osx
+  python
+  rails
+  sudo
+  tmux
+  tmuxinator
+  urltools
+  web-search
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -79,8 +101,10 @@ source $ZSH/oh-my-zsh.sh
    export EDITOR='vim'
  else
    #export EDITOR='mvim'
-   export EDITOR='vim'
+   export EDITOR='nvim'
  fi
+
+ export VISUAL='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -111,7 +135,7 @@ alias branch="~/bin/branch.sh"
 alias duviz="~/bin/duviz/duviz.py"
 alias zshconfig="vi ~/.files/.zshrc"
 alias ohmyzsh="vi ~/.files/.oh-my-zsh"
-alias notes="vi ~/Dropbox/life.org"
+alias notes="vi ~/iCloud/life.org"
 alias swift="xcrun swift"
 alias ggprp="ggpur && ggpush"
 alias gn="ggpur && gco -b"
@@ -128,6 +152,7 @@ alias gcleanup="git branch --merged | egrep -v '(^\*|master|dev|develop|staging)
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
 alias fast="networksetup -getairportnetwork en0 | cut -c 24- && fast"
+alias what="sudo bandwhich"
 alias afk="/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"
 alias ssdesk="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background &> /dev/null &"
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
@@ -147,6 +172,13 @@ alias railsGo='rails s -b 0.0.0.0'
 alias kindaba='clear && tmuxinator start kindaba'
 alias machinelabs='clear && tmuxinator start machinelabs'
 alias devpy="./dev.py"
+alias talos:dev="clear && talos && npm run docs:dev"
+alias talos:build="npm run docs:build"
+alias talos:update="npm run update-vue-library"
+alias talos:playground="(cd ./vue-components; npm run serve)"
+alias talos:bundle="(cd ./vue-components; npm run build-bundle)"
+alias talos:parse="npm run components:parse"
+alias talos:publish="echo 'Publishing Talos package…' && confirm-before npm run components:publish"
 alias production-deploy="yarn build && mv build my.kindaba && scp -r my.kindaba kindaba-production:/home/ec2-user/app/ && rm -rf my.kindaba && echo '🎉 Successfully deployed to https://my.kindaba.com'"
 alias staging-deploy="yarn build && mv build dev.kindaba && scp -r dev.kindaba kindaba-staging:/home/ec2-user/app/ && rm -rf dev.kindaba && echo '🎉 Successfully deployed to http://dev.kindaba.com'"
 alias sprint='trello card list -b 58e21a5f5dc40c4fee175a7d -l 58e21c0fceeab090bdb2bd79 -o tsv'
@@ -210,10 +242,54 @@ function mkcd() {
   cd "$*"
 }
 
+# Usage: mv oldfilename
+# If you call mv without the second parameter it will prompt you to edit the filename on command line.
+# Original mv is called when it's called with more than one argument.
+# It's useful when you want to change just a few letters in a long name.
+
+function mv() {
+  if [ "$#" -ne 1 ] || [ ! -e "$1" ]; then
+    command mv "$@"
+    return
+  fi
+
+  read -ei "$1" newfilename
+  command mv -v -- "$1" "$newfilename"
+}
+
 # Have I been pwned?
 # usage: `hibp email@example.com`
 hibp() {
   curl -fsS "https://haveibeenpwned.com/api/v2/breachedaccount/$1" | jq -r 'sort_by(.BreachDate)[] | [.Title,.Domain,.BreachDate,.PwnCount] | @tsv' | column -t -s$'\t'
+}
+
+# nnn Quit on CD
+n ()
+{
+    # Block nesting of nnn in subshells
+    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+        echo "nnn is already running"
+        return
+    fi
+
+    # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+    # To cd on quit only on ^G, remove the "export" as in:
+    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    # NOTE: NNN_TMPFILE is fixed, should not be modified
+    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+    # stty start undef
+    # stty stop undef
+    # stty lwrap undef
+    # stty lnext undef
+
+    nnn "$@"
+
+    if [ -f "$NNN_TMPFILE" ]; then
+            . "$NNN_TMPFILE"
+            rm -f "$NNN_TMPFILE" > /dev/null
+    fi
 }
 
 function kindabalogo() {
@@ -247,6 +323,63 @@ function logo() {
   echo ''
 }
 
+function talos() {
+  echo ''
+  echo '  ______      __          '
+  echo ' /_  __/___ _/ /___  _____'
+  echo '  / / / __ `/ / __ \/ ___/'
+  echo ' / / / /_/ / / /_/ (__  ) '
+  echo '/_/  \__,_/_/\____/____/  '
+  echo '                          '
+  echo ''
+}
+
+# Avoid overwriting files - `set +o noclobber` to override
+set -o noclobber
+
+autoload -U promptinit
+promptinit
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi # If using rbenv instead of RVM
+
+export GOPATH=$HOME/Labs/go
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
+export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/iCloud/.logs/zsh-history-$(date "+%Y-%m-%d").log; fi'
+
+#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+#source /usr/local/share/zsh/site-functions/_aws
+#source ~/.profile
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# . "/usr/local/opt/nvm/nvm.sh"
+export NODE_PATH='/usr/local/lib/node_modules'
+
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+# For compilers to find openssl@1.1 you may need to set:
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+
+# For pkg-config to find openssl@1.1 you may need to set:
+export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
+
+# pyenv
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+# if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+# pipx
+export PATH="~/.local/bin:$PATH"
+
+# poetry
+export PATH="$HOME/.poetry/bin:$PATH"
+
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 
@@ -266,35 +399,18 @@ function gpip3(){
 # To get virtualenvwrapper to create a virtual environment using pyvenv instead of virtualenv
 # export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
-export WORKON_HOME=~/.virtualenvs
-mkdir -p $WORKON_HOME
+# export WORKON_HOME=~/.virtualenvs
+# mkdir -p $WORKON_HOME
 
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+# export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+# export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+# export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3.8
+# export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+# export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 
-source /usr/local/bin/virtualenvwrapper.sh
+# source /usr/local/bin/virtualenvwrapper.sh
 
-# Avoid overwriting files - `set +o noclobber` to override
-set -o noclobber
 
-autoload -U promptinit
-promptinit
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi # If using rbenv instead of RVM
-
-export GOPATH=$HOME/Labs/go
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
-
-export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/Dropbox/.logs/zsh-history-$(date "+%Y-%m-%d").log; fi'
-
-#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-#source /usr/local/share/zsh/site-functions/_aws
-#source ~/.profile
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
-export NODE_PATH='/usr/local/lib/node_modules'
+# Created by `userpath` on 2020-02-13 11:26:07
+export PATH="$PATH:/Users/willwright/.local/bin"
+export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
