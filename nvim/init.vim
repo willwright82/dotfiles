@@ -798,7 +798,7 @@ if dein#load_state('/Users/willwright/.local/share/dein')
   call dein#add('jparise/vim-graphql')
   call dein#add('junegunn/goyo.vim.git')
   call dein#add('junegunn/vim-easy-align.git')
-	call dein#add('kaicataldo/material.vim')
+	"call dein#add('kaicataldo/material.vim')
   call dein#add('kana/vim-textobj-entire.git')
   call dein#add('kana/vim-textobj-indent.git')
   call dein#add('kana/vim-textobj-line.git')
@@ -878,21 +878,27 @@ if theme == 'dark'
 	"let g:material_terminal_italics = 1
 	"let g:material_theme_style = 'default'
   "colorscheme material
+	"highlight CursorLine guibg=#252525
+  " No Tildes
+	"highlight NonText ctermfg=NONE guifg=#263238 cterm=NONE gui=NONE
+	"highlight! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=NONE guifg=#263238
+	"highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#263238 guifg=#263238
 	"Nord
   let g:airline_theme='nord'
   autocmd VimEnter * AirlineTheme nord
   colorscheme nord
-	highlight CursorLine guibg=#252525
+	highlight CursorLine guibg=#3B4252
 	highlight Visual guibg=#65738e
 	set nocursorcolumn
   " No Tildes
-	highlight NonText ctermfg=NONE guifg=#263238 cterm=NONE gui=NONE
+	highlight NonText ctermfg=NONE cterm=NONE guifg=#2E3440 gui=NONE
+	highlight! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=NONE guifg=#2E3440
   " No Background
-	" highlight NonText guibg=#263238 ctermbg=NONE
-	" highlight Normal guibg=#263238 ctermbg=NONE
+	" highlight NonText guibg=#2E3440 ctermbg=NONE
+	" highlight Normal guibg=#2E3440 ctermbg=NONE
 	highlight Normal guibg=NONE ctermbg=NONE
 	" No Split bars
-	highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#263238 guifg=#263238
+	highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#2E3440 guifg=#2E3440
   let g:indentLine_color_term = 238
 elseif theme == 'light'
   set background=light
