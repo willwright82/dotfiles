@@ -122,6 +122,7 @@ apps=(
   coreutils
   docker
   duviz
+  exa
   gawk
   gcal
   github/gh/gh

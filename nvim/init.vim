@@ -891,6 +891,7 @@ if theme == 'dark'
 	highlight Visual guibg=#65738e
 	set nocursorcolumn
   " No Tildes
+	set fillchars=eob:\ ,
 	highlight NonText ctermfg=NONE cterm=NONE guifg=#2E3440 gui=NONE
 	highlight! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=NONE guifg=#2E3440
   " No Background
@@ -898,7 +899,9 @@ if theme == 'dark'
 	" highlight Normal guibg=#2E3440 ctermbg=NONE
 	highlight Normal guibg=NONE ctermbg=NONE
 	" No Split bars
-	highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#2E3440 guifg=#2E3440
+	"highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=#2E3440 guifg=#2E3440
+	highlight! VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE gui=NONE guibg=NONE guifg=#2E3440
+	highlight! SignColumn ctermbg=NONE guibg=NONE
   let g:indentLine_color_term = 238
 elseif theme == 'light'
   set background=light
