@@ -130,15 +130,17 @@ alias nvimd='nvim -d'
 alias e='vi'
 alias git='hub'
 alias ls='exa'
+alias la='exa -la'
 alias mkdir='mkdir -pv'
 alias em='emacsclient -nw -c a ""'
 alias branch="~/bin/branch.sh"
 alias duviz="~/bin/duviz/duviz.py"
 alias zshconfig="vi ~/.files/.zshrc"
 alias hyperconfig="vi ~/.files/.hyper.js"
+alias vimrc="vi ~/.files/nvim/init.vim"
 alias ohmyzsh="vi ~/.files/.oh-my-zsh"
 alias notes="vi ~/iCloud/life.org"
-alias swift="xcrun swift"
+#alias swift="xcrun swift"
 alias ggprp="ggpur && ggpush"
 alias gn="ggpur && gco -b"
 alias gac="gaa && gcam"
@@ -150,7 +152,7 @@ alias gcd="gco develop"
 alias ggrh="git reset --hard origin/$(current_branch)"
 alias gpr="git pull-request -b"
 alias gsup="git standup -D \"format:%Y-%m-%d %H:%M\""
-alias gcleanup="git branch --merged | egrep -v '(^\*|master|dev|develop|staging)' | xargs git branch -d"
+alias gcleanup="git branch --merged | egrep -v '(^\*|master|main|dev|develop|staging)' | xargs git branch -d"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
 alias fast="networksetup -getairportnetwork en0 | cut -c 24- && fast"
@@ -161,6 +163,7 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 alias zip="zip -x *.DS_Store -x *__MACOSX* -x *.AppleDouble*"
 alias rainbowstream="source venv/bin/activate && rainbowstream"
 alias chrome='open -a "Google Chrome"'
+alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc"
 #alias today='cal | ag --passthrough "\b$(date +%e | sed "s/ //g")\b"'
 alias cal='gcal --starting-day=1'
 alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app"
@@ -174,6 +177,7 @@ alias railsGo='rails s -b 0.0.0.0'
 alias kindaba='clear && tmuxinator start kindaba'
 alias machinelabs='clear && tmuxinator start machinelabs'
 alias devpy="./dev.py"
+alias portforward="echo 'rdr pass inet proto tcp from 127.0.0.1 to any port 443 -> 127.0.0.1 port 8080' | sudo pfctl -ef -"
 alias talos:dev="clear && talos && npm run docs:dev"
 alias talos:build="npm run docs:build"
 alias talos:update="npm run update-vue-library"
@@ -371,8 +375,12 @@ export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 
 # pyenv
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/bin:$PATH"
+
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+  #eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
 fi
 # if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
@@ -416,3 +424,4 @@ function gpip3(){
 # Created by `userpath` on 2020-02-13 11:26:07
 export PATH="$PATH:/Users/willwright/.local/bin"
 export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
+export SOPS_KMS_ARN="arn:aws:kms:eu-west-1:252184070950:key/3c83a2d1-5387-4430-9fd7-f40b0b13b170"

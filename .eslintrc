@@ -9,14 +9,19 @@
     "jsx": true
   },
   "plugins": [
-    "react"
+    "react",
+    "prettier"
   ],
-  "extends": "eslint:recommended",
+  "extends": [
+    "prettier",
+    "eslint:recommended",
+  ],
   "rules": {
     "strict": 0,
     "quotes": 0,
     "no-unused-vars": 0,
     "camelcase": 0,
     "no-underscore-dangle": 0
+    "prettier/prettier": "error",
   }
 }
