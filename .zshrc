@@ -163,6 +163,12 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 alias zip="zip -x *.DS_Store -x *__MACOSX* -x *.AppleDouble*"
 alias rainbowstream="source venv/bin/activate && rainbowstream"
 alias chrome='open -a "Google Chrome"'
+alias brave='open -a "Brave Browser"'
+alias slack='open -a "Slack"'
+alias zoom='open -a "zoom.us"'
+alias vscode='open -a "Visual Studio Code"'
+alias figma='open -a "Figma"'
+alias up='brave && slack && zoom'
 alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc"
 #alias today='cal | ag --passthrough "\b$(date +%e | sed "s/ //g")\b"'
 alias cal='gcal --starting-day=1'
@@ -423,5 +429,6 @@ function gpip3(){
 
 # Created by `userpath` on 2020-02-13 11:26:07
 export PATH="$PATH:/Users/willwright/.local/bin"
+export PATH="$PATH:/Users/willwright/bin"
 export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
 export SOPS_KMS_ARN="arn:aws:kms:eu-west-1:252184070950:key/3c83a2d1-5387-4430-9fd7-f40b0b13b170"
