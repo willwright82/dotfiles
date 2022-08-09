@@ -428,7 +428,7 @@ function gpip3(){
 
 
 # Created by `userpath` on 2020-02-13 11:26:07
-export PATH="$PATH:/Users/willwright/.local/bin"
+#export PATH="$PATH:/Users/willwright/.local/bin"
 export PATH="$PATH:/Users/willwright/bin"
 export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
 export SOPS_KMS_ARN="arn:aws:kms:eu-west-1:252184070950:key/3c83a2d1-5387-4430-9fd7-f40b0b13b170"
